@@ -21,7 +21,7 @@ export function computeSquadChemistry(world: SaveGameWorld, clubId: string): num
   if (players.length === 0) return 50;
 
   const avgSociability = players.reduce((s, p) => s + p.personality.sociability, 0) / players.length;
-  const avgLeadership = players.reduce((s, p) => s + p.personality.leadership, 0) / players.length;
+  const avgLeadership = players.reduce((s, p) => s + p.attributes.mental.leadership, 0) / players.length;
   const unsettledPenalty = players.filter((p) => p.personality.traits.includes("unsettled")).length * 2;
   const temperamentalPenalty = players.filter((p) => p.personality.traits.includes("temperamental")).length * 1.5;
   const leadersBonus = players.filter((p) => p.personality.traits.includes("leader")).length * 3;
