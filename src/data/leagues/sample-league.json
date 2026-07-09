@@ -1,0 +1,88 @@
+{
+  "id": "sample-league",
+  "name": "Sample Premier Division",
+  "countryCode": "ENG",
+  "tier": 1,
+  "clubs": [
+    {
+      "id": "club-riverside",
+      "name": "Riverside United",
+      "shortName": "Riverside",
+      "abbreviation": "RIV",
+      "founded": 1901,
+      "colors": { "primary": "#1E5B46", "secondary": "#F5F3EC" },
+      "stadium": { "name": "Riverside Park", "capacity": 38000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
+    },
+    {
+      "id": "club-harborough",
+      "name": "Harborough Town",
+      "shortName": "Harborough",
+      "abbreviation": "HAR",
+      "founded": 1889,
+      "colors": { "primary": "#B23A2E", "secondary": "#0A2118" },
+      "stadium": { "name": "The Harbour", "capacity": 24000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-2-3-1", "mentality": "balanced" } }
+    },
+    {
+      "id": "club-westgate",
+      "name": "Westgate Rovers",
+      "shortName": "Westgate",
+      "abbreviation": "WES",
+      "founded": 1912,
+      "colors": { "primary": "#154A38", "secondary": "#D68F26" },
+      "stadium": { "name": "Westgate Common", "capacity": 19500 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "SCO", "tacticalTendencies": { "preferredFormation": "3-5-2", "mentality": "defensive" } }
+    },
+    {
+      "id": "club-northbridge",
+      "name": "Northbridge City",
+      "shortName": "Northbridge",
+      "abbreviation": "NOR",
+      "founded": 1897,
+      "colors": { "primary": "#0F3D2E", "secondary": "#E9E5D8" },
+      "stadium": { "name": "Bridge Lane", "capacity": 31000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "IRL", "tacticalTendencies": { "preferredFormation": "4-4-2", "mentality": "balanced" } }
+    },
+    {
+      "id": "club-southmoor",
+      "name": "Southmoor Athletic",
+      "shortName": "Southmoor",
+      "abbreviation": "SOU",
+      "founded": 1923,
+      "colors": { "primary": "#2C7057", "secondary": "#141915" },
+      "stadium": { "name": "Moor Park", "capacity": 21000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "WAL", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
+    },
+    {
+      "id": "club-eastfield",
+      "name": "Eastfield Wanderers",
+      "shortName": "Eastfield",
+      "abbreviation": "EAS",
+      "founded": 1905,
+      "colors": { "primary": "#B8721A", "secondary": "#0A2118" },
+      "stadium": { "name": "The Fields", "capacity": 17500 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-1-4-1", "mentality": "defensive" } }
+    },
+    {
+      "id": "club-kingsmead",
+      "name": "Kingsmead FC",
+      "shortName": "Kingsmead",
+      "abbreviation": "KIN",
+      "founded": 1878,
+      "colors": { "primary": "#D68F26", "secondary": "#141915" },
+      "stadium": { "name": "Kings Ground", "capacity": 42000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "NGA", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "very-attacking" } }
+    },
+    {
+      "id": "club-oldport",
+      "name": "Oldport Town",
+      "shortName": "Oldport",
+      "abbreviation": "OLD",
+      "founded": 1899,
+      "colors": { "primary": "#141915", "secondary": "#F5F3EC" },
+      "stadium": { "name": "Port Road", "capacity": 15000 },
+      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "5-3-2", "mentality": "very-defensive" } }
+    }
+  ]
+}
