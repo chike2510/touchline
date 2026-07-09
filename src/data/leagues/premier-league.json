@@ -24,11 +24,11 @@
         "nationality": "ESP",
         "reputation": 163,
         "tacticalTendencies": {
-          "preferredFormation": "4-4-2",
-          "mentality": "attacking",
+          "preferredFormation": "4-2-3-1",
+          "mentality": "defensive",
           "pressingIntensity": 86,
           "buildUpSpeed": 88,
-          "defensiveLine": 65,
+          "defensiveLine": 90,
           "width": 62,
           "favoursYouth": 58,
           "transferAggression": 73,
@@ -138,8 +138,8 @@
         "nationality": "ESP",
         "reputation": 157,
         "tacticalTendencies": {
-          "preferredFormation": "3-4-3",
-          "mentality": "attacking",
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
           "pressingIntensity": 79,
           "buildUpSpeed": 64,
           "defensiveLine": 73,
@@ -284,7 +284,7 @@
         "reputation": 157,
         "tacticalTendencies": {
           "preferredFormation": "3-4-3",
-          "mentality": "attacking",
+          "mentality": "balanced",
           "pressingIntensity": 68,
           "buildUpSpeed": 69,
           "defensiveLine": 71,
@@ -306,7 +306,7 @@
         "secondary": "#FFCD00"
       },
       "stadium": {
-        "name": "Falmer Stadium",
+        "name": "AMEX Stadium",
         "capacity": 31800
       },
       "manager": {
@@ -315,7 +315,7 @@
         "nationality": "GER",
         "reputation": 157,
         "tacticalTendencies": {
-          "preferredFormation": "3-5-2",
+          "preferredFormation": "4-2-3-1",
           "mentality": "balanced",
           "pressingIntensity": 59,
           "buildUpSpeed": 52,
@@ -347,7 +347,7 @@
         "nationality": "ESP",
         "reputation": 150,
         "tacticalTendencies": {
-          "preferredFormation": "4-2-3-1",
+          "preferredFormation": "3-4-2-1",
           "mentality": "balanced",
           "pressingIntensity": 43,
           "buildUpSpeed": 56,
@@ -682,7 +682,7 @@
         "nationality": "ESP",
         "reputation": 137,
         "tacticalTendencies": {
-          "preferredFormation": "3-4-3",
+          "preferredFormation": "4-3-3",
           "mentality": "balanced",
           "pressingIntensity": 64,
           "buildUpSpeed": 40,
@@ -714,7 +714,7 @@
         "nationality": "ITA",
         "reputation": 142,
         "tacticalTendencies": {
-          "preferredFormation": "3-4-3",
+          "preferredFormation": "4-2-3-1",
           "mentality": "balanced",
           "pressingIntensity": 53,
           "buildUpSpeed": 55,
@@ -891,7 +891,7 @@
         "nationality": "AUT",
         "reputation": 133,
         "tacticalTendencies": {
-          "preferredFormation": "4-1-4-1",
+          "preferredFormation": "3-4-3",
           "mentality": "defensive",
           "pressingIntensity": 35,
           "buildUpSpeed": 43,
@@ -1115,8 +1115,8 @@
         "nationality": "ITA",
         "reputation": 135,
         "tacticalTendencies": {
-          "preferredFormation": "4-4-1-1",
-          "mentality": "defensive",
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
           "pressingIntensity": 44,
           "buildUpSpeed": 31,
           "defensiveLine": 26,
