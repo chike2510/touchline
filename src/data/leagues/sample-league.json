@@ -1,58 +1,58 @@
 {
   "id": "sample-league",
-  "name": "Sample Premier Division",
+  "name": "English Premier Division",
   "countryCode": "ENG",
   "tier": 1,
   "clubs": [
     {
       "id": "club-riverside",
-      "name": "Riverside United",
-      "shortName": "Riverside",
-      "abbreviation": "RIV",
+      "name": "Manchester United",
+      "shortName": "MAN UTD",
+      "abbreviation": "MUM",
       "founded": 1901,
       "colors": { "primary": "#1E5B46", "secondary": "#F5F3EC" },
-      "stadium": { "name": "Riverside Park", "capacity": 38000 },
-      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
+      "stadium": { "name": "Old Trafford", "capacity": 38000 },
+      "manager": { "firstName": "Micheal", "lastName": "Carrick", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
     },
     {
       "id": "club-harborough",
-      "name": "Harborough Town",
-      "shortName": "Harborough",
-      "abbreviation": "HAR",
+      "name": "Arsenal Football Club",
+      "shortName": "Arsenal",
+      "abbreviation": "ASS",
       "founded": 1889,
       "colors": { "primary": "#B23A2E", "secondary": "#0A2118" },
-      "stadium": { "name": "The Harbour", "capacity": 24000 },
-      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "ENG", "tacticalTendencies": { "preferredFormation": "4-2-3-1", "mentality": "balanced" } }
+      "stadium": { "name": "Emirates Stadium", "capacity": 24000 },
+      "manager": { "firstName": "Mikel", "lastName": "Arteta", "nationality": "ESP", "tacticalTendencies": { "preferredFormation": "4-2-3-1", "mentality": "balanced" } }
     },
     {
       "id": "club-westgate",
-      "name": "Westgate Rovers",
-      "shortName": "Westgate",
-      "abbreviation": "WES",
+      "name": "Manchester City",
+      "shortName": "Man City",
+      "abbreviation": "MCI",
       "founded": 1912,
       "colors": { "primary": "#154A38", "secondary": "#D68F26" },
       "stadium": { "name": "Westgate Common", "capacity": 19500 },
-      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "SCO", "tacticalTendencies": { "preferredFormation": "3-5-2", "mentality": "defensive" } }
+      "manager": { "firstName": "Enzo", "lastName": "Maresca", "nationality": "ITA", "tacticalTendencies": { "preferredFormation": "4-2-3-1", "mentality": "defensive" } }
     },
     {
       "id": "club-northbridge",
-      "name": "Northbridge City",
-      "shortName": "Northbridge",
-      "abbreviation": "NOR",
+      "name": "Chelsea Football Club",
+      "shortName": "Chelsea",
+      "abbreviation": "CHE",
       "founded": 1897,
       "colors": { "primary": "#0F3D2E", "secondary": "#E9E5D8" },
-      "stadium": { "name": "Bridge Lane", "capacity": 31000 },
-      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "IRL", "tacticalTendencies": { "preferredFormation": "4-4-2", "mentality": "balanced" } }
+      "stadium": { "name": "Stamford Bridge", "capacity": 31000 },
+      "manager": { "firstName": "Xabi", "lastName": "Alonso", "nationality": "ESP", "tacticalTendencies": { "preferredFormation": "3-4-3", "mentality": "balanced" } }
     },
     {
       "id": "club-southmoor",
-      "name": "Southmoor Athletic",
-      "shortName": "Southmoor",
-      "abbreviation": "SOU",
+      "name": "Liverpool Football Club",
+      "shortName": "Liverpool",
+      "abbreviation": "LIV",
       "founded": 1923,
       "colors": { "primary": "#2C7057", "secondary": "#141915" },
-      "stadium": { "name": "Moor Park", "capacity": 21000 },
-      "manager": { "firstName": "Example", "lastName": "Manager", "nationality": "WAL", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
+      "stadium": { "name": "Anfield", "capacity": 21000 },
+      "manager": { "firstName": "Andoni", "lastName": "Iraola", "nationality": "ESP", "tacticalTendencies": { "preferredFormation": "4-3-3", "mentality": "attacking" } }
     },
     {
       "id": "club-eastfield",
