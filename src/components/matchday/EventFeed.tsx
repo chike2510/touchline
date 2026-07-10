@@ -1,7 +1,6 @@
 "use client";
 import type { MatchEvent } from "@/engines/match/matchTypes";
-import type { Club, ID, Player } from "@/domain/types";
-import { buildCommentaryFeed } from "@/engines/match/commentary";
+import type { ID, Player } from "@/domain/types";
 
 const EVENT_LABEL: Partial<Record<MatchEvent["type"], { text: string; className: string }>> = {
   goal: { text: "GOAL", className: "text-accent-400" },
@@ -11,31 +10,27 @@ const EVENT_LABEL: Partial<Record<MatchEvent["type"], { text: string; className:
   substitution: { text: "SUB", className: "text-ink-500" },
   injury: { text: "INJ", className: "text-danger-500" },
   "half-time": { text: "HT", className: "text-ink-500" },
-  "full-time": { text: "FT", className: "text-ink-500" },
   kickoff: { text: "KO", className: "text-ink-500" },
-  "penalty-scored": { text: "PEN", className: "text-accent-400" },
 };
 
-export function EventFeed({
-  events, players, homeClub, awayClub, homeClubId,
-}: {
-  events: MatchEvent[]; players: Record<ID, Player>;
-  homeClub: Club | undefined; awayClub: Club | undefined; homeClubId: ID;
-}) {
-  const lines = buildCommentaryFeed(events, players, { home: homeClub, away: awayClub, homeClubId });
-
+export function EventFeed({ events, players }: { events: MatchEvent[]; players: Record<ID, Player> }) {
+  const sorted = [...events].sort((a, b) => b.minute - a.minute);
   return (
-    <div className="flex max-h-80 flex-col gap-2 overflow-y-auto rounded-card border border-navy-600 bg-navy-900 p-3">
-      {lines.length === 0 && <p className="text-sm text-ink-500">Kick-off is moments away…</p>}
-      {lines.map((line, i) => {
-        const label = EVENT_LABEL[line.type];
+    <div className="flex max-h-72 flex-col gap-1.5 overflow-y-auto rounded-card border border-navy-600 bg-navy-900 p-3">
+      {sorted.length === 0 && <p className="text-sm text-ink-500">No events yet.</p>}
+      {sorted.map((e, i) => {
+        const player = e.playerId ? players[e.playerId] : undefined;
+        const label = EVENT_LABEL[e.type];
         return (
-          <div key={i} className={`flex items-baseline gap-2 text-sm ${line.emphasis === "high" ? "font-medium" : ""}`}>
-            <span className="w-8 shrink-0 font-data text-ink-500">{line.minute}&apos;</span>
+          <div key={i} className="flex items-baseline gap-2 text-sm">
+            <span className="w-8 shrink-0 font-data text-ink-500">{e.minute}&apos;</span>
             <span className={`w-9 shrink-0 font-data text-xs font-semibold ${label?.className ?? "text-ink-500"}`}>
-              {label?.text ?? "•"}
+              {label?.text ?? "—"}
             </span>
-            <span className={line.emphasis === "high" ? "text-ink-100" : "text-ink-300"}>{line.text}</span>
+            <span className="text-ink-300">
+              {e.description}
+              {player && <span className="text-ink-100"> — {player.firstName} {player.lastName}</span>}
+            </span>
           </div>
         );
       })}
