@@ -31,14 +31,15 @@ export function PlayerProfilePanel({ player, onClose }: { player: Player; onClos
       <AttributeRadar player={player} />
 
       <div className="grid grid-cols-3 gap-4 text-xs">
-        <AttrGroup title="Technical" attrs={technical} />
-        <AttrGroup title="Mental" attrs={mental} />
-        <AttrGroup title="Physical" attrs={physical} />
+        {/* Cast specific attribute groups to a generic record so they satisfy AttrGroup's index signature */}
+        <AttrGroup title="Technical" attrs={technical as unknown as Record<string, number>} />
+        <AttrGroup title="Mental" attrs={mental as unknown as Record<string, number>} />
+        <AttrGroup title="Physical" attrs={physical as unknown as Record<string, number>} />
       </div>
 
       {isGk && (
         <div className="grid grid-cols-3 gap-4 text-xs">
-          <AttrGroup title="Goalkeeping" attrs={goalkeeping} />
+          <AttrGroup title="Goalkeeping" attrs={goalkeeping as unknown as Record<string, number>} />
         </div>
       )}
 
