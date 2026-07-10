@@ -24,7 +24,7 @@ export default function TacticsPage() {
   // tactic's playerRoles map by matching each assigned player's positionCode
   // against the formation's slot list, in order.
   const assignments = useMemo(() => {
-    if (!tactic) return [];
+    if (!tactic) return [] as (string | null)[];
     const remaining = new Map(Object.entries(tactic.playerRoles));
     return slots.map((slotPos) => {
       const match = [...remaining.entries()].find(([, role]) => role.positionCode === slotPos);
@@ -129,7 +129,7 @@ export default function TacticsPage() {
             <PlayerPicker
               slotPosition={slots[selectedSlot]!}
               candidateIds={club.squadIds}
-              currentId={assignments[selectedSlot]}
+              currentId={assignments[selectedSlot] ?? null}
               players={world.players}
               onPick={(id) => handleAssign(selectedSlot, id)}
               onClose={() => setSelectedSlot(null)}
