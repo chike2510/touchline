@@ -50,6 +50,10 @@ export default function TacticsPage() {
   }
 
   function handleFormationChange(formation: string) {
+    // Guard: ensure world is available when this handler runs (TypeScript
+    // can't always infer the outer null-check for callbacks).
+    if (!world) return;
+
     // Rebuild playerRoles from scratch against the new slot list, keeping
     // whichever currently-assigned players still fit a slot by position,
     // greedily, and leaving the rest for the manager to fill in.
@@ -61,7 +65,7 @@ export default function TacticsPage() {
       const candidate = currentPlayerIds.find((id) => {
         if (usedIds.has(id)) return false;
         const p = world.players[id];
-        return p?.positions.includes(slotPos);
+        return p?.positions.includes(slotPos) ?? false;
       });
       if (candidate) {
         usedIds.add(candidate);
