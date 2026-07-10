@@ -1,6 +1,6 @@
 "use client";
 import type { MatchEvent } from "@/engines/match/matchTypes";
-import type { ID, Player } from "@/domain/types";
+import type { ID, Player, Club } from "@/domain/types";
 
 const EVENT_LABEL: Partial<Record<MatchEvent["type"], { text: string; className: string }>> = {
   goal: { text: "GOAL", className: "text-accent-400" },
@@ -13,7 +13,7 @@ const EVENT_LABEL: Partial<Record<MatchEvent["type"], { text: string; className:
   kickoff: { text: "KO", className: "text-ink-500" },
 };
 
-export function EventFeed({ events, players }: { events: MatchEvent[]; players: Record<ID, Player> }) {
+export function EventFeed({ events, players, homeClub, awayClub, homeClubId }: { events: MatchEvent[]; players: Record<ID, Player>; homeClub?: Club; awayClub?: Club; homeClubId?: string }) {
   const sorted = [...events].sort((a, b) => b.minute - a.minute);
   return (
     <div className="flex max-h-72 flex-col gap-1.5 overflow-y-auto rounded-card border border-navy-600 bg-navy-900 p-3">
