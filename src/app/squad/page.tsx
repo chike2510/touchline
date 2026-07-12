@@ -82,7 +82,13 @@ export default function SquadPage() {
                   <td className="px-3 py-2 font-data text-ink-500">{p.positions[0]}</td>
                   <td className="px-3 py-2 font-medium text-ink-100">
                     <div className="flex items-center gap-2">
-                      <PlayerPhoto playerId={p.id} size={26} />
+                      <PlayerPhoto
+  firstName={p.firstName}
+  lastName={p.lastName}
+  leagueId={world.leagues[club.leagueId].id}
+  clubId={club.id}
+  size={26}
+/>
                       {p.firstName} {p.lastName}
                       {p.injuryStatus && <span className="ml-1.5 text-xs text-danger-500">INJ</span>}
                       {p.suspension && <span className="ml-1.5 text-xs text-warning-500">SUS</span>}
