@@ -1,0 +1,4112 @@
+{
+  "id": "premier-league",
+  "name": "Premier League",
+  "countryCode": "ENG",
+  "tier": 1,
+  "clubs": [
+    {
+      "id": "club-arsenal",
+      "name": "Arsenal",
+      "shortName": "Arsenal",
+      "abbreviation": "ARS",
+      "founded": 1886,
+      "colors": {
+        "primary": "#EF0107",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Emirates Stadium",
+        "capacity": 60704
+      },
+      "manager": {
+        "firstName": "Mikel",
+        "lastName": "Arteta",
+        "nationality": "ESP",
+        "reputation": 163,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "defensive",
+          "pressingIntensity": 86,
+          "buildUpSpeed": 88,
+          "defensiveLine": 90,
+          "width": 62,
+          "favoursYouth": 58,
+          "transferAggression": 73,
+          "adaptability": 56
+        }
+      },
+      "players": [
+        {
+          "firstName": "David",
+          "lastName": "Raya",
+          "nationality": "ESP",
+          "dateOfBirth": "1995-09-15",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 158,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Karl",
+          "lastName": "Hein",
+          "nationality": "EST",
+          "dateOfBirth": "2002-06-13",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 108,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "William",
+          "lastName": "Saliba",
+          "nationality": "FRA",
+          "dateOfBirth": "2001-03-24",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 172,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Gabriel",
+          "lastName": "Magalhaes",
+          "nationality": "BRA",
+          "dateOfBirth": "1997-12-19",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 165,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Jurrien",
+          "lastName": "Timber",
+          "nationality": "NED",
+          "dateOfBirth": "2001-06-17",
+          "positions": [
+            "CB",
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Riccardo",
+          "lastName": "Calafiori",
+          "nationality": "ITA",
+          "dateOfBirth": "2002-05-19",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Myles",
+          "lastName": "Lewis-Skelly",
+          "nationality": "ENG",
+          "dateOfBirth": "2006-09-26",
+          "positions": [
+            "LB",
+            "CM"
+          ],
+          "foot": "left",
+          "currentAbility": 135,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Ben",
+          "lastName": "White",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-10-08",
+          "positions": [
+            "RB",
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Declan",
+          "lastName": "Rice",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-01-14",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 178,
+          "potentialAbility": 178
+        },
+        {
+          "firstName": "Martin",
+          "lastName": "Zubimendi",
+          "nationality": "ESP",
+          "dateOfBirth": "2000-03-30",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Martin",
+          "lastName": "Odegaard",
+          "nationality": "NOR",
+          "dateOfBirth": "1998-12-17",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "left",
+          "currentAbility": 179,
+          "potentialAbility": 179
+        },
+        {
+          "firstName": "Mikel",
+          "lastName": "Merino",
+          "nationality": "ESP",
+          "dateOfBirth": "1998-03-22",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Bukayo",
+          "lastName": "Saka",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-09-05",
+          "positions": [
+            "RW",
+            "RM"
+          ],
+          "foot": "left",
+          "currentAbility": 183,
+          "potentialAbility": 183
+        },
+        {
+          "firstName": "Gabriel",
+          "lastName": "Martinelli",
+          "nationality": "BRA",
+          "dateOfBirth": "2001-06-18",
+          "positions": [
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Leandro",
+          "lastName": "Trossard",
+          "nationality": "BEL",
+          "dateOfBirth": "1994-12-04",
+          "positions": [
+            "LW",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 143,
+          "potentialAbility": 143
+        },
+        {
+          "firstName": "Kai",
+          "lastName": "Havertz",
+          "nationality": "GER",
+          "dateOfBirth": "1999-06-11",
+          "positions": [
+            "ST",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 156,
+          "potentialAbility": 156
+        },
+        {
+          "firstName": "Viktor",
+          "lastName": "Gyokeres",
+          "nationality": "SWE",
+          "dateOfBirth": "1998-06-04",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 168,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Ethan",
+          "lastName": "Nwaneri",
+          "nationality": "ENG",
+          "dateOfBirth": "2007-03-21",
+          "positions": [
+            "CAM",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 172
+        }
+      ]
+    },
+    {
+      "id": "club-aston-villa",
+      "name": "Aston Villa",
+      "shortName": "Aston Villa",
+      "abbreviation": "AVL",
+      "founded": 1874,
+      "colors": {
+        "primary": "#670E36",
+        "secondary": "#95BFE5"
+      },
+      "stadium": {
+        "name": "Villa Park",
+        "capacity": 42918
+      },
+      "manager": {
+        "firstName": "Unai",
+        "lastName": "Emery",
+        "nationality": "ESP",
+        "reputation": 157,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 79,
+          "buildUpSpeed": 64,
+          "defensiveLine": 73,
+          "width": 69,
+          "favoursYouth": 32,
+          "transferAggression": 88,
+          "adaptability": 30
+        }
+      },
+      "players": [
+        {
+          "firstName": "Emiliano",
+          "lastName": "Martinez",
+          "nationality": "ARG",
+          "dateOfBirth": "1992-09-02",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 158,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Ezri",
+          "lastName": "Konsa",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-10-23",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Pau",
+          "lastName": "Torres",
+          "nationality": "ESP",
+          "dateOfBirth": "1997-01-16",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Matty",
+          "lastName": "Cash",
+          "nationality": "POL",
+          "dateOfBirth": "1997-08-07",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Lucas",
+          "lastName": "Digne",
+          "nationality": "FRA",
+          "dateOfBirth": "1995-07-20",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Ian",
+          "lastName": "Maatsen",
+          "nationality": "NED",
+          "dateOfBirth": "2002-03-10",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Boubacar",
+          "lastName": "Kamara",
+          "nationality": "FRA",
+          "dateOfBirth": "1999-11-23",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Amadou",
+          "lastName": "Onana",
+          "nationality": "BEL",
+          "dateOfBirth": "2001-08-16",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Youri",
+          "lastName": "Tielemans",
+          "nationality": "BEL",
+          "dateOfBirth": "1997-05-07",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "John",
+          "lastName": "McGinn",
+          "nationality": "SCO",
+          "dateOfBirth": "1994-10-18",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Morgan",
+          "lastName": "Rogers",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-07-26",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Leon",
+          "lastName": "Bailey",
+          "nationality": "JAM",
+          "dateOfBirth": "1997-08-09",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Donyell",
+          "lastName": "Malen",
+          "nationality": "NED",
+          "dateOfBirth": "1999-01-19",
+          "positions": [
+            "RW",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Ollie",
+          "lastName": "Watkins",
+          "nationality": "ENG",
+          "dateOfBirth": "1995-12-30",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 156,
+          "potentialAbility": 156
+        },
+        {
+          "firstName": "Jacob",
+          "lastName": "Ramsey",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-01-28",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        }
+      ]
+    },
+    {
+      "id": "club-bournemouth",
+      "name": "AFC Bournemouth",
+      "shortName": "Bournemouth",
+      "abbreviation": "BOU",
+      "founded": 1899,
+      "colors": {
+        "primary": "#DA291C",
+        "secondary": "#000000"
+      },
+      "stadium": {
+        "name": "Vitality Stadium",
+        "capacity": 13291
+      },
+      "manager": {
+        "firstName": "Marco",
+        "lastName": "Rose",
+        "nationality": "GER",
+        "reputation": 160,
+        "tacticalTendencies": {
+          "preferredFormation": "3-5-2",
+          "mentality": "attacking",
+          "pressingIntensity": 76,
+          "buildUpSpeed": 80,
+          "defensiveLine": 68,
+          "width": 45,
+          "favoursYouth": 24,
+          "transferAggression": 82,
+          "adaptability": 73
+        }
+      },
+      "players": [
+        {
+          "firstName": "Djordje",
+          "lastName": "Petrovic",
+          "nationality": "SRB",
+          "dateOfBirth": "1999-10-08",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Mark",
+          "lastName": "Travers",
+          "nationality": "IRL",
+          "dateOfBirth": "1999-05-18",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Marcos",
+          "lastName": "Senesi",
+          "nationality": "ARG",
+          "dateOfBirth": "1997-05-10",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "James",
+          "lastName": "Hill",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-01-05",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Bafode",
+          "lastName": "Diakite",
+          "nationality": "FRA",
+          "dateOfBirth": "2001-01-06",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Max",
+          "lastName": "Aarons",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-01-04",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Adam",
+          "lastName": "Smith",
+          "nationality": "ENG",
+          "dateOfBirth": "1991-04-29",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Adrien",
+          "lastName": "Truffert",
+          "nationality": "FRA",
+          "dateOfBirth": "2001-11-20",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Ryan",
+          "lastName": "Christie",
+          "nationality": "SCO",
+          "dateOfBirth": "1995-02-22",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Alex",
+          "lastName": "Scott",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-08-21",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Marcus",
+          "lastName": "Tavernier",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-03-22",
+          "positions": [
+            "CM",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Justin",
+          "lastName": "Kluivert",
+          "nationality": "NED",
+          "dateOfBirth": "2001-05-05",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Antoine",
+          "lastName": "Semenyo",
+          "nationality": "GHA",
+          "dateOfBirth": "2000-01-07",
+          "positions": [
+            "RW",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Dango",
+          "lastName": "Ouattara",
+          "nationality": "BFA",
+          "dateOfBirth": "2002-01-11",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Evanilson",
+          "lastName": "Ferreira",
+          "nationality": "BRA",
+          "dateOfBirth": "2001-10-06",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        }
+      ]
+    },
+    {
+      "id": "club-brentford",
+      "name": "Brentford",
+      "shortName": "Brentford",
+      "abbreviation": "BRE",
+      "founded": 1889,
+      "colors": {
+        "primary": "#E30613",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Gtech Community Stadium",
+        "capacity": 17250
+      },
+      "manager": {
+        "firstName": "Keith",
+        "lastName": "Andrews",
+        "nationality": "IRL",
+        "reputation": 157,
+        "tacticalTendencies": {
+          "preferredFormation": "3-4-3",
+          "mentality": "balanced",
+          "pressingIntensity": 68,
+          "buildUpSpeed": 69,
+          "defensiveLine": 71,
+          "width": 37,
+          "favoursYouth": 33,
+          "transferAggression": 88,
+          "adaptability": 74
+        }
+      },
+      "players": [
+        {
+          "firstName": "Mark",
+          "lastName": "Flekken",
+          "nationality": "NED",
+          "dateOfBirth": "1993-06-13",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Nathan",
+          "lastName": "Collins",
+          "nationality": "IRL",
+          "dateOfBirth": "2001-04-30",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Ethan",
+          "lastName": "Pinnock",
+          "nationality": "JAM",
+          "dateOfBirth": "1993-05-29",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Sepp",
+          "lastName": "van den Berg",
+          "nationality": "NED",
+          "dateOfBirth": "2002-12-20",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Aaron",
+          "lastName": "Hickey",
+          "nationality": "SCO",
+          "dateOfBirth": "2002-06-10",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "left",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Rico",
+          "lastName": "Henry",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-07-08",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Vitaly",
+          "lastName": "Janelt",
+          "nationality": "GER",
+          "dateOfBirth": "1998-04-10",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Mikkel",
+          "lastName": "Damsgaard",
+          "nationality": "DEN",
+          "dateOfBirth": "2000-07-03",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Mathias",
+          "lastName": "Jensen",
+          "nationality": "DEN",
+          "dateOfBirth": "1996-01-01",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Bryan",
+          "lastName": "Mbeumo",
+          "nationality": "CMR",
+          "dateOfBirth": "1999-08-07",
+          "positions": [
+            "RW",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Yoane",
+          "lastName": "Wissa",
+          "nationality": "COD",
+          "dateOfBirth": "1996-09-03",
+          "positions": [
+            "ST",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Kevin",
+          "lastName": "Schade",
+          "nationality": "GER",
+          "dateOfBirth": "2001-11-01",
+          "positions": [
+            "LW",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Fabio",
+          "lastName": "Carvalho",
+          "nationality": "POR",
+          "dateOfBirth": "2002-08-30",
+          "positions": [
+            "CAM"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        }
+      ]
+    },
+    {
+      "id": "club-brighton",
+      "name": "Brighton & Hove Albion",
+      "shortName": "Brighton",
+      "abbreviation": "BHA",
+      "founded": 1901,
+      "colors": {
+        "primary": "#0057B8",
+        "secondary": "#FFCD00"
+      },
+      "stadium": {
+        "name": "AMEX Stadium",
+        "capacity": 31800
+      },
+      "manager": {
+        "firstName": "Fabian",
+        "lastName": "Hurzeler",
+        "nationality": "GER",
+        "reputation": 157,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 59,
+          "buildUpSpeed": 52,
+          "defensiveLine": 48,
+          "width": 70,
+          "favoursYouth": 31,
+          "transferAggression": 71,
+          "adaptability": 64
+        }
+      },
+      "players": [
+        {
+          "firstName": "Bart",
+          "lastName": "Verbruggen",
+          "nationality": "NED",
+          "dateOfBirth": "2002-08-18",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Lewis",
+          "lastName": "Dunk",
+          "nationality": "ENG",
+          "dateOfBirth": "1991-11-21",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Jan Paul",
+          "lastName": "van Hecke",
+          "nationality": "NED",
+          "dateOfBirth": "2000-06-08",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Igor",
+          "lastName": "Julio",
+          "nationality": "BRA",
+          "dateOfBirth": "1999-02-17",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Tariq",
+          "lastName": "Lamptey",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-09-30",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Pervis",
+          "lastName": "Estupinan",
+          "nationality": "ECU",
+          "dateOfBirth": "1998-01-21",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Carlos",
+          "lastName": "Baleba",
+          "nationality": "CMR",
+          "dateOfBirth": "2004-01-03",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Mats",
+          "lastName": "Wieffer",
+          "nationality": "NED",
+          "dateOfBirth": "2000-10-17",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "James",
+          "lastName": "Milner",
+          "nationality": "ENG",
+          "dateOfBirth": "1986-01-04",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Kaoru",
+          "lastName": "Mitoma",
+          "nationality": "JPN",
+          "dateOfBirth": "1997-05-20",
+          "positions": [
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Yankuba",
+          "lastName": "Minteh",
+          "nationality": "GAM",
+          "dateOfBirth": "2004-01-23",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Simon",
+          "lastName": "Adingra",
+          "nationality": "CIV",
+          "dateOfBirth": "2002-01-01",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Georginio",
+          "lastName": "Rutter",
+          "nationality": "FRA",
+          "dateOfBirth": "2002-04-31",
+          "positions": [
+            "CAM",
+            "ST"
+          ],
+          "foot": "left",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Danny",
+          "lastName": "Welbeck",
+          "nationality": "ENG",
+          "dateOfBirth": "1990-11-26",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        }
+      ]
+    },
+    {
+      "id": "club-chelsea",
+      "name": "Chelsea",
+      "shortName": "Chelsea",
+      "abbreviation": "CHE",
+      "founded": 1905,
+      "colors": {
+        "primary": "#034694",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Stamford Bridge",
+        "capacity": 40343
+      },
+      "manager": {
+        "firstName": "Xabi",
+        "lastName": "Alonso",
+        "nationality": "ESP",
+        "reputation": 150,
+        "tacticalTendencies": {
+          "preferredFormation": "3-4-2-1",
+          "mentality": "balanced",
+          "pressingIntensity": 43,
+          "buildUpSpeed": 56,
+          "defensiveLine": 47,
+          "width": 64,
+          "favoursYouth": 35,
+          "transferAggression": 75,
+          "adaptability": 38
+        }
+      },
+      "players": [
+        {
+          "firstName": "Robert",
+          "lastName": "Sanchez",
+          "nationality": "ESP",
+          "dateOfBirth": "1997-11-18",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Filip",
+          "lastName": "Jorgensen",
+          "nationality": "DEN",
+          "dateOfBirth": "2002-08-30",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Levi",
+          "lastName": "Colwill",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-02-26",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Wesley",
+          "lastName": "Fofana",
+          "nationality": "FRA",
+          "dateOfBirth": "2000-12-17",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Benoit",
+          "lastName": "Badiashile",
+          "nationality": "FRA",
+          "dateOfBirth": "2001-03-26",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Reece",
+          "lastName": "James",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-12-08",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "right",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Marc",
+          "lastName": "Cucurella",
+          "nationality": "ESP",
+          "dateOfBirth": "1998-07-22",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Moises",
+          "lastName": "Caicedo",
+          "nationality": "ECU",
+          "dateOfBirth": "2001-11-02",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 168,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Romeo",
+          "lastName": "Lavia",
+          "nationality": "BEL",
+          "dateOfBirth": "2004-01-06",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Enzo",
+          "lastName": "Fernandez",
+          "nationality": "ARG",
+          "dateOfBirth": "2001-01-17",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 162,
+          "potentialAbility": 162
+        },
+        {
+          "firstName": "Cole",
+          "lastName": "Palmer",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-05-06",
+          "positions": [
+            "CAM",
+            "RW"
+          ],
+          "foot": "left",
+          "currentAbility": 176,
+          "potentialAbility": 176
+        },
+        {
+          "firstName": "Noni",
+          "lastName": "Madueke",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-03-10",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Pedro",
+          "lastName": "Neto",
+          "nationality": "POR",
+          "dateOfBirth": "2000-03-09",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Nicolas",
+          "lastName": "Jackson",
+          "nationality": "SEN",
+          "dateOfBirth": "2001-06-20",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Liam",
+          "lastName": "Delap",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-02-08",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Estevao",
+          "lastName": "Willian",
+          "nationality": "BRA",
+          "dateOfBirth": "2007-04-24",
+          "positions": [
+            "RW",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 180
+        }
+      ]
+    },
+    {
+      "id": "club-crystal-palace",
+      "name": "Crystal Palace",
+      "shortName": "Crystal Palace",
+      "abbreviation": "CRY",
+      "founded": 1905,
+      "colors": {
+        "primary": "#1B458F",
+        "secondary": "#C4122E"
+      },
+      "stadium": {
+        "name": "Selhurst Park",
+        "capacity": 25486
+      },
+      "manager": {
+        "firstName": "Pierre",
+        "lastName": "Sage",
+        "nationality": "FRA",
+        "reputation": 153,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 59,
+          "buildUpSpeed": 67,
+          "defensiveLine": 47,
+          "width": 60,
+          "favoursYouth": 15,
+          "transferAggression": 68,
+          "adaptability": 36
+        }
+      },
+      "players": [
+        {
+          "firstName": "Dean",
+          "lastName": "Henderson",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-03-12",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Marc",
+          "lastName": "Guehi",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-07-13",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Maxence",
+          "lastName": "Lacroix",
+          "nationality": "FRA",
+          "dateOfBirth": "2000-05-06",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Chris",
+          "lastName": "Richards",
+          "nationality": "USA",
+          "dateOfBirth": "2000-03-28",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Daniel",
+          "lastName": "Munoz",
+          "nationality": "COL",
+          "dateOfBirth": "1996-05-14",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Tyrick",
+          "lastName": "Mitchell",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-09-01",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Adam",
+          "lastName": "Wharton",
+          "nationality": "ENG",
+          "dateOfBirth": "2004-11-06",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Cheick",
+          "lastName": "Doucoure",
+          "nationality": "MLI",
+          "dateOfBirth": "2000-01-08",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Eberechi",
+          "lastName": "Eze",
+          "nationality": "ENG",
+          "dateOfBirth": "1998-06-29",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Ismaila",
+          "lastName": "Sarr",
+          "nationality": "SEN",
+          "dateOfBirth": "1998-02-25",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Jean-Philippe",
+          "lastName": "Mateta",
+          "nationality": "FRA",
+          "dateOfBirth": "1997-06-28",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        }
+      ]
+    },
+    {
+      "id": "club-everton",
+      "name": "Everton",
+      "shortName": "Everton",
+      "abbreviation": "EVE",
+      "founded": 1878,
+      "colors": {
+        "primary": "#003399",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Hill Dickinson Stadium",
+        "capacity": 52888
+      },
+      "manager": {
+        "firstName": "David",
+        "lastName": "Moyes",
+        "nationality": "SCO",
+        "reputation": 149,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 52,
+          "buildUpSpeed": 48,
+          "defensiveLine": 46,
+          "width": 72,
+          "favoursYouth": 45,
+          "transferAggression": 72,
+          "adaptability": 32
+        }
+      },
+      "players": [
+        {
+          "firstName": "Jordan",
+          "lastName": "Pickford",
+          "nationality": "ENG",
+          "dateOfBirth": "1994-03-19",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Jarrad",
+          "lastName": "Branthwaite",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-06-27",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "James",
+          "lastName": "Tarkowski",
+          "nationality": "ENG",
+          "dateOfBirth": "1992-11-19",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Vitaliy",
+          "lastName": "Mykolenko",
+          "nationality": "UKR",
+          "dateOfBirth": "1999-05-29",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Nathan",
+          "lastName": "Patterson",
+          "nationality": "SCO",
+          "dateOfBirth": "2001-10-16",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 120,
+          "potentialAbility": 120
+        },
+        {
+          "firstName": "Idrissa",
+          "lastName": "Gueye",
+          "nationality": "SEN",
+          "dateOfBirth": "1989-09-16",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "James",
+          "lastName": "Garner",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-03-13",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Abdoulaye",
+          "lastName": "Doucoure",
+          "nationality": "MLI",
+          "dateOfBirth": "1993-01-01",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Iliman",
+          "lastName": "Ndiaye",
+          "nationality": "SEN",
+          "dateOfBirth": "2000-01-06",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Dwight",
+          "lastName": "McNeil",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-11-22",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "left",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Beto",
+          "lastName": "Betao",
+          "nationality": "GNB",
+          "dateOfBirth": "1998-05-31",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        }
+      ]
+    },
+    {
+      "id": "club-fulham",
+      "name": "Fulham",
+      "shortName": "Fulham",
+      "abbreviation": "FUL",
+      "founded": 1879,
+      "colors": {
+        "primary": "#000000",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Craven Cottage",
+        "capacity": 29600
+      },
+      "manager": {
+        "firstName": "Alvaro",
+        "lastName": "Arbeloa",
+        "nationality": "ESP",
+        "reputation": 145,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 63,
+          "buildUpSpeed": 57,
+          "defensiveLine": 43,
+          "width": 49,
+          "favoursYouth": 32,
+          "transferAggression": 72,
+          "adaptability": 63
+        }
+      },
+      "players": [
+        {
+          "firstName": "Bernd",
+          "lastName": "Leno",
+          "nationality": "GER",
+          "dateOfBirth": "1992-03-04",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Calvin",
+          "lastName": "Bassey",
+          "nationality": "NGA",
+          "dateOfBirth": "1999-12-31",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Joachim",
+          "lastName": "Andersen",
+          "nationality": "DEN",
+          "dateOfBirth": "1996-05-31",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Antonee",
+          "lastName": "Robinson",
+          "nationality": "USA",
+          "dateOfBirth": "1997-08-08",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Kenny",
+          "lastName": "Tete",
+          "nationality": "NED",
+          "dateOfBirth": "1995-10-09",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Sander",
+          "lastName": "Berge",
+          "nationality": "NOR",
+          "dateOfBirth": "1998-02-14",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Harrison",
+          "lastName": "Reed",
+          "nationality": "ENG",
+          "dateOfBirth": "1995-01-27",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Andreas",
+          "lastName": "Pereira",
+          "nationality": "BRA",
+          "dateOfBirth": "1996-01-01",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Alex",
+          "lastName": "Iwobi",
+          "nationality": "NGA",
+          "dateOfBirth": "1996-05-03",
+          "positions": [
+            "LW",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Emile",
+          "lastName": "Smith Rowe",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-07-28",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Rodrigo",
+          "lastName": "Muniz",
+          "nationality": "BRA",
+          "dateOfBirth": "2001-06-04",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        }
+      ]
+    },
+    {
+      "id": "club-leeds-united",
+      "name": "Leeds United",
+      "shortName": "Leeds",
+      "abbreviation": "LEE",
+      "founded": 1919,
+      "colors": {
+        "primary": "#FFFFFF",
+        "secondary": "#1D428A"
+      },
+      "stadium": {
+        "name": "Elland Road",
+        "capacity": 37890
+      },
+      "manager": {
+        "firstName": "Daniel",
+        "lastName": "Farke",
+        "nationality": "GER",
+        "reputation": 140,
+        "tacticalTendencies": {
+          "preferredFormation": "3-5-2",
+          "mentality": "balanced",
+          "pressingIntensity": 61,
+          "buildUpSpeed": 37,
+          "defensiveLine": 49,
+          "width": 52,
+          "favoursYouth": 20,
+          "transferAggression": 69,
+          "adaptability": 67
+        }
+      },
+      "players": [
+        {
+          "firstName": "Illan",
+          "lastName": "Meslier",
+          "nationality": "FRA",
+          "dateOfBirth": "2000-03-02",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Pascal",
+          "lastName": "Struijk",
+          "nationality": "NED",
+          "dateOfBirth": "2000-08-11",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Joe",
+          "lastName": "Rodon",
+          "nationality": "WAL",
+          "dateOfBirth": "1997-10-22",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Ethan",
+          "lastName": "Ampadu",
+          "nationality": "WAL",
+          "dateOfBirth": "2000-09-14",
+          "positions": [
+            "CDM",
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Jayden",
+          "lastName": "Bogle",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-05-15",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Junior",
+          "lastName": "Firpo",
+          "nationality": "DOM",
+          "dateOfBirth": "1996-08-22",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Ilia",
+          "lastName": "Gruev",
+          "nationality": "BUL",
+          "dateOfBirth": "2001-01-06",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Ao",
+          "lastName": "Tanaka",
+          "nationality": "JPN",
+          "dateOfBirth": "1998-09-10",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Brenden",
+          "lastName": "Aaronson",
+          "nationality": "USA",
+          "dateOfBirth": "2000-10-22",
+          "positions": [
+            "CAM",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Daniel",
+          "lastName": "James",
+          "nationality": "WAL",
+          "dateOfBirth": "1997-11-10",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Joel",
+          "lastName": "Piroe",
+          "nationality": "NED",
+          "dateOfBirth": "1999-01-08",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        }
+      ]
+    },
+    {
+      "id": "club-liverpool",
+      "name": "Liverpool",
+      "shortName": "Liverpool",
+      "abbreviation": "LIV",
+      "founded": 1892,
+      "colors": {
+        "primary": "#C8102E",
+        "secondary": "#F6EB61"
+      },
+      "stadium": {
+        "name": "Anfield",
+        "capacity": 61276
+      },
+      "manager": {
+        "firstName": "Andoni",
+        "lastName": "Iraola",
+        "nationality": "ESP",
+        "reputation": 137,
+        "tacticalTendencies": {
+          "preferredFormation": "4-3-3",
+          "mentality": "balanced",
+          "pressingIntensity": 64,
+          "buildUpSpeed": 40,
+          "defensiveLine": 45,
+          "width": 52,
+          "favoursYouth": 34,
+          "transferAggression": 68,
+          "adaptability": 80
+        }
+      },
+      "players": [
+        {
+          "firstName": "Alisson",
+          "lastName": "Becker",
+          "nationality": "BRA",
+          "dateOfBirth": "1992-10-02",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 172,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Giorgi",
+          "lastName": "Mamardashvili",
+          "nationality": "GEO",
+          "dateOfBirth": "2000-09-29",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Virgil",
+          "lastName": "van Dijk",
+          "nationality": "NED",
+          "dateOfBirth": "1991-07-08",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 178,
+          "potentialAbility": 178
+        },
+        {
+          "firstName": "Ibrahima",
+          "lastName": "Konate",
+          "nationality": "FRA",
+          "dateOfBirth": "1999-11-25",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 158,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Jarell",
+          "lastName": "Quansah",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-10-29",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 135,
+          "potentialAbility": 162
+        },
+        {
+          "firstName": "Conor",
+          "lastName": "Bradley",
+          "nationality": "NIR",
+          "dateOfBirth": "2003-07-04",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Andrew",
+          "lastName": "Robertson",
+          "nationality": "SCO",
+          "dateOfBirth": "1994-03-11",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Milos",
+          "lastName": "Kerkez",
+          "nationality": "HUN",
+          "dateOfBirth": "2003-11-07",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Ryan",
+          "lastName": "Gravenberch",
+          "nationality": "NED",
+          "dateOfBirth": "2002-05-16",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 156,
+          "potentialAbility": 156
+        },
+        {
+          "firstName": "Alexis",
+          "lastName": "Mac Allister",
+          "nationality": "ARG",
+          "dateOfBirth": "1998-12-24",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 165,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Dominik",
+          "lastName": "Szoboszlai",
+          "nationality": "HUN",
+          "dateOfBirth": "2000-10-25",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 162,
+          "potentialAbility": 162
+        },
+        {
+          "firstName": "Mohamed",
+          "lastName": "Salah",
+          "nationality": "EGY",
+          "dateOfBirth": "1992-06-15",
+          "positions": [
+            "RW"
+          ],
+          "foot": "left",
+          "currentAbility": 183,
+          "potentialAbility": 183
+        },
+        {
+          "firstName": "Cody",
+          "lastName": "Gakpo",
+          "nationality": "NED",
+          "dateOfBirth": "1999-05-07",
+          "positions": [
+            "LW",
+            "ST"
+          ],
+          "foot": "left",
+          "currentAbility": 156,
+          "potentialAbility": 156
+        },
+        {
+          "firstName": "Alexander",
+          "lastName": "Isak",
+          "nationality": "SWE",
+          "dateOfBirth": "1999-09-21",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 172,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Darwin",
+          "lastName": "Nunez",
+          "nationality": "URU",
+          "dateOfBirth": "1999-06-24",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Rio",
+          "lastName": "Ngumoha",
+          "nationality": "ENG",
+          "dateOfBirth": "2008-05-21",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 100,
+          "potentialAbility": 175
+        }
+      ]
+    },
+    {
+      "id": "club-man-city",
+      "name": "Manchester City",
+      "shortName": "Man City",
+      "abbreviation": "MCI",
+      "founded": 1880,
+      "colors": {
+        "primary": "#6CABDD",
+        "secondary": "#1C2C5B"
+      },
+      "stadium": {
+        "name": "Etihad Stadium",
+        "capacity": 53400
+      },
+      "manager": {
+        "firstName": "Enzo",
+        "lastName": "Maresca",
+        "nationality": "ITA",
+        "reputation": 142,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 53,
+          "buildUpSpeed": 55,
+          "defensiveLine": 46,
+          "width": 40,
+          "favoursYouth": 66,
+          "transferAggression": 79,
+          "adaptability": 72
+        }
+      },
+      "players": [
+        {
+          "firstName": "Ederson",
+          "lastName": "Moraes",
+          "nationality": "BRA",
+          "dateOfBirth": "1993-08-17",
+          "positions": [
+            "GK"
+          ],
+          "foot": "left",
+          "currentAbility": 168,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Stefan",
+          "lastName": "Ortega",
+          "nationality": "GER",
+          "dateOfBirth": "1992-11-06",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Ruben",
+          "lastName": "Dias",
+          "nationality": "POR",
+          "dateOfBirth": "1997-05-14",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 176,
+          "potentialAbility": 176
+        },
+        {
+          "firstName": "John",
+          "lastName": "Stones",
+          "nationality": "ENG",
+          "dateOfBirth": "1996-05-28",
+          "positions": [
+            "CB",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Nathan",
+          "lastName": "Ake",
+          "nationality": "NED",
+          "dateOfBirth": "1995-02-18",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Josko",
+          "lastName": "Gvardiol",
+          "nationality": "CRO",
+          "dateOfBirth": "2002-01-23",
+          "positions": [
+            "CB",
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 160,
+          "potentialAbility": 160
+        },
+        {
+          "firstName": "Rico",
+          "lastName": "Lewis",
+          "nationality": "ENG",
+          "dateOfBirth": "2004-11-21",
+          "positions": [
+            "RB",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Rodri",
+          "lastName": "Hernandez",
+          "nationality": "ESP",
+          "dateOfBirth": "1996-06-22",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 182,
+          "potentialAbility": 182
+        },
+        {
+          "firstName": "Mateo",
+          "lastName": "Kovacic",
+          "nationality": "CRO",
+          "dateOfBirth": "1994-05-06",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Nico",
+          "lastName": "Gonzalez",
+          "nationality": "ESP",
+          "dateOfBirth": "2002-01-03",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Bernardo",
+          "lastName": "Silva",
+          "nationality": "POR",
+          "dateOfBirth": "1994-08-10",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 168,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Jeremy",
+          "lastName": "Doku",
+          "nationality": "BEL",
+          "dateOfBirth": "2002-05-27",
+          "positions": [
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 158,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Savinho",
+          "lastName": "Moreira",
+          "nationality": "BRA",
+          "dateOfBirth": "2004-04-10",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Erling",
+          "lastName": "Haaland",
+          "nationality": "NOR",
+          "dateOfBirth": "2000-07-21",
+          "positions": [
+            "ST"
+          ],
+          "foot": "left",
+          "currentAbility": 186,
+          "potentialAbility": 186
+        },
+        {
+          "firstName": "Omar",
+          "lastName": "Marmoush",
+          "nationality": "EGY",
+          "dateOfBirth": "2002-02-07",
+          "positions": [
+            "ST",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "James",
+          "lastName": "McAtee",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-10-18",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 158
+        }
+      ]
+    },
+    {
+      "id": "club-man-united",
+      "name": "Manchester United",
+      "shortName": "Man Utd",
+      "abbreviation": "MUN",
+      "founded": 1878,
+      "colors": {
+        "primary": "#DA291C",
+        "secondary": "#FBE122"
+      },
+      "stadium": {
+        "name": "Old Trafford",
+        "capacity": 74310
+      },
+      "manager": {
+        "firstName": "Michael",
+        "lastName": "Carrick",
+        "nationality": "ENG",
+        "reputation": 141,
+        "tacticalTendencies": {
+          "preferredFormation": "4-3-3",
+          "mentality": "balanced",
+          "pressingIntensity": 43,
+          "buildUpSpeed": 58,
+          "defensiveLine": 51,
+          "width": 51,
+          "favoursYouth": 31,
+          "transferAggression": 66,
+          "adaptability": 37
+        }
+      },
+      "players": [
+        {
+          "firstName": "Altay",
+          "lastName": "Bayindir",
+          "nationality": "TUR",
+          "dateOfBirth": "1998-04-14",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Senne",
+          "lastName": "Lammens",
+          "nationality": "BEL",
+          "dateOfBirth": "2002-07-07",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Lisandro",
+          "lastName": "Martinez",
+          "nationality": "ARG",
+          "dateOfBirth": "1998-01-18",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Matthijs",
+          "lastName": "de Ligt",
+          "nationality": "NED",
+          "dateOfBirth": "1999-08-12",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Leny",
+          "lastName": "Yoro",
+          "nationality": "FRA",
+          "dateOfBirth": "2005-11-13",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Harry",
+          "lastName": "Maguire",
+          "nationality": "ENG",
+          "dateOfBirth": "1993-03-05",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 144,
+          "potentialAbility": 144
+        },
+        {
+          "firstName": "Ayden",
+          "lastName": "Heaven",
+          "nationality": "ENG",
+          "dateOfBirth": "2006-09-22",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 129,
+          "potentialAbility": 160
+        },
+        {
+          "firstName": "Diego",
+          "lastName": "Leon",
+          "nationality": "PAR",
+          "dateOfBirth": "2007-04-03",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 105,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Noussair",
+          "lastName": "Mazraoui",
+          "nationality": "MAR",
+          "dateOfBirth": "1997-11-14",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Diogo",
+          "lastName": "Dalot",
+          "nationality": "POR",
+          "dateOfBirth": "1999-03-18",
+          "positions": [
+            "RB",
+            "LB"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Patrick",
+          "lastName": "Dorgu",
+          "nationality": "DEN",
+          "dateOfBirth": "2004-10-07",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 132,
+          "potentialAbility": 160
+        },
+        {
+          "firstName": "Luke",
+          "lastName": "Shaw",
+          "nationality": "ENG",
+          "dateOfBirth": "1995-07-12",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Manuel",
+          "lastName": "Ugarte",
+          "nationality": "URU",
+          "dateOfBirth": "2001-04-11",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Toby",
+          "lastName": "Collyer",
+          "nationality": "ENG",
+          "dateOfBirth": "2004-01-03",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Bruno",
+          "lastName": "Fernandes",
+          "nationality": "POR",
+          "dateOfBirth": "1994-09-08",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 172,
+          "potentialAbility": 172
+        },
+        {
+          "firstName": "Mason",
+          "lastName": "Mount",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-01-10",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Kobbie",
+          "lastName": "Mainoo",
+          "nationality": "ENG",
+          "dateOfBirth": "2005-04-19",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 168
+        },
+        {
+          "firstName": "Amad",
+          "lastName": "Diallo",
+          "nationality": "CIV",
+          "dateOfBirth": "2002-07-11",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Bryan",
+          "lastName": "Mbeumo",
+          "nationality": "CMR",
+          "dateOfBirth": "1999-08-07",
+          "positions": [
+            "RW",
+            "ST"
+          ],
+          "foot": "left",
+          "currentAbility": 156,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Marcus",
+          "lastName": "Rashford",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-10-31",
+          "positions": [
+            "LW",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Matheus",
+          "lastName": "Cunha",
+          "nationality": "BRA",
+          "dateOfBirth": "1999-05-27",
+          "positions": [
+            "CF",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 156,
+          "potentialAbility": 156
+        },
+        {
+          "firstName": "Joshua",
+          "lastName": "Zirkzee",
+          "nationality": "NED",
+          "dateOfBirth": "2001-05-22",
+          "positions": [
+            "ST",
+            "CF"
+          ],
+          "foot": "right",
+          "currentAbility": 144,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Benjamin",
+          "lastName": "Sesko",
+          "nationality": "SVN",
+          "dateOfBirth": "2004-05-18",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 144,
+          "potentialAbility": 172
+        }
+      ]
+    },
+    {
+      "id": "club-newcastle",
+      "name": "Newcastle United",
+      "shortName": "Newcastle",
+      "abbreviation": "NEW",
+      "founded": 1892,
+      "colors": {
+        "primary": "#241F20",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "St James' Park",
+        "capacity": 52305
+      },
+      "manager": {
+        "firstName": "Eddie",
+        "lastName": "Howe",
+        "nationality": "ENG",
+        "reputation": 135,
+        "tacticalTendencies": {
+          "preferredFormation": "4-1-4-1",
+          "mentality": "defensive",
+          "pressingIntensity": 39,
+          "buildUpSpeed": 36,
+          "defensiveLine": 31,
+          "width": 65,
+          "favoursYouth": 68,
+          "transferAggression": 60,
+          "adaptability": 46
+        }
+      },
+      "players": [
+        {
+          "firstName": "Nick",
+          "lastName": "Pope",
+          "nationality": "ENG",
+          "dateOfBirth": "1992-04-19",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Sven",
+          "lastName": "Botman",
+          "nationality": "NED",
+          "dateOfBirth": "2000-01-12",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Fabian",
+          "lastName": "Schar",
+          "nationality": "SUI",
+          "dateOfBirth": "1991-12-20",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Kieran",
+          "lastName": "Trippier",
+          "nationality": "ENG",
+          "dateOfBirth": "1990-09-19",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Tino",
+          "lastName": "Livramento",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-11-12",
+          "positions": [
+            "RB",
+            "LB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Lewis",
+          "lastName": "Hall",
+          "nationality": "ENG",
+          "dateOfBirth": "2004-09-08",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 135,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Bruno",
+          "lastName": "Guimaraes",
+          "nationality": "BRA",
+          "dateOfBirth": "1997-11-16",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 162,
+          "potentialAbility": 162
+        },
+        {
+          "firstName": "Sandro",
+          "lastName": "Tonali",
+          "nationality": "ITA",
+          "dateOfBirth": "2000-05-08",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Joelinton",
+          "lastName": "Cassio",
+          "nationality": "BRA",
+          "dateOfBirth": "1996-05-14",
+          "positions": [
+            "CM"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Elliot",
+          "lastName": "Anderson",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-03-06",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "Anthony",
+          "lastName": "Gordon",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-02-24",
+          "positions": [
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Jacob",
+          "lastName": "Murphy",
+          "nationality": "ENG",
+          "dateOfBirth": "1995-02-24",
+          "positions": [
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        },
+        {
+          "firstName": "William",
+          "lastName": "Osula",
+          "nationality": "DEN",
+          "dateOfBirth": "2003-01-22",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 120,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Lewis",
+          "lastName": "Miley",
+          "nationality": "ENG",
+          "dateOfBirth": "2006-01-26",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Harvey",
+          "lastName": "Barnes",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-12-09",
+          "positions": [
+            "LW",
+            "RW"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Anthony",
+          "lastName": "Elanga",
+          "nationality": "SWE",
+          "dateOfBirth": "2002-04-27",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        }
+      ]
+    },
+    {
+      "id": "club-nottm-forest",
+      "name": "Nottingham Forest",
+      "shortName": "Forest",
+      "abbreviation": "NFO",
+      "founded": 1865,
+      "colors": {
+        "primary": "#DD0000",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "City Ground",
+        "capacity": 30445
+      },
+      "manager": {
+        "firstName": "Oliver",
+        "lastName": "Glasner",
+        "nationality": "AUT",
+        "reputation": 133,
+        "tacticalTendencies": {
+          "preferredFormation": "3-4-3",
+          "mentality": "defensive",
+          "pressingIntensity": 35,
+          "buildUpSpeed": 43,
+          "defensiveLine": 22,
+          "width": 52,
+          "favoursYouth": 33,
+          "transferAggression": 59,
+          "adaptability": 40
+        }
+      },
+      "players": [
+        {
+          "firstName": "Matz",
+          "lastName": "Sels",
+          "nationality": "BEL",
+          "dateOfBirth": "1992-02-26",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Murillo",
+          "lastName": "Santiago",
+          "nationality": "BRA",
+          "dateOfBirth": "2002-04-04",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Nikola",
+          "lastName": "Milenkovic",
+          "nationality": "SRB",
+          "dateOfBirth": "1997-10-12",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Morato",
+          "lastName": "Rocha",
+          "nationality": "BRA",
+          "dateOfBirth": "2002-09-25",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 120,
+          "potentialAbility": 120
+        },
+        {
+          "firstName": "Neco",
+          "lastName": "Williams",
+          "nationality": "WAL",
+          "dateOfBirth": "2001-04-13",
+          "positions": [
+            "RB",
+            "LB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Ola",
+          "lastName": "Aina",
+          "nationality": "NGA",
+          "dateOfBirth": "1996-10-08",
+          "positions": [
+            "LB",
+            "RB"
+          ],
+          "foot": "left",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Ibrahim",
+          "lastName": "Sangare",
+          "nationality": "CIV",
+          "dateOfBirth": "1997-08-02",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Nicolas",
+          "lastName": "Dominguez",
+          "nationality": "URU",
+          "dateOfBirth": "1998-06-28",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 130,
+          "potentialAbility": 130
+        },
+        {
+          "firstName": "Morgan",
+          "lastName": "Gibbs-White",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-01-27",
+          "positions": [
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "Chris",
+          "lastName": "Wood",
+          "nationality": "NZL",
+          "dateOfBirth": "1991-12-07",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 132
+        }
+      ]
+    },
+    {
+      "id": "club-sunderland",
+      "name": "Sunderland",
+      "shortName": "Sunderland",
+      "abbreviation": "SUN",
+      "founded": 1879,
+      "colors": {
+        "primary": "#EB172F",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Stadium of Light",
+        "capacity": 48707
+      },
+      "manager": {
+        "firstName": "Regis",
+        "lastName": "Le Bris",
+        "nationality": "FRA",
+        "reputation": 133,
+        "tacticalTendencies": {
+          "preferredFormation": "4-4-1-1",
+          "mentality": "defensive",
+          "pressingIntensity": 40,
+          "buildUpSpeed": 44,
+          "defensiveLine": 27,
+          "width": 41,
+          "favoursYouth": 50,
+          "transferAggression": 65,
+          "adaptability": 59
+        }
+      },
+      "players": [
+        {
+          "firstName": "Anthony",
+          "lastName": "Patterson",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-08-08",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Dan",
+          "lastName": "Ballard",
+          "nationality": "NIR",
+          "dateOfBirth": "1999-04-22",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 125,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Luke",
+          "lastName": "O'Nien",
+          "nationality": "ENG",
+          "dateOfBirth": "1996-05-21",
+          "positions": [
+            "CB",
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Trai",
+          "lastName": "Hume",
+          "nationality": "NIR",
+          "dateOfBirth": "2002-06-04",
+          "positions": [
+            "RB",
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Dennis",
+          "lastName": "Cirkin",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-02-06",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Dan",
+          "lastName": "Neil",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-10-13",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Chris",
+          "lastName": "Rigg",
+          "nationality": "ENG",
+          "dateOfBirth": "2007-01-06",
+          "positions": [
+            "CM",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Patrick",
+          "lastName": "Roberts",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-02-05",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 120,
+          "potentialAbility": 120
+        },
+        {
+          "firstName": "Romaine",
+          "lastName": "Mundle",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-03-30",
+          "positions": [
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Wilson",
+          "lastName": "Isidor",
+          "nationality": "FRA",
+          "dateOfBirth": "2000-12-27",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Eliezer",
+          "lastName": "Mayenda",
+          "nationality": "ESP",
+          "dateOfBirth": "2005-08-08",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 148
+        }
+      ]
+    },
+    {
+      "id": "club-tottenham",
+      "name": "Tottenham Hotspur",
+      "shortName": "Spurs",
+      "abbreviation": "TOT",
+      "founded": 1882,
+      "colors": {
+        "primary": "#132257",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Tottenham Hotspur Stadium",
+        "capacity": 62850
+      },
+      "manager": {
+        "firstName": "Roberto",
+        "lastName": "De Zerbi",
+        "nationality": "ITA",
+        "reputation": 135,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 44,
+          "buildUpSpeed": 31,
+          "defensiveLine": 26,
+          "width": 63,
+          "favoursYouth": 21,
+          "transferAggression": 72,
+          "adaptability": 76
+        }
+      },
+      "players": [
+        {
+          "firstName": "Guglielmo",
+          "lastName": "Vicario",
+          "nationality": "ITA",
+          "dateOfBirth": "1996-10-20",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Cristian",
+          "lastName": "Romero",
+          "nationality": "ARG",
+          "dateOfBirth": "1998-04-27",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 160,
+          "potentialAbility": 160
+        },
+        {
+          "firstName": "Micky",
+          "lastName": "van de Ven",
+          "nationality": "NED",
+          "dateOfBirth": "2001-04-19",
+          "positions": [
+            "CB"
+          ],
+          "foot": "left",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Djed",
+          "lastName": "Spence",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-08-20",
+          "positions": [
+            "RB",
+            "LB"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Pedro",
+          "lastName": "Porro",
+          "nationality": "ESP",
+          "dateOfBirth": "1999-09-13",
+          "positions": [
+            "RB",
+            "RWB"
+          ],
+          "foot": "right",
+          "currentAbility": 150,
+          "potentialAbility": 150
+        },
+        {
+          "firstName": "Destiny",
+          "lastName": "Udogie",
+          "nationality": "ITA",
+          "dateOfBirth": "2002-04-28",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 145,
+          "potentialAbility": 145
+        },
+        {
+          "firstName": "Rodrigo",
+          "lastName": "Bentancur",
+          "nationality": "URU",
+          "dateOfBirth": "1997-06-25",
+          "positions": [
+            "CDM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 148,
+          "potentialAbility": 148
+        },
+        {
+          "firstName": "Yves",
+          "lastName": "Bissouma",
+          "nationality": "MLI",
+          "dateOfBirth": "1996-09-30",
+          "positions": [
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 142,
+          "potentialAbility": 142
+        },
+        {
+          "firstName": "James",
+          "lastName": "Maddison",
+          "nationality": "ENG",
+          "dateOfBirth": "1996-11-23",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 155,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "Dejan",
+          "lastName": "Kulusevski",
+          "nationality": "SWE",
+          "dateOfBirth": "2000-04-04",
+          "positions": [
+            "RW",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 152,
+          "potentialAbility": 152
+        },
+        {
+          "firstName": "Son",
+          "lastName": "Heung-min",
+          "nationality": "KOR",
+          "dateOfBirth": "1992-07-08",
+          "positions": [
+            "LW",
+            "ST"
+          ],
+          "foot": "both",
+          "currentAbility": 158,
+          "potentialAbility": 158
+        },
+        {
+          "firstName": "Mathys",
+          "lastName": "Tel",
+          "nationality": "FRA",
+          "dateOfBirth": "2005-04-27",
+          "positions": [
+            "ST",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 132,
+          "potentialAbility": 165
+        },
+        {
+          "firstName": "Brennan",
+          "lastName": "Johnson",
+          "nationality": "WAL",
+          "dateOfBirth": "2001-05-23",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 138,
+          "potentialAbility": 138
+        },
+        {
+          "firstName": "Dominic",
+          "lastName": "Solanke",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-09-14",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 140,
+          "potentialAbility": 140
+        },
+        {
+          "firstName": "Archie",
+          "lastName": "Gray",
+          "nationality": "ENG",
+          "dateOfBirth": "2006-03-12",
+          "positions": [
+            "CM",
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 160
+        },
+        {
+          "firstName": "Wilson",
+          "lastName": "Odobert",
+          "nationality": "FRA",
+          "dateOfBirth": "2004-01-30",
+          "positions": [
+            "LW"
+          ],
+          "foot": "left",
+          "currentAbility": 120,
+          "potentialAbility": 155
+        }
+      ]
+    },
+    {
+      "id": "club-coventry",
+      "name": "Coventry City",
+      "shortName": "Coventry",
+      "abbreviation": "COV",
+      "founded": 1883,
+      "colors": {
+        "primary": "#78D0F3",
+        "secondary": "#1B1B1B"
+      },
+      "stadium": {
+        "name": "Coventry Building Society Arena",
+        "capacity": 32609
+      },
+      "manager": {
+        "firstName": "Frank",
+        "lastName": "Lampard",
+        "nationality": "ENG",
+        "reputation": 128,
+        "tacticalTendencies": {
+          "preferredFormation": "3-5-2",
+          "mentality": "balanced",
+          "pressingIntensity": 55,
+          "buildUpSpeed": 52,
+          "defensiveLine": 50,
+          "width": 52,
+          "favoursYouth": 50,
+          "transferAggression": 40,
+          "adaptability": 55
+        }
+      },
+      "players": [
+        {
+          "firstName": "Ben",
+          "lastName": "Wilson",
+          "nationality": "ENG",
+          "dateOfBirth": "1997-01-31",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 112
+        },
+        {
+          "firstName": "Bobby",
+          "lastName": "Thomas",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-11-19",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Luis",
+          "lastName": "Binks",
+          "nationality": "ENG",
+          "dateOfBirth": "2002-01-19",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Jake",
+          "lastName": "Bidwell",
+          "nationality": "ENG",
+          "dateOfBirth": "1993-03-21",
+          "positions": [
+            "LB"
+          ],
+          "foot": "left",
+          "currentAbility": 108,
+          "potentialAbility": 108
+        },
+        {
+          "firstName": "Josh",
+          "lastName": "Wilson-Esbrand",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-01-25",
+          "positions": [
+            "RB"
+          ],
+          "foot": "left",
+          "currentAbility": 112,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Josh",
+          "lastName": "Eccles",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-01-04",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 125
+        },
+        {
+          "firstName": "Ben",
+          "lastName": "Sheaf",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-01-15",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Jack",
+          "lastName": "Rudoni",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-06-22",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Tatsuhiro",
+          "lastName": "Sakamoto",
+          "nationality": "JPN",
+          "dateOfBirth": "1997-05-24",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 120,
+          "potentialAbility": 120
+        },
+        {
+          "firstName": "Ellis",
+          "lastName": "Simms",
+          "nationality": "ENG",
+          "dateOfBirth": "2000-11-05",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Haji",
+          "lastName": "Wright",
+          "nationality": "USA",
+          "dateOfBirth": "1999-01-27",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 120,
+          "potentialAbility": 125
+        }
+      ]
+    },
+    {
+      "id": "club-hull-city",
+      "name": "Hull City",
+      "shortName": "Hull City",
+      "abbreviation": "HUL",
+      "founded": 1904,
+      "colors": {
+        "primary": "#F18A01",
+        "secondary": "#000000"
+      },
+      "stadium": {
+        "name": "MKM Stadium",
+        "capacity": 25586
+      },
+      "manager": {
+        "firstName": "Sergej",
+        "lastName": "Jakirovic",
+        "nationality": "BIH",
+        "reputation": 105,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 52,
+          "buildUpSpeed": 50,
+          "defensiveLine": 48,
+          "width": 50,
+          "favoursYouth": 48,
+          "transferAggression": 35,
+          "adaptability": 50
+        }
+      },
+      "players": [
+        {
+          "firstName": "Ivor",
+          "lastName": "Pandur",
+          "nationality": "CRO",
+          "dateOfBirth": "2001-01-24",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 112
+        },
+        {
+          "firstName": "Jacob",
+          "lastName": "Greaves",
+          "nationality": "ENG",
+          "dateOfBirth": "2001-05-20",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Alfie",
+          "lastName": "Jones",
+          "nationality": "ENG",
+          "dateOfBirth": "1998-11-11",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 108,
+          "potentialAbility": 108
+        },
+        {
+          "firstName": "Sean",
+          "lastName": "McLoughlin",
+          "nationality": "IRL",
+          "dateOfBirth": "1997-04-17",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 108,
+          "potentialAbility": 108
+        },
+        {
+          "firstName": "Lewie",
+          "lastName": "Coyle",
+          "nationality": "ENG",
+          "dateOfBirth": "1995-08-31",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 110,
+          "potentialAbility": 110
+        },
+        {
+          "firstName": "Ryan",
+          "lastName": "Giles",
+          "nationality": "WAL",
+          "dateOfBirth": "2000-01-27",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 112,
+          "potentialAbility": 112
+        },
+        {
+          "firstName": "Regan",
+          "lastName": "Slater",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-09-08",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 110,
+          "potentialAbility": 110
+        },
+        {
+          "firstName": "Xavier",
+          "lastName": "Simons",
+          "nationality": "NED",
+          "dateOfBirth": "2002-04-08",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 110,
+          "potentialAbility": 110
+        },
+        {
+          "firstName": "Ozan",
+          "lastName": "Tufan",
+          "nationality": "TUR",
+          "dateOfBirth": "1995-03-23",
+          "positions": [
+            "CAM",
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Abu",
+          "lastName": "Kamara",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-06-16",
+          "positions": [
+            "RW",
+            "LW"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 135
+        },
+        {
+          "firstName": "Oliver",
+          "lastName": "McBurnie",
+          "nationality": "SCO",
+          "dateOfBirth": "1996-06-04",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        }
+      ]
+    },
+    {
+      "id": "club-ipswich",
+      "name": "Ipswich Town",
+      "shortName": "Ipswich",
+      "abbreviation": "IPS",
+      "founded": 1878,
+      "colors": {
+        "primary": "#3A64A3",
+        "secondary": "#FFFFFF"
+      },
+      "stadium": {
+        "name": "Portman Road",
+        "capacity": 30311
+      },
+      "manager": {
+        "firstName": "Gary",
+        "lastName": "O'Neil",
+        "nationality": "ENG",
+        "reputation": 130,
+        "tacticalTendencies": {
+          "preferredFormation": "4-2-3-1",
+          "mentality": "balanced",
+          "pressingIntensity": 58,
+          "buildUpSpeed": 52,
+          "defensiveLine": 50,
+          "width": 52,
+          "favoursYouth": 45,
+          "transferAggression": 50,
+          "adaptability": 65
+        }
+      },
+      "players": [
+        {
+          "firstName": "Arijanet",
+          "lastName": "Muric",
+          "nationality": "KVX",
+          "dateOfBirth": "1998-08-07",
+          "positions": [
+            "GK"
+          ],
+          "foot": "right",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Cameron",
+          "lastName": "Burgess",
+          "nationality": "SCO",
+          "dateOfBirth": "1996-04-17",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 112,
+          "potentialAbility": 112
+        },
+        {
+          "firstName": "Luke",
+          "lastName": "Woolfenden",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-01-21",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 115,
+          "potentialAbility": 115
+        },
+        {
+          "firstName": "Dara",
+          "lastName": "O'Shea",
+          "nationality": "IRL",
+          "dateOfBirth": "1999-01-04",
+          "positions": [
+            "CB"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Leif",
+          "lastName": "Davis",
+          "nationality": "ENG",
+          "dateOfBirth": "1998-11-30",
+          "positions": [
+            "LB",
+            "LWB"
+          ],
+          "foot": "left",
+          "currentAbility": 122,
+          "potentialAbility": 122
+        },
+        {
+          "firstName": "Kane",
+          "lastName": "Vincent-Young",
+          "nationality": "ENG",
+          "dateOfBirth": "1998-08-15",
+          "positions": [
+            "RB"
+          ],
+          "foot": "right",
+          "currentAbility": 108,
+          "potentialAbility": 108
+        },
+        {
+          "firstName": "Jens",
+          "lastName": "Cajuste",
+          "nationality": "SWE",
+          "dateOfBirth": "1997-08-10",
+          "positions": [
+            "CM",
+            "CDM"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        },
+        {
+          "firstName": "Massimo",
+          "lastName": "Luongo",
+          "nationality": "AUS",
+          "dateOfBirth": "1992-09-25",
+          "positions": [
+            "CM"
+          ],
+          "foot": "right",
+          "currentAbility": 108,
+          "potentialAbility": 108
+        },
+        {
+          "firstName": "Sammie",
+          "lastName": "Szmodics",
+          "nationality": "IRL",
+          "dateOfBirth": "1997-10-24",
+          "positions": [
+            "CAM",
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 128
+        },
+        {
+          "firstName": "Omari",
+          "lastName": "Hutchinson",
+          "nationality": "ENG",
+          "dateOfBirth": "2003-05-31",
+          "positions": [
+            "RW",
+            "CAM"
+          ],
+          "foot": "right",
+          "currentAbility": 128,
+          "potentialAbility": 155
+        },
+        {
+          "firstName": "George",
+          "lastName": "Hirst",
+          "nationality": "ENG",
+          "dateOfBirth": "1999-09-06",
+          "positions": [
+            "ST"
+          ],
+          "foot": "right",
+          "currentAbility": 118,
+          "potentialAbility": 118
+        }
+      ]
+    }
+  ]
+}
