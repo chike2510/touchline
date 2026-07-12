@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html, body {
+  @apply bg-navy-950 text-ink-100 font-body;
+  min-height: 100dvh;
+}
+
+/* Fixed mesh-gradient glow behind the whole app — the "cyber-sport" aura.
+   Sits at z-index -1, doesn't scroll, doesn't intercept pointer events. */
+body {
+  position: relative;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: theme("backgroundImage.mesh-glow");
+}
+
+* {
+  @apply border-navy-600;
+}
+
+:focus-visible {
+  outline: 2px solid theme("colors.accent.400");
+  outline-offset: 2px;
+}
+
+/* Glassmorphism: translucent panel + backdrop blur + soft border highlight.
+   Applied to Card, Sidebar, TopBar — the surfaces the reskin touches. */
+.glass-panel {
+  background: rgba(17, 20, 31, 0.62);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid theme("colors.glass.border");
+  box-shadow: 0 1px 0 0 theme("colors.glass.highlight") inset, 0 12px 32px -12px rgba(0,0,0,0.6);
+}
+
+.text-gradient-accent {
+  background: linear-gradient(135deg, theme("colors.accent.300"), theme("colors.pulse.400"));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtle-divider {
+  height: 1px;
+  background: theme("colors.navy.600");
+}
+
+::-webkit-scrollbar {
+  width: 8px; height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: theme("colors.navy.600");
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Simple 3D perspective stage for the pitch views — see PitchViz/
+   DashboardPitch/FormationPitch, which now render inside a `.pitch-3d-stage`
+   wrapper tilted like a broadcast camera, with player tokens getting a
+   depth-based drop shadow. This is a CSS-only "3D-styled" presentation, not
+   a real 3D engine — see the README note added alongside this reskin. */
+.pitch-3d-stage {
+  perspective: 900px;
+}
+.pitch-3d-tilt {
+  transform: rotateX(38deg) scale(1.05);
+  transform-style: preserve-3d;
+  transform-origin: 50% 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .pitch-3d-tilt {
+    transform: none;
+  }
+}
