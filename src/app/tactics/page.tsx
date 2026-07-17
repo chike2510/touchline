@@ -111,18 +111,18 @@ export default function TacticsPage() {
   function handleRoleChange(playerId: string, roleCode: RoleCode) {
     const duties = ROLE_CATALOG[roleCode].duties;
     const duty: RoleDuty = duties.includes("support") ? "support" : duties[0]!;
-    updateTactic({ playerRoles: { ...tactic.playerRoles, [playerId]: { roleCode, duty } } }, -1);
+    updateTactic({ playerRoles: { ...tactic!.playerRoles, [playerId]: { roleCode, duty } } }, -1);
   }
 
   function handleDutyChange(playerId: string, duty: RoleDuty) {
-    const role = tactic.playerRoles[playerId];
+    const role = tactic!.playerRoles[playerId];
     if (!role) return;
-    updateTactic({ playerRoles: { ...tactic.playerRoles, [playerId]: { ...role, duty } } }, -1);
+    updateTactic({ playerRoles: { ...tactic!.playerRoles, [playerId]: { ...role, duty } } }, -1);
   }
 
   function handleOutOfPossessionFormationChange(formation: string) {
-    const newOutSlots = remapOutOfPossessionFormation(startingXI, tactic.inPossession.formation, formation);
-    updateTactic({ outOfPossession: { ...tactic.outOfPossession, formation, slotAssignments: newOutSlots } }, -2);
+    const newOutSlots = remapOutOfPossessionFormation(startingXI, tactic!.inPossession.formation, formation);
+    updateTactic({ outOfPossession: { ...tactic!.outOfPossession, formation, slotAssignments: newOutSlots } }, -2);
   }
 
   function setCaptain(playerId: string) {
