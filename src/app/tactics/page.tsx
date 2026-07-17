@@ -130,7 +130,7 @@ export default function TacticsPage() {
   }
 
   function handleCreateTactic(styleId: TacticSetup["tacticalStyleId"], formation: string) {
-    const { startingXI: freshXI } = pickAutoLineup(club.squadIds, world.players, formation);
+    const { startingXI: freshXI } = pickAutoLineup(club!.squadIds, world.players, formation);
     const fresh = buildTacticFromStyle(styleId, formation, freshXI, tactic.name);
     mutateWorld((w) => {
       w.activeTactic = fresh;
