@@ -1,0 +1,83 @@
+"use client";
+import Link from "next/link";
+import type { Player, TacticSetup } from "@/domain/types";
+import { PlayerPhoto } from "@/components/ui/PlayerPhoto";
+import { caToOverall } from "@/components/tactics/FormationPitch";
+import { coordsForFormation } from "@/engines/tactics/positionCoords";
+import { FORMATION_SLOTS } from "@/engines/tactics/aiTactics";
+
+export function DashboardPitch({
+  tactic, players, leagueId, clubId,
+}: { tactic: TacticSetup; players: Record<string, Player>; leagueId: string; clubId: string }) {
+  const { formation, slotAssignments } = tactic.inPossession;
+  const slots = FORMATION_SLOTS[formation] ?? FORMATION_SLOTS["4-3-3"]!;
+  const coords = coordsForFormation(formation);
+
+  // Ordered slot -> playerId, matching each formation slot to whichever
+  // starter is assigned that slot in the in-possession shape.
+  const remaining = new Map(Object.entries(slotAssignments));
+  const assignments = slots.map((slotPos) => {
+    const match = [...remaining.entries()].find(([, s]) => s === slotPos);
+    if (match) { remaining.delete(match[0]); return match[0]; }
+    return null;
+  });
+
+  return (
+    <div className="glass-panel flex h-full flex-col rounded-card p-3">
+      <div className="mb-2 flex items-center justify-between">
+        <p className="text-sm font-medium text-ink-100">{formation} • {tactic.mentality.replace(/-/g, " ")}</p>
+        <Link href="/tactics" className="text-xs text-accent-400">Edit tactics</Link>
+      </div>
+      <div className="pitch-3d-stage flex-1 overflow-hidden rounded-card" style={{ minHeight: 320 }}>
+        <div
+          className="pitch-3d-tilt relative h-full w-full"
+          style={{ background: "linear-gradient(90deg, #0A2117 0%, #0F2E1E 100%)", boxShadow: "0 30px 60px -20px rgba(0,0,0,0.7)" }}
+        >
+          <svg viewBox="0 0 100 64" className="absolute inset-0 h-full w-full" preserveAspectRatio="none">
+            <rect x="1" y="1" width="98" height="62" fill="none" stroke="#245C3E" strokeWidth="0.4" />
+            <line x1="50" y1="1" x2="50" y2="63" stroke="#245C3E" strokeWidth="0.3" />
+            <circle cx="50" cy="32" r="9" fill="none" stroke="#245C3E" strokeWidth="0.3" />
+            <rect x="1" y="18" width="13" height="28" fill="none" stroke="#245C3E" strokeWidth="0.3" />
+            <rect x="86" y="18" width="13" height="28" fill="none" stroke="#245C3E" strokeWidth="0.3" />
+          </svg>
+
+          {coords.map((c, i) => {
+            const playerId = assignments[i];
+            const player = playerId ? players[playerId] : undefined;
+            // Landscape: pitch "advancement" (c.y in the portrait template)
+            // maps to horizontal position; "spread" (c.x) maps to vertical.
+            const left = (c.y / 100) * 96 + 2;
+            const top = (c.x / 100) * 88 + 6;
+            return (
+              <div
+                key={i}
+                className="absolute flex flex-col items-center gap-0.5"
+                // Counter-rotate against the parent's 3D tilt so the photo
+                // token stays upright/front-facing — a "billboard" trick —
+                // while the pitch plane underneath still reads as tilted.
+                style={{ left: `${left}%`, top: `${top}%`, transform: "translate(-50%, -50%) rotateX(-38deg)" }}
+              >
+                <PlayerPhoto
+                  firstName={player?.firstName ?? ""}
+                  lastName={player?.lastName ?? ""}
+                  leagueId={leagueId}
+                  clubId={clubId}
+                  size={34}
+                  className="ring-2 ring-accent-400/40"
+                />
+                <span className="rounded bg-navy-950/85 px-1 text-[10px] text-ink-100">
+                  {player ? player.lastName : slots[i]}
+                </span>
+                {player && (
+                  <span className="rounded bg-gradient-to-r from-accent-500 to-accent-600 px-1 text-[9px] font-bold text-navy-950">
+                    {caToOverall(player.currentAbility)}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
