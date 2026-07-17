@@ -270,16 +270,16 @@ export default function TacticsPage() {
     })
   }
 />
-              <Segmented label="Passing directness" value={tactic.inPossession.passingDirectness}
+              <Segmented label="Passing directness" value={tactic.inPossession.instructions.passingDirectness}
                 options={["short", "mixed", "direct", "long"] as PassingDirectness[]}
                 onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, passingDirectness: v } })} />
-              <Segmented label="Width" value={tactic.inPossession.width}
+              <Segmented label="Width" value={tactic.inPossession.instructions.width}
                 options={["narrow", "balanced", "wide"] as WidthLevel[]}
                 onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, width: v } })} />
               <Segmented label="Play through" value={tactic.inPossession.playThroughBias}
                 options={["left", "centre", "balanced", "right"] as PlayThroughBias[]}
                 onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, playThroughBias: v } })} />
-              <Segmented label="Creative freedom" value={tactic.inPossession.creativeFreedom}
+              <Segmented label="Creative freedom" value={tactic.inPossession.instructions.creativeFreedom}
                 options={["disciplined", "balanced", "expressive"] as CreativeFreedomLevel[]}
                 onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, creativeFreedom: v } })} />
               <ToggleRow label="Build up from the back" value={tactic.inPossession.buildUpFromBack}
