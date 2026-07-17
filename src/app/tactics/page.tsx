@@ -101,8 +101,8 @@ export default function TacticsPage() {
     const newOutSlots = remapOutOfPossessionFormation(orderedXI, tactic!.inPossession.formation, tactic!.outOfPossession.formation);
 
     updateTactic({
-      inPossession: { ...tactic.inPossession, slotAssignments: newInSlots },
-      outOfPossession: { ...tactic.outOfPossession, slotAssignments: newOutSlots },
+      inPossession: { ...tactic!.inPossession, slotAssignments: newInSlots },
+      outOfPossession: { ...tactic!.outOfPossession, slotAssignments: newOutSlots },
       playerRoles: newRoles,
     }, -2);
     setSelectedSlot(null);
