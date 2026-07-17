@@ -93,12 +93,12 @@ export default function TacticsPage() {
       if (!id) return;
       const slot = inSlots[i]!;
       newInSlots[id] = slot;
-      const existingRole = tactic.playerRoles[id];
+      const existingRole = tactic!.playerRoles[id];
       const roleValid = existingRole && ROLE_CATALOG[existingRole.roleCode].slots.includes(slot);
       newRoles[id] = roleValid ? existingRole! : { roleCode: rolesForSlot(slot)[0]?.code ?? "CM", duty: "support" };
     });
     const orderedXI = newAssignments.filter((id): id is string => !!id);
-    const newOutSlots = remapOutOfPossessionFormation(orderedXI, tactic.inPossession.formation, tactic.outOfPossession.formation);
+    const newOutSlots = remapOutOfPossessionFormation(orderedXI, tactic!.inPossession.formation, tactic!.outOfPossession.formation);
 
     updateTactic({
       inPossession: { ...tactic.inPossession, slotAssignments: newInSlots },
