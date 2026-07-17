@@ -253,7 +253,17 @@ export default function MatchdayPage() {
           <CardHeader title="Your active tactic" subtitle={`${world.activeTactic.inPossession.formation} in possession → ${world.activeTactic.outOfPossession.formation} out of possession`} />
           <div className="flex flex-col gap-1.5 text-sm text-ink-300">
             <p>Mentality: <span className="capitalize text-ink-100">{world.activeTactic.mentality.replace(/-/g, " ")}</span></p>
-            <p>Tempo: <span className="capitalize text-ink-100">{world.activeTactic.inPossession.tempo}</span> · Width: <span className="capitalize text-ink-100">{world.activeTactic.inPossession.width}</span></p>
+           <p>
+  Tempo:{" "}
+  <span className="capitalize text-ink-100">
+    {world.activeTactic.inPossession.instructions.tempo}
+  </span>
+  {" · "}
+  Width:{" "}
+  <span className="capitalize text-ink-100">
+    {world.activeTactic.inPossession.instructions.width}
+  </span>
+</p>
             <p>Defensive line: <span className="capitalize text-ink-100">{world.activeTactic.outOfPossession.instructions.defensiveLine}</span> · Closing down: <span className="capitalize text-ink-100">{world.activeTactic.outOfPossession.instructions.closingDown.replace(/-/g, " ")}</span></p>
             <p>Familiarity: <span className="text-ink-100">{Math.round(world.activeTactic.familiarity)}/100</span></p>
           </div>
