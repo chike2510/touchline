@@ -254,9 +254,22 @@ export default function TacticsPage() {
           <Card>
             <CardHeader title="Build-up" />
             <div className="flex flex-col gap-3">
-              <Segmented label="Tempo" value={tactic.inPossession.tempo}
-                options={["slow", "normal", "fast"] as TempoLevel[]}
-                onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, tempo: v } })} />
+            <Segmented
+  label="Tempo"
+  value={tactic.inPossession.instructions.tempo}
+  options={["slow", "normal", "fast"] as TempoLevel[]}
+  onChange={(v) =>
+    updateTactic({
+      inPossession: {
+        ...tactic.inPossession,
+        instructions: {
+          ...tactic.inPossession.instructions,
+          tempo: v,
+        },
+      },
+    })
+  }
+/>
               <Segmented label="Passing directness" value={tactic.inPossession.passingDirectness}
                 options={["short", "mixed", "direct", "long"] as PassingDirectness[]}
                 onChange={(v) => updateTactic({ inPossession: { ...tactic.inPossession, passingDirectness: v } })} />
