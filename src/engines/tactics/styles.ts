@@ -34,7 +34,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "attacking",
       inPossession: { tempo: "normal", passingDirectness: "short", width: "narrow", playThroughBias: "centre", buildUpFromBack: true, creativeFreedom: "expressive" },
-      outOfPossession: { defensiveLine: "high", closingDown: "all-over", tackling: "normal", marking: "zonal", offsideTrap: true, timeWasting: false },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "high", closingDown: "all-over", tackling: "normal", marking: "zonal", offsideTrap: true, timeWasting: false },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "work-into-box", finalThirdRunning: "through-balls", passingFocus: "centre", goalkeeperDistribution: "short" },
       transition: { counterPressIntensity: "committed", counterAttackSpeed: "hold-shape", transitionDirectness: "short" },
     },
@@ -46,7 +46,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "attacking",
       inPossession: { tempo: "fast", passingDirectness: "mixed", width: "balanced", playThroughBias: "centre", buildUpFromBack: true, creativeFreedom: "expressive" },
-      outOfPossession: { defensiveLine: "high", closingDown: "all-over", tackling: "committed", marking: "zonal", offsideTrap: true, timeWasting: false },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "high", closingDown: "all-over", tackling: "committed", marking: "zonal", offsideTrap: true, timeWasting: false },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "through-balls", passingFocus: "centre", goalkeeperDistribution: "short" },
       transition: { counterPressIntensity: "committed", counterAttackSpeed: "counter", transitionDirectness: "mixed" },
     },
@@ -58,7 +58,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "balanced",
       inPossession: { tempo: "normal", passingDirectness: "short", width: "balanced", playThroughBias: "balanced", buildUpFromBack: true, creativeFreedom: "balanced" },
-      outOfPossession: { defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "balanced", defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "work-into-box", finalThirdRunning: "run-at-defence", passingFocus: "mixed", goalkeeperDistribution: "short" },
       transition: { counterPressIntensity: "normal", counterAttackSpeed: "hold-shape", transitionDirectness: "mixed" },
     },
@@ -70,7 +70,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "very-attacking",
       inPossession: { tempo: "fast", passingDirectness: "direct", width: "wide", playThroughBias: "balanced", buildUpFromBack: false, creativeFreedom: "expressive" },
-      outOfPossession: { defensiveLine: "high", closingDown: "all-over", tackling: "committed", marking: "man", offsideTrap: true, timeWasting: false },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "high", closingDown: "all-over", tackling: "committed", marking: "man", offsideTrap: true, timeWasting: false },
       attack: { finalThirdCrossing: "early-crosses", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "through-balls", passingFocus: "mixed", goalkeeperDistribution: "mixed" },
       transition: { counterPressIntensity: "committed", counterAttackSpeed: "fast-break", transitionDirectness: "direct" },
     },
@@ -82,7 +82,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "attacking",
       inPossession: { tempo: "normal", passingDirectness: "mixed", width: "wide", playThroughBias: "balanced", buildUpFromBack: true, creativeFreedom: "balanced" },
-      outOfPossession: { defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "wide", defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "early-crosses", finalThirdShooting: "work-into-box", finalThirdRunning: "run-at-defence", passingFocus: "both-flanks", goalkeeperDistribution: "mixed" },
       transition: { counterPressIntensity: "normal", counterAttackSpeed: "counter", transitionDirectness: "mixed" },
     },
@@ -94,7 +94,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "balanced",
       inPossession: { tempo: "normal", passingDirectness: "mixed", width: "balanced", playThroughBias: "balanced", buildUpFromBack: true, creativeFreedom: "balanced" },
-      outOfPossession: { defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "balanced", defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "work-into-box", finalThirdRunning: "run-at-defence", passingFocus: "mixed", goalkeeperDistribution: "mixed" },
       transition: { counterPressIntensity: "normal", counterAttackSpeed: "counter", transitionDirectness: "mixed" },
     },
@@ -106,7 +106,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "defensive",
       inPossession: { tempo: "fast", passingDirectness: "long", width: "balanced", playThroughBias: "centre", buildUpFromBack: false, creativeFreedom: "disciplined" },
-      outOfPossession: { defensiveLine: "deep", closingDown: "sit-back", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "balanced", defensiveLine: "deep", closingDown: "sit-back", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "early-crosses", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "run-at-defence", passingFocus: "centre", goalkeeperDistribution: "long" },
       transition: { counterPressIntensity: "cautious", counterAttackSpeed: "fast-break", transitionDirectness: "direct" },
     },
@@ -118,7 +118,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "balanced",
       inPossession: { tempo: "fast", passingDirectness: "direct", width: "balanced", playThroughBias: "balanced", buildUpFromBack: false, creativeFreedom: "balanced" },
-      outOfPossession: { defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "balanced", defensiveLine: "balanced", closingDown: "own-half", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "through-balls", passingFocus: "mixed", goalkeeperDistribution: "mixed" },
       transition: { counterPressIntensity: "normal", counterAttackSpeed: "fast-break", transitionDirectness: "direct" },
     },
@@ -130,7 +130,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "defensive",
       inPossession: { tempo: "fast", passingDirectness: "direct", width: "narrow", playThroughBias: "centre", buildUpFromBack: false, creativeFreedom: "disciplined" },
-      outOfPossession: { defensiveLine: "deep", closingDown: "sit-back", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "deep", closingDown: "sit-back", tackling: "normal", marking: "zonal", offsideTrap: false, timeWasting: false },
       attack: { finalThirdCrossing: "early-crosses", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "through-balls", passingFocus: "centre", goalkeeperDistribution: "long" },
       transition: { counterPressIntensity: "cautious", counterAttackSpeed: "fast-break", transitionDirectness: "direct" },
     },
@@ -142,7 +142,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "very-defensive",
       inPossession: { tempo: "slow", passingDirectness: "mixed", width: "narrow", playThroughBias: "balanced", buildUpFromBack: false, creativeFreedom: "disciplined" },
-      outOfPossession: { defensiveLine: "deep", closingDown: "sit-back", tackling: "cautious", marking: "man", offsideTrap: false, timeWasting: true },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "deep", closingDown: "sit-back", tackling: "cautious", marking: "man", offsideTrap: false, timeWasting: true },
       attack: { finalThirdCrossing: "look-for-overlap", finalThirdShooting: "work-into-box", finalThirdRunning: "run-at-defence", passingFocus: "mixed", goalkeeperDistribution: "long" },
       transition: { counterPressIntensity: "cautious", counterAttackSpeed: "counter", transitionDirectness: "direct" },
     },
@@ -154,7 +154,7 @@ export const TACTICAL_STYLES: Record<TacticalStyleId, TacticalStyleDefinition> =
     defaults: {
       mentality: "very-defensive",
       inPossession: { tempo: "slow", passingDirectness: "long", width: "narrow", playThroughBias: "balanced", buildUpFromBack: false, creativeFreedom: "disciplined" },
-      outOfPossession: { defensiveLine: "deep", closingDown: "sit-back", tackling: "cautious", marking: "zonal", offsideTrap: false, timeWasting: true },
+      outOfPossession: { defensiveWidth: "narrow", defensiveLine: "deep", closingDown: "sit-back", tackling: "cautious", marking: "zonal", offsideTrap: false, timeWasting: true },
       attack: { finalThirdCrossing: "early-crosses", finalThirdShooting: "shoot-on-sight", finalThirdRunning: "run-at-defence", passingFocus: "mixed", goalkeeperDistribution: "long" },
       transition: { counterPressIntensity: "cautious", counterAttackSpeed: "hold-shape", transitionDirectness: "long" },
     },
