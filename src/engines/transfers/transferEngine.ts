@@ -62,6 +62,7 @@ export function transferWindowInfo(currentDate: string): { open: boolean; label:
 }
 
 
+export function listPlayerForTransfer(
   world: SaveGameWorld,
   playerId: string,
   reason: TransferListing["reason"],
