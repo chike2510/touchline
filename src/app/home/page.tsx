@@ -117,7 +117,7 @@ export default function HomePage() {
   const opponentRank = standings.findIndex((r) => r.clubId === opponentId) + 1;
 
   return (
-    <div className="flex flex-col gap-4 py-3 pb-16">
+    <div className="home-dashboard-layout flex flex-col gap-4 py-3 pb-16">
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         {/* Column 1 */}
         <div className="flex flex-col gap-4">
