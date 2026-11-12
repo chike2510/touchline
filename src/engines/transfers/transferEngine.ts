@@ -6,6 +6,7 @@
 // ============================================================================
 import type { SaveGameWorld, Player, TransferOffer, TransferListing } from "@/domain/types";
 import { nanoid } from "nanoid";
+import { sellerPriceFactor } from "@/engines/ai/managerProfiles";
 import { canAffordTransferFee, canAffordWage } from "@/engines/finance/financeEngine";
 
 // Baseline market value from current ability, age curve, contract length
@@ -116,7 +117,9 @@ export function evaluateOfferAsSellingClub(world: SaveGameWorld, offer: Transfer
   if (!player) return "rejected";
   const value = estimateMarketValue(player, world.currentDate);
   const listing = world.transferListings[offer.playerId];
-  const acceptThreshold = listing ? value * 0.85 : value * 1.15;
+  const sellerMgr = world.clubs[offer.fromClubId]?.managerId;
+  const factor = sellerPriceFactor(sellerMgr ? world.managers[sellerMgr]?.aiProfile : undefined);
+  const acceptThreshold = (listing ? value * 0.85 : value * 1.15) * factor;
   return offer.fee >= acceptThreshold ? "accepted" : "rejected";
 }
 

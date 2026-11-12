@@ -62,3 +62,67 @@ export function rotationSquad(world: SaveGameWorld, clubId: string, availableIds
   }
   return availableIds.filter((id) => keep.has(id));
 }
+
+// Mentality shifts one step with the manager's appetite: ambitious, risk-tolerant bosses push forward,
+// cautious, patient ones sit deeper. Pure, deterministic; only picks the starting mentality of the tactic.
+const MENT = ["very-defensive", "defensive", "balanced", "attacking", "very-attacking"] as const;
+export function profileMentality(base: (typeof MENT)[number], profile?: Manager["aiProfile"]): (typeof MENT)[number] {
+  if (!profile) return base;
+  const push = (profile.ambition + profile.riskTolerance) / 2;
+  const shift = push >= 70 ? 1 : push <= 35 ? -1 : 0;
+  return MENT[Math.max(0, Math.min(4, MENT.indexOf(base) + shift))]!;
+}
+
+// Selling-club price multiplier: patient managers hold out, high-risk ambitious ones cash in faster.
+export function sellerPriceFactor(profile?: Manager["aiProfile"]): number {
+  if (!profile) return 1;
+  return Math.max(0.9, Math.min(1.15, 1 + (profile.patience - 50) / 500 - (profile.riskTolerance - 50) / 800));
+}
+
+// Buying side: how much of the transfer budget an AI club is willing to commit to one signing.
+export function buyerSpendCap(world: SaveGameWorld, clubId: string): number {
+  const club = world.clubs[clubId]; if (!club) return 0;
+  const prof = club.managerId ? world.managers[club.managerId]?.aiProfile : undefined;
+  const share = 0.3 + ((prof?.riskTolerance ?? 50) / 100) * 0.4;
+  return Math.floor(club.finance.transferBudget * share);
+}
+
+// Squad-size behaviour: does this AI club want to sign or sell right now?
+export function squadNeed(world: SaveGameWorld, clubId: string): "buy" | "sell" | "hold" {
+  const club = world.clubs[clubId]; if (!club) return "hold";
+  const target = (club.managerId ? world.managers[club.managerId]?.aiProfile?.squadSizeTarget : undefined) ?? 24;
+  return club.squadIds.length < target - 2 ? "buy" : club.squadIds.length > target + 4 ? "sell" : "hold";
+}
+
+// Managerial behaviour: an AI board sacks on sustained low confidence, scaled by the manager's patience
+// (patient bosses survive lower confidence). Returns true when the manager should be dismissed.
+export function shouldSackManager(world: SaveGameWorld, clubId: string): boolean {
+  const club = world.clubs[clubId]; if (!club || clubId === world.userClubId || !club.managerId) return false;
+  const m = world.managers[club.managerId]; if (!m || m.isUserControlled) return false;
+  return club.boardConfidence < 25 - (m.aiProfile?.patience ?? 50) * 0.1;
+}
+
+// Season-end managerial behaviour: sack and replace. The replacement is a deterministic new manager
+// (id derived from club + season) so the same world always yields the same result. Returns sacked club ids.
+export function runAiManagerChanges(world: SaveGameWorld, season: number): string[] {
+  const out: string[] = [];
+  for (const club of Object.values(world.clubs)) {
+    if (!shouldSackManager(world, club.id)) continue;
+    const old = world.managers[club.managerId!]!;
+    old.clubId = null;
+    old.history = [...(old.history ?? []), { clubId: club.id, season, reason: "sacked" } as never];
+    const id = `mgr-${club.id}-s${season + 1}`;
+    if (!world.managers[id]) {
+      const t = { ...old.tacticalTendencies };
+      const jit = (k: string) => Math.round(unit(world.seed + id, k) * 30 - 15);
+      t.pressingIntensity = clamp(t.pressingIntensity + jit("p")); t.buildUpSpeed = clamp(t.buildUpSpeed + jit("b"));
+      t.width = clamp(t.width + jit("w")); t.defensiveLine = clamp(t.defensiveLine + jit("d"));
+      world.managers[id] = { ...old, id, firstName: "Interim", lastName: club.shortName, clubId: club.id, history: [], tacticalTendencies: t, aiProfile: undefined };
+      world.managers[id]!.aiProfile = buildAiProfile(world.seed, world.managers[id]!);
+    }
+    club.managerId = id;
+    club.boardConfidence = 50;
+    out.push(club.id);
+  }
+  return out;
+}

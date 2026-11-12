@@ -3,7 +3,7 @@
 import type { InboxItem, SaveGameWorld } from "@/domain/types";
 
 export interface RenewalOffer { years: number; wageWeekly: number; }
-export type ContractResult = { ok: true } | { ok: false; reason: string };
+export type ContractResult = { ok: true; compensation?: number } | { ok: false; reason: string };
 
 const DAY = 86400000;
 export const addYearsIso = (iso: string, years: number) => new Date(Date.parse(iso) + Math.round(years * 365) * DAY).toISOString().slice(0, 10);
@@ -53,11 +53,18 @@ export function renewPlayerContract(world: SaveGameWorld, playerId: string, offe
 export function releasePlayer(world: SaveGameWorld, playerId: string): ContractResult {
   const club = world.clubs[world.userClubId]; const p = world.players[playerId];
   if (!club || !p || !club.squadIds.includes(playerId)) return { ok: false, reason: "not-in-squad" };
+  // Unexpired deals cost half the wages still owed; expired ones cost nothing.
+  let compensation = 0;
+  if (p.contract && p.contract.expiryDate > world.currentDate) {
+    const weeks = Math.ceil((Date.parse(p.contract.expiryDate) - Date.parse(world.currentDate)) / (7 * DAY));
+    compensation = Math.round(weeks * p.contract.wageWeekly * 0.5);
+    club.finance.balance -= compensation;
+  }
   club.squadIds = club.squadIds.filter((id) => id !== playerId);
   p.clubId = null; p.contract = null;
   if (world.shortlistedPlayerIds) world.shortlistedPlayerIds = world.shortlistedPlayerIds.filter((id) => id !== playerId);
   resolveContractInbox(world, playerId);
-  return { ok: true };
+  return { ok: true, compensation };
 }
 
 // Players still listed as expired after the user ignored the inbox: auto-release when the grace period passes.
@@ -94,3 +101,10 @@ export function applyContractDecision(world: SaveGameWorld, payload: Record<stri
   if (payload.contractAction === "renew") return renewPlayerContract(world, payload.playerId, { years: Number(payload.years), wageWeekly: Number(payload.wageWeekly) });
   return null;
 }
+
+export const contractFailureText: Record<string, string> = {
+  "player-rejected": "The player rejected the offer: it is below his asking wage.",
+  "wage-budget-exceeded": "The wage budget cannot cover that raise.",
+  "invalid-offer": "Offer must be 1 to 5 years at a positive wage.",
+  "not-in-squad": "Player is no longer in your squad.",
+};

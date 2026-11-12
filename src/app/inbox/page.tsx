@@ -6,7 +6,7 @@ import { useGameStore } from "@/state/gameStore";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { applyMediaResponse } from "@/engines/media/mediaEngine";
-import { applyContractDecision } from "@/engines/contracts/contractEngine";
+import { applyContractDecision, contractFailureText } from "@/engines/contracts/contractEngine";
 import type { InboxAction, InboxItem } from "@/domain/types";
 
 const PRIORITY_TONE: Record<InboxItem["priority"], "neutral" | "amber" | "rival" | "success"> = {
@@ -47,6 +47,7 @@ export default function InboxPage() {
       if (action.kind === "decision" && action.payload?.contractAction) {
         const r = applyContractDecision(w, action.payload);
         if (t && r?.ok) t.archived = true;
+        else if (t && r && !r.ok && !t.body.includes("[Last attempt]")) t.body += ` [Last attempt] ${contractFailureText[r.reason] ?? r.reason}`;
       }
     });
     if (action.kind === "navigate" && action.target) router.push(action.target);

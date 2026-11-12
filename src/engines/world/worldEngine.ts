@@ -9,6 +9,7 @@ import type { InboxItem, SaveGameWorld, RivalryRecord, Fixture } from "@/domain/
 import { nanoid } from "nanoid";
 import { expiredContractPlayerIds, contractInboxItem, releaseUnresolvedExpiries } from "@/engines/contracts/contractEngine";
 import { runYouthIntake } from "@/engines/youth/youthEngine";
+import { runAiManagerChanges } from "@/engines/ai/managerProfiles";
 import { computeStandings } from "@/engines/world/standings";
 import { generateRoundRobinFixtures, nextSaturday, WEATHER_POOL } from "@/engines/world/newSave";
 
@@ -139,6 +140,7 @@ export function progressSeasonEnd(world: SaveGameWorld): void {
   for (const { league, fixtures } of todo) generateNextSeasonFixtures(world, league.id, league.clubIds, fixtures, season + 1);
   world.seasonNumber = season + 1;
   runSeasonRolloverEssentials(world, season);
+  runAiManagerChanges(world, season);
 }
 
 // Moves clubs between adjacent tiers of the same country. The number moved per pair is limited by
