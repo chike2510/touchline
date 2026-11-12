@@ -38,7 +38,7 @@ export function Sidebar() {
   const reputationStars = Math.round((manager?.reputation ?? 0) / 40); // 1-200 -> 0-5
 
   return (
-    <aside className="glass-panel fixed inset-x-0 bottom-0 z-40 flex h-16 w-full shrink-0 flex-row overflow-hidden rounded-none border-x-0 border-b-0 md:sticky md:top-0 md:h-dvh md:w-60 md:flex-col md:overflow-y-auto md:border-y-0 md:border-l-0">
+    <aside className="app-sidebar glass-panel fixed inset-x-0 bottom-0 z-40 flex h-16 w-full shrink-0 flex-row overflow-hidden rounded-none border-x-0 border-b-0 md:sticky md:top-0 md:h-dvh md:w-60 md:flex-col md:overflow-y-auto md:border-y-0 md:border-l-0">
       <div className="hidden shrink-0 items-center gap-2.5 border-b border-glass-border px-2.5 py-3 md:flex md:px-4">
         <ClubCrest clubId={club?.id} abbreviation={club?.abbreviation ?? "TL"} color={club?.colors.primary} size={32} />
         <div className="hidden min-w-0 md:block">
