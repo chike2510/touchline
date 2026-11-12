@@ -327,8 +327,10 @@ export function simulateOneMinute(
   const passAttemptsThisMinute = 6 + Math.round(rand() * 4);
   const possessingTactics = homeHasBall ? homeTactics : awayTactics;
   const passSuccessRate = clamp(
-    0.68 + (possessingStrength.possessionSkill - 12) / 60, 0.55, 0.95
-  ) * weatherMods.passingAccuracy * possessingTactics.passingAccuracyMultiplier;
+    clamp(0.68 + (possessingStrength.possessionSkill - 12) / 60, 0.55, 0.95)
+      * weatherMods.passingAccuracy * possessingTactics.passingAccuracyMultiplier,
+    0.45, 0.98
+  );
   let passesCompletedThisMinute = 0;
   for (let i = 0; i < passAttemptsThisMinute; i++) if (rand() < passSuccessRate) passesCompletedThisMinute += 1;
   if (homeHasBall) {
@@ -463,6 +465,19 @@ function resolveOpenPlayChance(
   const setPieceRoll = rand();
   const routine = attacking.tactic.setPieces;
   const scorersPool = attacking.startingXI.filter((id) => state.playerStates[id]?.onPitch);
+  const activePlayerId = (id: ID | null): ID | null => id && scorersPool.includes(id) ? id : null;
+  const activeSetPieces = {
+    cornersAttacking: {
+      ...routine.cornersAttacking,
+      designatedTakerId: activePlayerId(routine.cornersAttacking.designatedTakerId),
+      targetPlayerIds: routine.cornersAttacking.targetPlayerIds.filter((id) => scorersPool.includes(id)),
+    },
+    freeKicksAttacking: {
+      ...routine.freeKicksAttacking,
+      designatedTakerId: activePlayerId(routine.freeKicksAttacking.designatedTakerId),
+      targetPlayerIds: routine.freeKicksAttacking.targetPlayerIds.filter((id) => scorersPool.includes(id)),
+    },
+  };
   const fallbackScorer = pickScorer(scorersPool, players, rand);
 
   let xg: number;
@@ -472,12 +487,12 @@ function resolveOpenPlayChance(
   let isOpenPlay = false;
 
   if (setPieceRoll < 0.10) {
-    const outcome = resolveCorner(rand, routine.cornersAttacking, players);
+    const outcome = resolveCorner(rand, activeSetPieces.cornersAttacking, players);
     xg = outcome.xg; scored = outcome.scored; scorer = outcome.scorerId ?? fallbackScorer;
     setPieceAssister = outcome.assisterId;
     state.events.push({ minute: state.minute, type: "corner", clubId: attacking.clubId, description: "Corner won." });
   } else if (setPieceRoll < 0.18) {
-    const outcome = resolveFreeKick(rand, routine.freeKicksAttacking, players, rand() < 0.4 ? "direct-shot" : "into-box");
+    const outcome = resolveFreeKick(rand, activeSetPieces.freeKicksAttacking, players, rand() < 0.4 ? "direct-shot" : "into-box");
     xg = outcome.xg; scored = outcome.scored; scorer = outcome.scorerId ?? fallbackScorer;
     setPieceAssister = outcome.assisterId;
     state.events.push({ minute: state.minute, type: "free-kick", clubId: attacking.clubId, description: "Free kick in a dangerous area." });
