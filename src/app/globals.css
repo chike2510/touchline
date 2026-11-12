@@ -103,3 +103,11 @@ body::before {
     transform: none;
   }
 }
+
+
+/* Mobile-first viewport containment and matchday pitch framing. */
+html, body { width: 100%; overflow-x: hidden; }
+@media (max-width: 767px) {
+  .pitch-3d-stage { perspective: none; padding: 2% !important; }
+  .pitch-3d-tilt { transform: none; transform-origin: center; }
+}
