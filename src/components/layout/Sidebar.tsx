@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard, Inbox, Users, ClipboardList, Dumbbell, CalendarDays, Search,
+  LayoutDashboard, Inbox, Users, ClipboardList, Dumbbell, CalendarDays, Search, Radio,
   ArrowLeftRight, Briefcase, Shield, Landmark, Sprout, Stethoscope, Trophy, Database, Settings, Star,
 } from "lucide-react";
 import { useGameStore } from "@/state/gameStore";
@@ -11,9 +11,10 @@ import { ClubCrest } from "@/components/ui/ClubCrest";
 // Order matches the reference sidebar exactly.
 const NAV_ITEMS = [
   { href: "/home", label: "Home", Icon: LayoutDashboard },
-  { href: "/inbox", label: "Inbox", Icon: Inbox },
-  { href: "/squad", label: "Squad", Icon: Users },
   { href: "/tactics", label: "Tactics", Icon: ClipboardList },
+  { href: "/squad", label: "Squad", Icon: Users },
+  { href: "/matchday", label: "Matchday", Icon: Radio },
+  { href: "/inbox", label: "Inbox", Icon: Inbox },
   { href: "/training", label: "Training", Icon: Dumbbell },
   { href: "/schedule", label: "Schedule", Icon: CalendarDays },
   { href: "/scouting", label: "Scouting", Icon: Search },
