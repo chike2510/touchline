@@ -555,6 +555,15 @@ function resolveOpenPlayChance(
   void defending;
 }
 
+export function removeSentOffPlayersFromSetup(state: MatchState, clubId: ID): void {
+  const setup = state.home.clubId === clubId ? state.home : state.away.clubId === clubId ? state.away : null;
+  if (!setup) return;
+  const dismissed = new Set(Object.values(state.playerStates)
+    .filter((ps) => ps.clubId === clubId && !ps.onPitch && (ps.redCards > 0 || ps.yellowCards >= 2))
+    .map((ps) => ps.playerId));
+  if (dismissed.size > 0) setup.startingXI = setup.startingXI.filter((id) => !dismissed.has(id));
+}
+
 function rollForCards(
   state: MatchState, rand: () => number, defendingSetup: TeamMatchSetup,
   defendingStrength: TeamStrengthProfile, tacticalEffects: TacticalMatchEffects
@@ -583,6 +592,7 @@ function rollForCards(
     const isRed = rand() < 0.06 * (referee.strictness / 50);
     if (isRed) {
       ps.redCards += 1; ps.onPitch = false; ps.rating = clamp(ps.rating - 1.5, 1, 10);
+      removeSentOffPlayersFromSetup(state, defendingSetup.clubId);
       state.events.push({ minute: state.minute, type: "red-card", clubId: defendingSetup.clubId, playerId, description: "Red card!" });
     } else {
       ps.yellowCards += 1;
@@ -590,6 +600,7 @@ function rollForCards(
       ps.rating = clamp(ps.rating - 0.3, 1, 10);
       if (isSecond) {
         ps.onPitch = false;
+        removeSentOffPlayersFromSetup(state, defendingSetup.clubId);
         state.events.push({ minute: state.minute, type: "second-yellow", clubId: defendingSetup.clubId, playerId, description: "Second yellow — off!" });
       } else {
         state.events.push({ minute: state.minute, type: "yellow-card", clubId: defendingSetup.clubId, playerId, description: "Booked." });
@@ -604,14 +615,15 @@ export function applySubstitution(state: MatchState, clubId: ID, playerOffId: ID
   const setup = state.home.clubId === clubId ? state.home : state.away;
   if (setup.substitutesUsed >= setup.maxSubstitutions) return false;
   if (!setup.startingXI.includes(playerOffId)) return false;
+  const offState = state.playerStates[playerOffId];
+  if (!offState?.onPitch || offState.redCards > 0 || offState.yellowCards >= 2) return false;
   if (!setup.bench.includes(playerOnId)) return false;
 
   setup.startingXI = setup.startingXI.map((id) => (id === playerOffId ? playerOnId : id));
   setup.bench = setup.bench.filter((id) => id !== playerOnId);
   setup.substitutesUsed += 1;
 
-  const offState = state.playerStates[playerOffId];
-  if (offState) offState.onPitch = false;
+  offState.onPitch = false;
   state.playerStates[playerOnId] = {
     playerId: playerOnId, clubId, onPitch: true, minutesPlayed: 0, fatigue: playerOnBaseFatigue,
     rating: 6.0, goals: 0, assists: 0, yellowCards: 0, redCards: 0, shots: 0, shotsOnTarget: 0, positionCode,
