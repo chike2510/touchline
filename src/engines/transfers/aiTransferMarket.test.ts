@@ -18,6 +18,7 @@ function marketWorld(): SaveGameWorld {
   const player = {
     id: "target", firstName: "Alex", lastName: "Player", nationality: "ENG", dateOfBirth: "2001-01-01",
     currentAbility: 70, potentialAbility: 80, form: 0, morale: 70, fatigue: 10, sharpness: 80,
+    personality: { ambition: 18 },
     injuryStatus: null, suspension: null, clubId: "seller", nationalTeamId: null,
     contract: { playerId: "target", clubId: "seller", wageWeekly: 1000, startDate: "2024-01-01", expiryDate: "2028-01-01" },
     careerHistory: [], seasonStats: { appearances: 10, starts: 8, goals: 2, assists: 1, minutesPlayed: 700, yellowCards: 0, redCards: 0, averageRating: 6.8, cleanSheets: 0, motmAwards: 0, shots: 8, shotsOnTarget: 3 },
