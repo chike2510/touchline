@@ -367,6 +367,13 @@ export default function MatchdayPage() {
         players={world.players}
       />
 
+      <aside className="matchday-side-stats glass-panel min-w-0 overflow-y-auto rounded-card p-2">
+        <MatchAnalyticsPanel state={state} players={world.players} homeClub={homeClub} awayClub={awayClub} />
+        <div className="mt-2">
+          <EventFeed events={state.events} players={world.players} homeClub={homeClub} awayClub={awayClub} homeClubId={fixture.homeClubId} />
+        </div>
+      </aside>
+
       {latestCommentary && (
         <div className="glass-panel flex items-center gap-2 rounded-card px-3 py-2 text-sm">
           <span className="font-data text-xs text-ink-500">{latestCommentary.minute}&apos;</span>
