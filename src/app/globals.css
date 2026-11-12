@@ -135,7 +135,6 @@ html, body { width: 100%; overflow-x: hidden; }
   .home-dashboard-layout > .grid { display: contents; }
   .home-dashboard-layout > .grid > div { min-width: 0; min-height: 0; overflow: auto; gap: 8px; }
   .home-dashboard-layout .glass-panel { padding: 10px; gap: 7px; }
-  .home-dashboard-layout .fixed { position: static; }
   .tactics-page-layout { height: 100%; min-height: 0; overflow: auto; gap: 8px; padding: 0 0 4px; }
   .tactics-page-layout > .flex.gap-1 { flex: 0 0 auto; overflow-x: auto; }
   .tactics-page-layout > .grid { flex: 1 1 auto; min-height: 0; grid-template-columns: minmax(185px, .78fr) minmax(280px, 1.35fr) minmax(205px, .88fr); gap: 9px; }
