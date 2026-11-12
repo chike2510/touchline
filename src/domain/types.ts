@@ -510,6 +510,7 @@ export interface SaveGameWorld {
   lastFinanceDate?: string; // ISO date; exactly-once finance tick
   lastFanSentimentDate?: string; // ISO date; exactly-once fan sentiment tick
   lastRolloverSeason?: number; // season number whose rollover side effects (youth, contracts) already ran
+  lastAiTransferMarketDate?: string; // exactly-once autonomous transfer-market batch per date
   shortlistedPlayerIds?: ID[]; // optional: absent on older saves, always read with `?? []`
 }
 
