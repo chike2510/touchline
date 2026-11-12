@@ -27,14 +27,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }, [flushPendingSave]);
 
   return (
-    <div className="flex min-h-dvh">
+    <div className="flex min-h-dvh w-full min-w-0 overflow-x-hidden">
       <OrientationController />
       <PlayerProfileModal />
       <Sidebar />
-      <div className="flex min-h-dvh flex-1 flex-col">
+      <div className="flex min-h-dvh min-w-0 flex-1 flex-col overflow-x-hidden">
         <TopBar />
-        <main className="flex-1 overflow-y-auto px-4 pb-4 pt-2 md:px-6">
-          <div className="mx-auto max-w-[1600px]">{children}</div>
+        <main className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-3 pb-24 pt-2 sm:px-4 md:px-6 md:pb-4">
+          <div className="mx-auto w-full min-w-0 max-w-[1600px]">{children}</div>
         </main>
       </div>
     </div>
