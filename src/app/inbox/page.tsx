@@ -47,7 +47,14 @@ export default function InboxPage() {
       if (action.kind === "decision" && action.payload?.contractAction) {
         const r = applyContractDecision(w, action.payload);
         if (t && r?.ok) t.archived = true;
-        else if (t && r && !r.ok && !t.body.includes("[Last attempt]")) t.body += ` [Last attempt] ${contractFailureText[r.reason] ?? r.reason}`;
+        else if (t && r && !r.ok && r.reason === "player-countered" && r.counterOffer) {
+          t.body = `The player has countered: ${r.counterOffer.years} year(s) at ${r.counterOffer.wageWeekly.toLocaleString()} per week. Accept the revised terms below or leave the contract unresolved.`;
+          const renew = t.actions.find((a) => a.id === "renew");
+          if (renew) {
+            renew.label = "Accept counter-offer";
+            renew.payload = { ...(renew.payload ?? {}), years: r.counterOffer.years, wageWeekly: r.counterOffer.wageWeekly };
+          }
+        } else if (t && r && !r.ok && !t.body.includes("[Last attempt]")) t.body += ` [Last attempt] ${contractFailureText[r.reason] ?? r.reason}`;
       }
     });
     if (action.kind === "navigate" && action.target) router.push(action.target);
