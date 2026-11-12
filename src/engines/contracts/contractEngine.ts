@@ -3,7 +3,7 @@
 import type { InboxItem, SaveGameWorld } from "@/domain/types";
 
 export interface RenewalOffer { years: number; wageWeekly: number; }
-export type ContractResult = { ok: true; compensation?: number } | { ok: false; reason: string };
+export type ContractResult = { ok: true; compensation?: number } | { ok: false; reason: string; counterOffer?: RenewalOffer };
 
 const DAY = 86400000;
 export const addYearsIso = (iso: string, years: number) => new Date(Date.parse(iso) + Math.round(years * 365) * DAY).toISOString().slice(0, 10);
@@ -40,6 +40,7 @@ export function renewPlayerContract(world: SaveGameWorld, playerId: string, offe
   if (!(offer.years >= 1 && offer.years <= 5) || !(offer.wageWeekly > 0)) return { ok: false, reason: "invalid-offer" };
   const ask = suggestedRenewal(world, playerId)!;
   if (offer.wageWeekly < ask.wageWeekly * 0.9) return { ok: false, reason: "player-rejected" };
+  if (offer.wageWeekly < ask.wageWeekly) return { ok: false, reason: "player-countered", counterOffer: { years: Math.max(offer.years, ask.years), wageWeekly: ask.wageWeekly } };
   const raise = offer.wageWeekly - p.contract.wageWeekly;
   if (raise > 0 && raise > wageHeadroom(world, club.id)) return { ok: false, reason: "wage-budget-exceeded" };
   const start = p.contract.expiryDate > world.currentDate ? p.contract.expiryDate : world.currentDate;
@@ -103,7 +104,8 @@ export function applyContractDecision(world: SaveGameWorld, payload: Record<stri
 }
 
 export const contractFailureText: Record<string, string> = {
-  "player-rejected": "The player rejected the offer: it is below his asking wage.",
+  "player-rejected": "The player rejected the offer: it is too far below his asking wage.",
+  "player-countered": "The player has returned a counter-offer. Review the revised terms in this inbox item.",
   "wage-budget-exceeded": "The wage budget cannot cover that raise.",
   "invalid-offer": "Offer must be 1 to 5 years at a positive wage.",
   "not-in-squad": "Player is no longer in your squad.",
