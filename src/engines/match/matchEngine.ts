@@ -44,13 +44,157 @@ export interface TeamStrengthProfile {
   goalkeeping: number; setPieceThreat: number; discipline: number; // higher = fewer cards
 }
 
+export interface TacticalMatchEffects {
+  possessionBonus: number;
+  pressingStrength: number;
+  chanceCreationMultiplier: number;
+  shotVolumeMultiplier: number;
+  shotQualityMultiplier: number;
+  passingAccuracyMultiplier: number;
+  fatigueMultiplier: number;
+  foulRiskMultiplier: number;
+}
+
+/**
+ * Translate the manager's match instructions into small, bounded simulation
+ * effects. These are deliberately modifiers rather than hard-coded outcomes:
+ * player quality, opponent quality, weather and randomness still matter.
+ */
+export function getTacticalMatchEffects(tactic: TeamMatchSetup["tactic"]): TacticalMatchEffects {
+  const inPossession = tactic.inPossession.instructions;
+  const outOfPossession = tactic.outOfPossession.instructions;
+  const effects: TacticalMatchEffects = {
+    possessionBonus: 0,
+    pressingStrength: 0,
+    chanceCreationMultiplier: 1,
+    shotVolumeMultiplier: 1,
+    shotQualityMultiplier: 1,
+    passingAccuracyMultiplier: 1,
+    fatigueMultiplier: 1,
+    foulRiskMultiplier: 1,
+  };
+
+  if (inPossession.tempo === "slow") {
+    effects.possessionBonus += 0.45;
+    effects.chanceCreationMultiplier *= 0.91;
+    effects.passingAccuracyMultiplier *= 1.04;
+    effects.fatigueMultiplier *= 0.94;
+  } else if (inPossession.tempo === "fast") {
+    effects.possessionBonus -= 0.35;
+    effects.chanceCreationMultiplier *= 1.12;
+    effects.passingAccuracyMultiplier *= 0.95;
+    effects.fatigueMultiplier *= 1.08;
+  }
+
+  if (inPossession.passingDirectness === "short") {
+    effects.possessionBonus += 0.75;
+    effects.passingAccuracyMultiplier *= 1.05;
+    effects.chanceCreationMultiplier *= 0.96;
+  } else if (inPossession.passingDirectness === "direct") {
+    effects.possessionBonus -= 0.3;
+    effects.passingAccuracyMultiplier *= 0.96;
+    effects.chanceCreationMultiplier *= 1.07;
+  } else if (inPossession.passingDirectness === "long") {
+    effects.possessionBonus -= 0.75;
+    effects.passingAccuracyMultiplier *= 0.9;
+    effects.chanceCreationMultiplier *= 1.05;
+  }
+
+  if (inPossession.width === "narrow") {
+    effects.possessionBonus += 0.25;
+    effects.passingAccuracyMultiplier *= 1.015;
+  } else if (inPossession.width === "wide") {
+    effects.chanceCreationMultiplier *= 1.035;
+  }
+
+  if (inPossession.buildUpFromBack) {
+    effects.possessionBonus += 0.25;
+    effects.passingAccuracyMultiplier *= 1.015;
+  }
+
+  if (inPossession.creativeFreedom === "expressive") {
+    effects.chanceCreationMultiplier *= 1.025;
+    effects.passingAccuracyMultiplier *= 0.99;
+  } else if (inPossession.creativeFreedom === "disciplined") {
+    effects.possessionBonus += 0.15;
+    effects.passingAccuracyMultiplier *= 1.01;
+  }
+
+  if (outOfPossession.closingDown === "all-over") {
+    effects.pressingStrength += 1.9;
+    effects.fatigueMultiplier *= 1.18;
+    effects.foulRiskMultiplier *= 1.12;
+  } else if (outOfPossession.closingDown === "own-half") {
+    effects.pressingStrength += 0.9;
+    effects.fatigueMultiplier *= 1.07;
+  } else {
+    effects.possessionBonus += 0.15;
+  }
+
+  if (outOfPossession.defensiveLine === "high") {
+    effects.pressingStrength += 0.35;
+    effects.fatigueMultiplier *= 1.04;
+  } else if (outOfPossession.defensiveLine === "deep") {
+    effects.possessionBonus += 0.15;
+  }
+
+  if (outOfPossession.tackling === "committed") {
+    effects.foulRiskMultiplier *= 1.28;
+    effects.fatigueMultiplier *= 1.07;
+  } else if (outOfPossession.tackling === "cautious") {
+    effects.foulRiskMultiplier *= 0.82;
+  }
+
+  if (tactic.transition.counterPressIntensity === "committed") {
+    effects.pressingStrength += 0.45;
+    effects.fatigueMultiplier *= 1.06;
+  } else if (tactic.transition.counterPressIntensity === "normal") {
+    effects.pressingStrength += 0.2;
+  }
+
+  if (tactic.transition.counterAttackSpeed === "fast-break") {
+    effects.chanceCreationMultiplier *= 1.08;
+  } else if (tactic.transition.counterAttackSpeed === "counter") {
+    effects.chanceCreationMultiplier *= 1.04;
+  }
+
+  if (tactic.attack.finalThirdShooting === "shoot-on-sight") {
+    effects.shotVolumeMultiplier *= 1.18;
+    effects.shotQualityMultiplier *= 0.83;
+  } else if (tactic.attack.finalThirdShooting === "work-into-box") {
+    effects.shotVolumeMultiplier *= 0.9;
+    effects.shotQualityMultiplier *= 1.15;
+  }
+
+  if (tactic.attack.finalThirdRunning === "through-balls") {
+    effects.chanceCreationMultiplier *= 1.08;
+    effects.shotQualityMultiplier *= 1.06;
+  } else if (tactic.attack.finalThirdRunning === "run-at-defence") {
+    effects.chanceCreationMultiplier *= 1.045;
+    effects.foulRiskMultiplier *= 1.035;
+  }
+
+  effects.pressingStrength = clamp(effects.pressingStrength, 0, 3);
+  effects.chanceCreationMultiplier = clamp(effects.chanceCreationMultiplier, 0.75, 1.35);
+  effects.shotVolumeMultiplier = clamp(effects.shotVolumeMultiplier, 0.7, 1.3);
+  effects.shotQualityMultiplier = clamp(effects.shotQualityMultiplier, 0.7, 1.3);
+  effects.passingAccuracyMultiplier = clamp(effects.passingAccuracyMultiplier, 0.8, 1.12);
+  effects.fatigueMultiplier = clamp(effects.fatigueMultiplier, 0.85, 1.4);
+  effects.foulRiskMultiplier = clamp(effects.foulRiskMultiplier, 0.7, 1.6);
+  return effects;
+}
+
 export function computeTeamStrength(
   setup: TeamMatchSetup,
   players: Record<ID, Player>,
   chemistry: number, // 0-100
-  squadTacticFamiliarity: number // 0-100
+  squadTacticFamiliarity: number, // 0-100
+  playerStates?: Record<ID, PlayerMatchState>
 ): TeamStrengthProfile {
-  const onPitch = setup.startingXI.map((id) => players[id]).filter((p): p is Player => !!p);
+  const onPitch = setup.startingXI
+    .filter((id) => playerStates?.[id]?.onPitch !== false)
+    .map((id) => players[id])
+    .filter((p): p is Player => !!p);
   if (onPitch.length === 0) {
     return { attack: 10, midfield: 10, defense: 10, possessionSkill: 10, goalkeeping: 10, setPieceThreat: 10, discipline: 10 };
   }
@@ -153,13 +297,25 @@ export function simulateOneMinute(
   state.minute += 1;
   const weatherMods = getWeatherModifiers(state.context.weather);
 
-  const homeStrength = computeTeamStrength(state.home, players, chemistryByClub[state.home.clubId] ?? 60, tacticFamiliarityByClub[state.home.clubId] ?? 60);
-  const awayStrength = computeTeamStrength(state.away, players, chemistryByClub[state.away.clubId] ?? 60, tacticFamiliarityByClub[state.away.clubId] ?? 60);
+  const homeTactics = getTacticalMatchEffects(state.home.tactic);
+  const awayTactics = getTacticalMatchEffects(state.away.tactic);
+  const homeStrength = computeTeamStrength(
+    state.home, players, chemistryByClub[state.home.clubId] ?? 60,
+    tacticFamiliarityByClub[state.home.clubId] ?? 60, state.playerStates
+  );
+  const awayStrength = computeTeamStrength(
+    state.away, players, chemistryByClub[state.away.clubId] ?? 60,
+    tacticFamiliarityByClub[state.away.clubId] ?? 60, state.playerStates
+  );
 
   // 1. Possession for this minute.
   const homeAdv = state.context.isNeutralVenue ? 0 : state.context.homeAdvantageStrength * 8;
-  const possessionScoreHome = homeStrength.possessionSkill + homeAdv;
-  const possessionScoreAway = awayStrength.possessionSkill;
+  const possessionScoreHome = Math.max(1,
+    homeStrength.possessionSkill + homeAdv + homeTactics.possessionBonus - awayTactics.pressingStrength
+  );
+  const possessionScoreAway = Math.max(1,
+    awayStrength.possessionSkill + awayTactics.possessionBonus - homeTactics.pressingStrength
+  );
   const homePossessionChance = possessionScoreHome / (possessionScoreHome + possessionScoreAway);
   const homeHasBall = rand() < homePossessionChance * weatherMods.passingAccuracy + (1 - weatherMods.passingAccuracy) * 0.5;
 
@@ -169,7 +325,10 @@ export function simulateOneMinute(
   // map), scaled by the possessing team's passing skill and tempo.
   const possessingStrength = homeHasBall ? homeStrength : awayStrength;
   const passAttemptsThisMinute = 6 + Math.round(rand() * 4);
-  const passSuccessRate = clamp(0.68 + (possessingStrength.possessionSkill - 12) / 60, 0.55, 0.95) * weatherMods.passingAccuracy;
+  const possessingTactics = homeHasBall ? homeTactics : awayTactics;
+  const passSuccessRate = clamp(
+    0.68 + (possessingStrength.possessionSkill - 12) / 60, 0.55, 0.95
+  ) * weatherMods.passingAccuracy * possessingTactics.passingAccuracyMultiplier;
   let passesCompletedThisMinute = 0;
   for (let i = 0; i < passAttemptsThisMinute; i++) if (rand() < passSuccessRate) passesCompletedThisMinute += 1;
   if (homeHasBall) {
@@ -192,17 +351,29 @@ export function simulateOneMinute(
   };
   const attackBoost = mentalityAttackBoost[attackingSetup.tactic.mentality] ?? 1;
 
-  const chanceRate = 0.20 * attackBoost * (1 + (attackingStrength.attack - defendingStrength.defense) / 40) * (1 + attackHomeAdv / 100);
-  const chanceCreated = rand() < clamp(chanceRate, 0.005, 0.35);
+  const attackingTactics = homeHasBall ? homeTactics : awayTactics;
+  const chanceRate = 0.20 * attackBoost
+    * (1 + (attackingStrength.attack - defendingStrength.defense) / 40)
+    * (1 + attackHomeAdv / 100)
+    * attackingTactics.chanceCreationMultiplier
+    * attackingTactics.shotVolumeMultiplier;
+  const chanceCreated = rand() < clamp(chanceRate, 0.005, 0.38);
 
   // Expected Threat — a smaller, continuous measure of buildup danger,
   // separate from xG (which only accrues on an actual shot). Ticks up every
   // minute the team is in possession in proportion to attack vs. defense.
-  const xtTick = clamp(0.01 * (1 + (attackingStrength.attack - defendingStrength.defense) / 30), 0.002, 0.05);
+  const xtTick = clamp(
+    0.01 * (1 + (attackingStrength.attack - defendingStrength.defense) / 30)
+      * attackingTactics.chanceCreationMultiplier,
+    0.002, 0.05
+  );
   if (homeHasBall) state.homeXt += xtTick; else state.awayXt += xtTick;
 
   if (chanceCreated) {
-    resolveOpenPlayChance(state, rand, attackingSetup, defendingSetup, attackingStrength, defendingStrength, weatherMods, homeHasBall, players);
+    resolveOpenPlayChance(
+      state, rand, attackingSetup, defendingSetup, attackingStrength, defendingStrength,
+      weatherMods, homeHasBall, players, attackingTactics
+    );
   }
 
   // Momentum — decays toward 0 every minute, nudged by who's on top this
@@ -212,7 +383,10 @@ export function simulateOneMinute(
 
   // 3. Discipline check (independent of chance creation) — tackles/duels
   // happen regardless of whether a shot results.
-  rollForCards(state, rand, defendingSetup, defendingStrength);
+  rollForCards(
+    state, rand, defendingSetup, defendingStrength,
+    homeHasBall ? awayTactics : homeTactics
+  );
 
   // 4. Fatigue + injury accumulation for everyone on the pitch.
   for (const setup of [state.home, state.away]) {
@@ -222,7 +396,11 @@ export function simulateOneMinute(
       if (!ps || !ps.onPitch || !player) continue;
       ps.minutesPlayed += 1;
       const staminaFactor = clamp((20 - player.attributes.physical.stamina) / 20, 0.2, 1.2);
-      ps.fatigue = clamp(ps.fatigue + 0.9 * staminaFactor * weatherMods.staminaDrainRate, 0, 100);
+      const teamTactics = setup.clubId === state.home.clubId ? homeTactics : awayTactics;
+      ps.fatigue = clamp(
+        ps.fatigue + 0.9 * staminaFactor * weatherMods.staminaDrainRate * teamTactics.fatigueMultiplier,
+        0, 100
+      );
 
       const injuryChance = 0.00025 * weatherMods.injuryRiskMultiplier * (1 + player.attributes.physical.injuryProneness / 20);
       if (rand() < injuryChance) {
@@ -279,11 +457,12 @@ function resolveOpenPlayChance(
   state: MatchState, rand: () => number,
   attacking: TeamMatchSetup, defending: TeamMatchSetup,
   attackingStrength: TeamStrengthProfile, defendingStrength: TeamStrengthProfile,
-  weatherMods: ReturnType<typeof getWeatherModifiers>, isHomeAttacking: boolean, players: Record<ID, Player>
+  weatherMods: ReturnType<typeof getWeatherModifiers>, isHomeAttacking: boolean,
+  players: Record<ID, Player>, tacticalEffects: TacticalMatchEffects
 ): void {
   const setPieceRoll = rand();
   const routine = attacking.tactic.setPieces;
-  const scorersPool = attacking.startingXI;
+  const scorersPool = attacking.startingXI.filter((id) => state.playerStates[id]?.onPitch);
   const fallbackScorer = pickScorer(scorersPool, players, rand);
 
   let xg: number;
@@ -305,7 +484,7 @@ function resolveOpenPlayChance(
   } else {
     isOpenPlay = true;
     const baseXg = 0.22 * (1 + (attackingStrength.attack - defendingStrength.defense) / 30);
-    xg = clamp(baseXg, 0.03, 0.6) * weatherMods.shotAccuracy;
+    xg = clamp(baseXg * tacticalEffects.shotQualityMultiplier, 0.03, 0.6) * weatherMods.shotAccuracy;
     const gkSave = 1 - clamp(defendingStrength.goalkeeping / 20, 0.3, 0.95) * 0.35;
     scored = rand() < xg * gkSave;
   }
@@ -361,20 +540,27 @@ function resolveOpenPlayChance(
   void defending;
 }
 
-function rollForCards(state: MatchState, rand: () => number, defendingSetup: TeamMatchSetup, defendingStrength: TeamStrengthProfile): void {
+function rollForCards(
+  state: MatchState, rand: () => number, defendingSetup: TeamMatchSetup,
+  defendingStrength: TeamStrengthProfile, tacticalEffects: TacticalMatchEffects
+): void {
   const referee = state.context.referee;
   const isHomeDefending = defendingSetup.clubId === state.home.clubId;
 
   // Most fouls never produce a card — roll for the foul itself first (at a
   // noticeably higher rate), then decide whether it's bad enough to book.
-  const foulBaseRate = 0.05 * (20 - defendingStrength.discipline) / 20;
+  const foulBaseRate = 0.05 * (20 - defendingStrength.discipline) / 20 * tacticalEffects.foulRiskMultiplier;
   if (rand() < foulBaseRate) {
     if (isHomeDefending) state.foulsHome += 1; else state.foulsAway += 1;
   }
 
-  const cardBaseRate = 0.006 * (referee.strictness / 50) * (20 - defendingStrength.discipline) / 20;
+  const cardBaseRate = 0.006 * (referee.strictness / 50)
+    * (20 - defendingStrength.discipline) / 20 * tacticalEffects.foulRiskMultiplier;
   if (rand() < cardBaseRate) {
-    const candidates = defendingSetup.startingXI.filter((id) => (state.playerStates[id]?.redCards ?? 0) === 0);
+    const candidates = defendingSetup.startingXI.filter((id) => {
+      const playerState = state.playerStates[id];
+      return playerState?.onPitch && playerState.redCards === 0;
+    });
     if (candidates.length === 0) return;
     const playerId = candidates[Math.floor(rand() * candidates.length)]!;
     const ps = state.playerStates[playerId]!;
