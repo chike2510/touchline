@@ -33,7 +33,7 @@ export function TopBar() {
   }
 
   return (
-    <header className="glass-panel sticky top-0 z-20 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-none border-x-0 border-t-0 px-4 py-2.5">
+    <header className="app-topbar glass-panel sticky top-0 z-20 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-none border-x-0 border-t-0 px-4 py-2.5">
       <div className="flex items-center gap-2.5">
         <ClubCrest clubId={club?.id} abbreviation={club?.abbreviation ?? "TL"} color={club?.colors.primary} size={36} />
         <div className="min-w-0">
