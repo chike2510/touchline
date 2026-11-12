@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { profileMentality, sellerPriceFactor, squadNeed, shouldSackManager, buildAiProfile } from "./managerProfiles";
+import { profileMentality, sellerPriceFactor, squadNeed, shouldSackManager, buildAiProfile, runAiManagerChanges } from "./managerProfiles";
 import { renewPlayerContract, releasePlayer, applyContractDecision } from "@/engines/contracts/contractEngine";
 import type { SaveGameWorld } from "@/domain/types";
 
@@ -31,6 +31,27 @@ describe("AI profile decisions", () => {
     expect(shouldSackManager(w, "c")).toBe(true);
     expect(shouldSackManager(w, "u")).toBe(false);
     w.clubs.c!.boardConfidence = 60; expect(shouldSackManager(w, "c")).toBe(false);
+  });
+  it("sacks and replaces an AI manager once at season end with a valid career record", () => {
+    const w = mk();
+    w.clubs.c!.name = "Club C";
+    w.clubs.c!.reputation = 90;
+    w.managers.m1!.reputation = 80;
+    w.managers.m1!.tacticalTendencies = {
+      preferredFormation: "4-3-3", mentality: "balanced", pressingIntensity: 50,
+      buildUpSpeed: 50, defensiveLine: 50, width: 50, favoursYouth: 40,
+      transferAggression: 45, adaptability: 50,
+    };
+    const oldManagerId = w.clubs.c!.managerId;
+    expect(runAiManagerChanges(w, 1)).toEqual(["c"]);
+    const replacementId = w.clubs.c!.managerId!;
+    expect(replacementId).not.toBe(oldManagerId);
+    expect(w.managers[replacementId]!.clubId).toBe("c");
+    expect(w.managers[replacementId]!.firstName).not.toBe("Interim");
+    expect(w.managers[replacementId]!.aiProfile).toBeDefined();
+    expect(w.managers[oldManagerId!]!.clubId).toBeNull();
+    expect(w.managers[oldManagerId!]!.history?.[0]).toMatchObject({ clubId: "c", clubName: "Club C", to: "2026-06-01" });
+    expect(runAiManagerChanges(w, 1)).toEqual([]);
   });
 });
 
