@@ -14,6 +14,7 @@ import { buildCommentaryFeed } from "@/engines/match/commentary";
 import { DragSubBoard } from "@/components/matchday/DragSubBoard";
 import { useLiveMatch } from "@/hooks/useGameLoop";
 import { buildClubTacticForMatch, pickAutoLineup, autoAssignSetPieceTakers, reshapeTactic } from "@/engines/tactics/aiTactics";
+import { applyMatchDiscipline } from "@/engines/stability/stabilityEngine";
 import { buildMatchResultFromState, applyMatchStateToPlayers } from "@/engines/match/matchResult";
 import { applyMatchResultToFanSentiment } from "@/engines/fanSentiment/fanSentimentEngine";
 import { generatePostMatchStory } from "@/engines/media/mediaEngine";
@@ -185,6 +186,7 @@ export default function MatchdayPage() {
       const fx = w.fixtures[fixture.id];
       if (fx) { fx.status = "completed"; fx.result = result; }
       applyMatchStateToPlayers(w, state);
+      applyMatchDiscipline(w, state, fixture.competitionId);
       applyMatchResultToFanSentiment(w, fixture, result);
       story = generatePostMatchStory(w, fixture, result);
       if (result.homeGoals !== result.awayGoals && Math.abs(result.homeGoals - result.awayGoals) >= 3) {

@@ -25,7 +25,7 @@ export function computeStandings(world: SaveGameWorld, leagueId: string): Standi
   }
 
   const completed = Object.values(world.fixtures)
-    .filter((f) => f.leagueId === leagueId && f.status === "completed" && f.result)
+    .filter((f) => f.leagueId === leagueId && (f.season ?? 1) === (world.seasonNumber ?? 1) && f.status === "completed" && f.result)
     .sort((a, b) => (a.kickoff < b.kickoff ? -1 : 1));
 
   for (const fixture of completed) {

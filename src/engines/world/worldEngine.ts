@@ -76,17 +76,23 @@ export function runWeeklyBriefing(world: SaveGameWorld): void {
 // still open — see the README's "documented stub" list — but the core loop
 // (finish season -> see final table -> play a new season) now works.
 export function progressSeasonEnd(world: SaveGameWorld): void {
+  let advanced = false;
   for (const league of Object.values(world.leagues)) {
-    const leagueFixtures = Object.values(world.fixtures).filter((f) => f.leagueId === league.id);
+    const season = world.seasonNumber ?? 1;
+    const leagueFixtures = Object.values(world.fixtures).filter((f) => f.leagueId === league.id && (f.season ?? 1) === season);
     if (leagueFixtures.length === 0) continue; // league has no fixtures at all yet — nothing to roll over
     const stillToPlay = leagueFixtures.some((f) => f.status === "scheduled");
     if (stillToPlay) continue; // season still in progress
 
     const standings = computeStandings(world, league.id);
+    (world.seasonArchive ??= []).push({ season, leagueId: league.id, championClubId: standings[0]?.clubId ?? null,
+      table: standings.map((r) => ({ clubId: r.clubId, played: r.played, won: r.won, drawn: r.drawn, lost: r.lost, goalsFor: r.goalsFor, goalsAgainst: r.goalsAgainst, points: r.points })) });
     reportSeasonEnd(world, league.id, standings);
     resetSeasonStats(world, league.clubIds);
-    generateNextSeasonFixtures(world, league.id, league.clubIds, leagueFixtures);
+    generateNextSeasonFixtures(world, league.id, league.clubIds, leagueFixtures, season + 1);
+    advanced = true;
   }
+  if (advanced) world.seasonNumber = (world.seasonNumber ?? 1) + 1;
 
   for (const club of Object.values(world.clubs)) {
     // Contract expiries -> free agency; loan returns; renew-or-release
@@ -150,7 +156,7 @@ function resetSeasonStats(world: SaveGameWorld, clubIds: string[]): void {
 }
 
 function generateNextSeasonFixtures(
-  world: SaveGameWorld, leagueId: string, clubIds: string[], previousFixtures: Fixture[]
+  world: SaveGameWorld, leagueId: string, clubIds: string[], previousFixtures: Fixture[], season: number
 ): void {
   const lastKickoff = previousFixtures.reduce((max, f) => (f.kickoff > max ? f.kickoff : max), previousFixtures[0]!.kickoff);
   // ~10 week close season (end of one campaign to the following August-ish
@@ -167,7 +173,7 @@ function generateNextSeasonFixtures(
       homeClubId: f.homeClubId, awayClubId: f.awayClubId, kickoff: f.kickoff, round: f.round,
       venueNeutral: false, weather: WEATHER_POOL[i % WEATHER_POOL.length]!,
       refereeId: refereeIds.length > 0 ? refereeIds[i % refereeIds.length]! : "fallback",
-      status: "scheduled", result: null,
+      status: "scheduled", result: null, season,
     };
   });
 }

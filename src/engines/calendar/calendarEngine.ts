@@ -11,6 +11,7 @@ import { runWeeklyBriefing, progressSeasonEnd } from "@/engines/world/worldEngin
 import { simulateOtherFixturesForDate } from "@/engines/world/simulateFixture";
 import { applyTrainingDay } from "@/engines/staff/staffEngine";
 import { tickFinanceDay } from "@/engines/finance/financeEngine";
+import { processDailyRecovery } from "@/engines/stability/stabilityEngine";
 import { tickFanSentimentDay } from "@/engines/fanSentiment/fanSentimentEngine";
 import { tickFacilitiesDay } from "@/engines/facilities/facilitiesEngine";
 
@@ -105,6 +106,7 @@ export function advancePhase(world: SaveGameWorld): SaveGameWorld {
       break;
     case "calendar-advance":
       world.currentDate = addDays(world.currentDate, 1);
+      processDailyRecovery(world, world.currentDate); // exactly once per date (guarded)
       simulateOtherFixturesForDate(world, world.currentDate); // the rest of the league plays its fixtures too
       progressSeasonEnd(world); // no-op unless a league just ran out of fixtures
       ensureCalendarDay(world, world.currentDate);

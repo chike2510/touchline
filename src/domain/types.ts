@@ -117,11 +117,17 @@ export interface InjuryStatus {
   daysRemaining: number;
   severity: "minor" | "moderate" | "severe";
   recurring: boolean;
+  // Added by stabilisation pass (optional: older saves lack them)
+  injuredOn?: string; // ISO date
+  initialDays?: number; // estimated recovery at time of injury
+  injuryType?: string;
 }
 
 export interface SuspensionStatus {
   reason: "yellow-accumulation" | "red-card" | "disciplinary";
   matchesRemaining: number;
+  competitionId?: string | null; // null/undefined = applies to all competitions
+  issuedOn?: string;
 }
 
 export interface SeasonStats {
@@ -301,6 +307,7 @@ export interface Fixture {
   weather: WeatherCondition;
   refereeId: ID;
   status: "scheduled" | "in-progress" | "completed" | "postponed";
+  season?: number; // absent on older fixtures = season 1
   result: MatchResult | null;
 }
 
@@ -452,6 +459,13 @@ export interface SaveGameMeta {
 // The full save payload persisted to IndexedDB. Split from SaveGameMeta so the
 // save-list screen can render quickly from meta alone without deserialising
 // the (potentially large) world blob.
+export interface SeasonArchiveEntry {
+  season: number;
+  leagueId: ID;
+  table: { clubId: ID; played: number; won: number; drawn: number; lost: number; goalsFor: number; goalsAgainst: number; points: number }[];
+  championClubId: ID | null;
+}
+
 export interface SaveGameWorld {
   saveId: ID;
   currentDate: string;
@@ -476,6 +490,9 @@ export interface SaveGameWorld {
   calendar: Record<string, CalendarDay>; // keyed by ISO date
   activeTactic: TacticSetup;
   savedTactics: TacticSetup[];
+  seasonNumber?: number; // 1-based; absent on older saves = 1
+  seasonArchive?: SeasonArchiveEntry[];
+  lastDailyProcessed?: string; // ISO date; guards exactly-once daily processing
   shortlistedPlayerIds?: ID[]; // optional: absent on older saves, always read with `?? []`
 }
 

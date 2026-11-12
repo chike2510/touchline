@@ -16,6 +16,7 @@ import { buildClubTacticForMatch } from "@/engines/tactics/aiTactics";
 import { computeSquadChemistry } from "@/engines/personality/personalityEngine";
 import { initMatchState, simulateToMinute } from "@/engines/match/matchEngine";
 import { buildMatchResultFromState, applyMatchStateToPlayers } from "@/engines/match/matchResult";
+import { applyMatchDiscipline } from "@/engines/stability/stabilityEngine";
 import type { TeamMatchSetup } from "@/engines/match/matchTypes";
 
 function buildTeamSetup(world: SaveGameWorld, club: Club): TeamMatchSetup {
@@ -61,6 +62,7 @@ export function simulateFixtureInstantly(world: SaveGameWorld, fixture: Fixture)
   const attendance = Math.round(homeClub.stadium.avgAttendance * (0.75 + Math.random() * 0.2));
   const result = buildMatchResultFromState(state, fixture, attendance);
   applyMatchStateToPlayers(world, state);
+  applyMatchDiscipline(world, state, fixture.competitionId);
   return result;
 }
 
