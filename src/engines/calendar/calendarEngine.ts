@@ -14,6 +14,7 @@ import { tickFinanceDay } from "@/engines/finance/financeEngine";
 import { processDailyRecovery } from "@/engines/stability/stabilityEngine";
 import { tickFanSentimentDay } from "@/engines/fanSentiment/fanSentimentEngine";
 import { tickFacilitiesDay } from "@/engines/facilities/facilitiesEngine";
+import { runAiTransferMarket } from "@/engines/transfers/transferEngine";
 
 const PHASE_ORDER: GamePhase[] = [
   "weekly-briefing",
@@ -120,6 +121,10 @@ export function advancePhase(world: SaveGameWorld): SaveGameWorld {
       world.currentDate = addDays(world.currentDate, 1);
       processDailyRecovery(world, world.currentDate); // exactly once per date (guarded)
       simulateOtherFixturesForDate(world, world.currentDate); // the rest of the league plays its fixtures too
+      if (world.lastAiTransferMarketDate !== world.currentDate) {
+        world.lastAiTransferMarketDate = world.currentDate;
+        runAiTransferMarket(world);
+      }
       progressSeasonEnd(world); // no-op unless a league just ran out of fixtures
       ensureCalendarDay(world, world.currentDate);
       // Loop back to the start of the cycle for the new day.
