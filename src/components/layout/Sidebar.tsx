@@ -38,8 +38,8 @@ export function Sidebar() {
   const reputationStars = Math.round((manager?.reputation ?? 0) / 40); // 1-200 -> 0-5
 
   return (
-    <aside className="glass-panel flex h-dvh w-16 shrink-0 flex-col overflow-y-auto rounded-none border-y-0 border-l-0 md:w-60">
-      <div className="flex shrink-0 items-center gap-2.5 border-b border-glass-border px-2.5 py-3 md:px-4">
+    <aside className="glass-panel fixed inset-x-0 bottom-0 z-40 flex h-16 w-full shrink-0 flex-row overflow-hidden rounded-none border-x-0 border-b-0 md:sticky md:top-0 md:h-dvh md:w-60 md:flex-col md:overflow-y-auto md:border-y-0 md:border-l-0">
+      <div className="hidden shrink-0 items-center gap-2.5 border-b border-glass-border px-2.5 py-3 md:flex md:px-4">
         <ClubCrest clubId={club?.id} abbreviation={club?.abbreviation ?? "TL"} color={club?.colors.primary} size={32} />
         <div className="hidden min-w-0 md:block">
           <p className="truncate text-sm font-semibold leading-tight text-ink-100">{club?.name ?? meta?.clubName ?? "Touchline"}</p>
@@ -47,14 +47,14 @@ export function Sidebar() {
         </div>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-0.5 px-1.5 py-2 md:px-2.5">
+      <nav className="flex min-w-0 flex-1 flex-row items-center justify-around gap-0.5 overflow-x-auto px-1 py-1 md:flex-col md:items-stretch md:overflow-visible md:px-2.5 md:py-2">
         {NAV_ITEMS.map(({ href, label, Icon }) => {
           const active = pathname === href || (href !== "/home" && pathname?.startsWith(href));
           return (
             <Link
               key={href}
               href={href}
-              className={`flex items-center gap-2.5 rounded-card px-2.5 py-2 text-[13px] transition-all duration-150 ${
+              className={`flex min-w-10 shrink-0 items-center justify-center gap-2.5 rounded-card px-2 py-2.5 text-[13px] transition-all duration-150 md:justify-start md:px-2.5 md:py-2 ${
                 active
                   ? "border-l-2 border-accent-500 bg-accent-500/12 font-medium text-accent-300"
                   : "border-l-2 border-transparent text-ink-300 hover:bg-navy-700/60 hover:text-ink-100"
