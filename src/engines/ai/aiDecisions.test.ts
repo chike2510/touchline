@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { profileMentality, sellerPriceFactor, squadNeed, shouldSackManager, buildAiProfile, runAiManagerChanges } from "./managerProfiles";
-import { renewPlayerContract, releasePlayer, applyContractDecision } from "@/engines/contracts/contractEngine";
+import { renewPlayerContract, releasePlayer, applyContractDecision, suggestedRenewal } from "@/engines/contracts/contractEngine";
 import type { SaveGameWorld } from "@/domain/types";
 
 const prof = (o: Partial<NonNullable<SaveGameWorld["managers"][string]["aiProfile"]>>) => ({ ...buildAiProfile("s", { id: "m", reputation: 100, tacticalTendencies: undefined as never }), ...o });
@@ -56,10 +56,13 @@ describe("AI profile decisions", () => {
 });
 
 describe("contracts", () => {
-  it("rejects low offer with reason, accepts fair one, saves roundtrip", () => {
+  it("rejects very low offers, counters reasonable offers, and accepts the counter", () => {
     const w = mk();
     expect(renewPlayerContract(w, "p1", { years: 2, wageWeekly: 10 })).toEqual({ ok: false, reason: "player-rejected" });
-    expect(renewPlayerContract(w, "p1", { years: 2, wageWeekly: 1500 }).ok).toBe(true);
+    const ask = suggestedRenewal(w, "p1")!;
+    const counter = renewPlayerContract(w, "p1", { years: 2, wageWeekly: Math.round(ask.wageWeekly * 0.95) });
+    expect(counter).toMatchObject({ ok: false, reason: "player-countered", counterOffer: { wageWeekly: ask.wageWeekly } });
+    expect(renewPlayerContract(w, "p1", counter.ok ? { years: 2, wageWeekly: 1500 } : counter.counterOffer!).ok).toBe(true);
     const copy = JSON.parse(JSON.stringify(w)) as SaveGameWorld;
     expect(copy.players.p1!.contract!.expiryDate > "2026-06-01").toBe(true);
   });
