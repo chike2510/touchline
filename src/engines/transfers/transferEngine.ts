@@ -156,7 +156,7 @@ export function completeTransfer(world: SaveGameWorld, offer: TransferOffer): vo
   const previousWage = player.contract?.wageWeekly ?? 0;
   buyer.finance.balance -= offer.fee;
   buyer.finance.transferBudget = Math.max(0, buyer.finance.transferBudget - offer.fee);
-  buyer.finance.wageBudgetUsedWeekly = Math.max(0, buyer.finance.wageBudgetUsedWeekly - previousWage + offer.wageOffer);
+  buyer.finance.wageBudgetUsedWeekly = Math.max(0, buyer.finance.wageBudgetUsedWeekly + offer.wageOffer);
   seller.finance.balance += offer.fee;
   seller.finance.wageBudgetUsedWeekly = Math.max(0, seller.finance.wageBudgetUsedWeekly - previousWage);
 
