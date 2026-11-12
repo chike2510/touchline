@@ -311,7 +311,7 @@ export default function MatchdayPage() {
   const possessionHome = totalPoss > 0 ? Math.round((state.possessionHomeTicks / totalPoss) * 100) : 50;
 
   return (
-    <div className="relative flex flex-col gap-2 py-2">
+    <div className="matchday-live-layout relative flex flex-col gap-2 py-2">
       {isGoalMoment && (
         <div className="pointer-events-none fixed inset-0 z-40 flex items-center justify-center">
           <div className="animate-bounce rounded-card bg-gradient-to-r from-accent-500 to-pulse-500 px-8 py-4 text-2xl font-display font-bold text-navy-950 shadow-glow">
