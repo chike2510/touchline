@@ -14,6 +14,7 @@ import { buildCommentaryFeed } from "@/engines/match/commentary";
 import { DragSubBoard } from "@/components/matchday/DragSubBoard";
 import { useLiveMatch } from "@/hooks/useGameLoop";
 import { buildClubTacticForMatch, pickAutoLineup, autoAssignSetPieceTakers, reshapeTactic } from "@/engines/tactics/aiTactics";
+import { activeXI } from "@/engines/stability/sentOff";
 import { sanitizeLineup } from "@/engines/stability/lineupGuard";
 import { applyMatchDiscipline } from "@/engines/stability/stabilityEngine";
 import { buildMatchResultFromState, applyMatchStateToPlayers } from "@/engines/match/matchResult";
@@ -440,7 +441,7 @@ export default function MatchdayPage() {
             {activePanel === "subs" && (
               <DragSubBoard
                 formation={userSetup.tactic.inPossession.formation}
-                onPitchIds={userSetup.startingXI}
+                onPitchIds={activeXI(state, userSetup)}
                 benchIds={userSetup.bench}
                 players={world.players}
                 substitutionsUsed={userSetup.substitutesUsed}

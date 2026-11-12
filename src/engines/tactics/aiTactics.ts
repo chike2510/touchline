@@ -1,4 +1,5 @@
 import { isAvailable } from "@/engines/stability/stabilityEngine";
+import { rotationSquad } from "@/engines/ai/managerProfiles";
 // ============================================================================
 // AI tactics & lineup selection — AI clubs don't store a persisted TacticSetup
 // the way the user's club does (only `SaveGameWorld.activeTactic` is tracked
@@ -263,7 +264,9 @@ export function buildClubTacticForMatch(world: SaveGameWorld, club: Club): Tacti
     preferredFormation: "4-3-3", mentality: "balanced", pressingIntensity: 50, buildUpSpeed: 50,
     defensiveLine: 50, width: 50, favoursYouth: 50, transferAggression: 50, adaptability: 50,
   };
-  const { startingXI } = pickAutoLineup(club.squadIds, world.players, profile.preferredFormation);
+  // AI manager profile rotation: rest tired players when the squad has depth. Selection only.
+  const selectable = rotationSquad(world, club.id, club.squadIds.filter((id) => world.players[id]));
+  const { startingXI } = pickAutoLineup(selectable, world.players, profile.preferredFormation);
   const tactic = buildTacticFromProfile(profile, startingXI);
   return autoAssignSetPieceTakers(tactic, startingXI, world.players);
 }

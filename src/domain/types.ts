@@ -474,6 +474,8 @@ export interface SeasonArchiveEntry {
   // Recorded at rollover for the season just finished (optional, absent on older archives).
   promotionSlots?: number; relegationSlots?: number;
   promotedClubIds?: ID[]; relegatedClubIds?: ID[];
+  // Clubs whose league membership actually changed at this rollover (subset of the above, limited by slot pairing).
+  appliedPromotedClubIds?: ID[]; appliedRelegatedClubIds?: ID[];
 }
 
 export interface SaveGameWorld {

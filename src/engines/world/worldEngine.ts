@@ -7,6 +7,7 @@
 // ============================================================================
 import type { InboxItem, SaveGameWorld, RivalryRecord, Fixture } from "@/domain/types";
 import { nanoid } from "nanoid";
+import { expiredContractPlayerIds, contractInboxItem, releaseUnresolvedExpiries } from "@/engines/contracts/contractEngine";
 import { runYouthIntake } from "@/engines/youth/youthEngine";
 import { computeStandings } from "@/engines/world/standings";
 import { generateRoundRobinFixtures, nextSaturday, WEATHER_POOL } from "@/engines/world/newSave";
@@ -19,6 +20,7 @@ import { generateRoundRobinFixtures, nextSaturday, WEATHER_POOL } from "@/engine
 export function runWeeklyBriefing(world: SaveGameWorld): void {
   const club = world.clubs[world.userClubId];
   if (!club) return;
+  releaseUnresolvedExpiries(world); // ignored expiries leave after a 30 day grace period
 
   const upcoming = Object.values(world.fixtures)
     .filter(
@@ -94,51 +96,96 @@ export function runSeasonRolloverEssentials(world: SaveGameWorld, finishedSeason
     }
   }
   if (expiredUser.length > 0) {
+    for (const id of expiredContractPlayerIds(world, world.userClubId)) {
+      const it = contractInboxItem(world, id); if (it) world.inboxItems[it.id] = it;
+    }
     const item: InboxItem = { id: nanoid(10), category: "contract", subject: `${expiredUser.length} contract(s) expired`,
-      body: `Expired contracts need a decision: ${expiredUser.join(", ")}.`, date: world.currentDate, read: false, archived: false, priority: "high",
+      body: `Expired contracts need a decision: ${expiredUser.join(", ")}. Each has its own renew or release message. Unresolved ones are released after 30 days.`, date: world.currentDate, read: false, archived: false, priority: "high",
       actions: [{ id: "ack", label: "Acknowledge", kind: "acknowledge" }] };
     world.inboxItems[item.id] = item;
   }
 }
 
+// Season transition. Runs only once EVERY league that has fixtures this season is fully played, so
+// divisions of different lengths never get out of step. Order matters: archive the final tables,
+// then move promoted/relegated clubs between divisions, then publish next season's fixtures from the
+// NEW membership. Archived tables keep the clubs as they stood during the season they describe.
 export function progressSeasonEnd(world: SaveGameWorld): void {
-  let advanced = false;
-  for (const league of Object.values(world.leagues)) {
-    const season = world.seasonNumber ?? 1;
-    const leagueFixtures = Object.values(world.fixtures).filter((f) => f.leagueId === league.id && (f.season ?? 1) === season);
-    if (leagueFixtures.length === 0) continue; // league has no fixtures at all yet — nothing to roll over
-    const stillToPlay = leagueFixtures.some((f) => f.status === "scheduled");
-    if (stillToPlay) continue; // season still in progress
+  const season = world.seasonNumber ?? 1;
+  const active = Object.values(world.leagues)
+    .map((league) => ({ league, fixtures: Object.values(world.fixtures).filter((f) => f.leagueId === league.id && (f.season ?? 1) === season) }))
+    .filter((x) => x.fixtures.length > 0);
+  if (active.length === 0) return;
+  if (active.some((x) => x.fixtures.some((f) => f.status === "scheduled"))) return; // season still in progress
+  const archive = (world.seasonArchive ??= []);
+  const todo = active.filter((x) => !archive.some((a) => a.season === season && a.leagueId === x.league.id));
+  if (todo.length === 0) return; // idempotent: never archive the same league+season twice
 
+  for (const { league } of todo) {
     const standings = computeStandings(world, league.id);
-    // Idempotent: never archive the same league+season twice.
-    if ((world.seasonArchive ??= []).some((a) => a.season === season && a.leagueId === league.id)) continue;
     const nPromo = Math.max(0, Math.min(league.promotionSlots ?? 0, standings.length));
     const nRel = Math.max(0, Math.min(league.relegationSlots ?? 0, standings.length));
-    world.seasonArchive.push({ season, leagueId: league.id, championClubId: standings[0]?.clubId ?? null,
+    archive.push({ season, leagueId: league.id, championClubId: standings[0]?.clubId ?? null,
       promotionSlots: league.promotionSlots, relegationSlots: league.relegationSlots,
       promotedClubIds: standings.slice(0, nPromo).map((r) => r.clubId),
       relegatedClubIds: nRel > 0 ? standings.slice(-nRel).map((r) => r.clubId) : [],
       table: standings.map((r) => ({ clubId: r.clubId, played: r.played, won: r.won, drawn: r.drawn, lost: r.lost, goalsFor: r.goalsFor, goalsAgainst: r.goalsAgainst, points: r.points })) });
     reportSeasonEnd(world, league.id, standings);
     resetSeasonStats(world, league.clubIds);
-    generateNextSeasonFixtures(world, league.id, league.clubIds, leagueFixtures, season + 1);
-    advanced = true;
-  }
-  if (advanced) {
-    const finished = world.seasonNumber ?? 1;
-    world.seasonNumber = finished + 1;
-    runSeasonRolloverEssentials(world, finished);
   }
 
-  for (const club of Object.values(world.clubs)) {
-    // Contract expiries -> free agency; loan returns; renew-or-release
-    // decisions surfaced to inbox for AI clubs (auto-resolved) and to the
-    // user's club (requires a decision).
-    void club;
+  applyPromotionRelegation(world, season, todo.map((x) => x.league.id));
+
+  for (const { league, fixtures } of todo) generateNextSeasonFixtures(world, league.id, league.clubIds, fixtures, season + 1);
+  world.seasonNumber = season + 1;
+  runSeasonRolloverEssentials(world, season);
+}
+
+// Moves clubs between adjacent tiers of the same country. The number moved per pair is limited by
+// both divisions' slot counts and by what the archive recorded, so membership sizes never change.
+// Competition formats (league.format, competition.format) are untouched except the derived
+// matchdaysTotal. Returns the moves made; the archive entries gain applied* lists.
+export interface LeagueMove { clubId: string; fromLeagueId: string; toLeagueId: string; }
+export function applyPromotionRelegation(world: SaveGameWorld, season: number, leagueIds: string[]): LeagueMove[] {
+  const entry = (id: string) => (world.seasonArchive ?? []).find((a) => a.season === season && a.leagueId === id);
+  const leagues = leagueIds.map((id) => world.leagues[id]).filter((l): l is NonNullable<typeof l> => !!l);
+  const moves: LeagueMove[] = [];
+  for (const upper of leagues) {
+    const lower = leagues.find((l) => l.countryCode === upper.countryCode && l.tier === upper.tier + 1);
+    if (!lower) continue;
+    const down = entry(upper.id)?.relegatedClubIds ?? [];
+    const up = entry(lower.id)?.promotedClubIds ?? [];
+    const n = Math.min(upper.relegationSlots ?? 0, lower.promotionSlots ?? 0, down.length, up.length);
+    if (n <= 0) continue;
+    for (const clubId of down.slice(-n)) moves.push({ clubId, fromLeagueId: upper.id, toLeagueId: lower.id });
+    for (const clubId of up.slice(0, n)) moves.push({ clubId, fromLeagueId: lower.id, toLeagueId: upper.id });
   }
-  // Youth intake for every club with youthFacilities above a threshold.
-  // Board mood reset based on season target vs. actual finish.
+  for (const m of moves) {
+    const from = world.leagues[m.fromLeagueId]!; const to = world.leagues[m.toLeagueId]!;
+    from.clubIds = from.clubIds.filter((id) => id !== m.clubId);
+    if (!to.clubIds.includes(m.clubId)) to.clubIds.push(m.clubId);
+    const club = world.clubs[m.clubId]; if (club) club.leagueId = to.id;
+    const e = entry(m.fromLeagueId);
+    if (e) { const key = world.leagues[m.toLeagueId]!.tier < from.tier ? "appliedPromotedClubIds" : "appliedRelegatedClubIds"; (e[key] ??= []).push(m.clubId); }
+  }
+  const touched = new Set(moves.flatMap((m) => [m.fromLeagueId, m.toLeagueId]));
+  for (const id of touched) {
+    const l = world.leagues[id]!;
+    if (l.format.type === "round-robin-double") l.format.matchdaysTotal = (l.clubIds.length - 1) * 2;
+    else if (l.format.type === "round-robin-single") l.format.matchdaysTotal = l.clubIds.length - 1;
+    const comp = world.competitions?.[id];
+    if (comp && comp.format === "league-table") comp.participatingClubIds = [...l.clubIds];
+  }
+  const mine = moves.find((m) => m.clubId === world.userClubId);
+  if (mine) {
+    const to = world.leagues[mine.toLeagueId]!; const promoted = to.tier < world.leagues[mine.fromLeagueId]!.tier;
+    const item: InboxItem = { id: nanoid(10), category: "world-news", subject: promoted ? `Promoted to ${to.name}` : `Relegated to ${to.name}`,
+      body: promoted ? `Your club has won promotion to ${to.name} for season ${season + 1}.` : `Your club has been relegated to ${to.name} for season ${season + 1}.`,
+      date: world.currentDate, read: false, archived: false, priority: "urgent",
+      actions: [{ id: "ack", label: "Acknowledge", kind: "acknowledge" }] };
+    world.inboxItems[item.id] = item;
+  }
+  return moves;
 }
 
 function reportSeasonEnd(world: SaveGameWorld, leagueId: string, standings: ReturnType<typeof computeStandings>): void {

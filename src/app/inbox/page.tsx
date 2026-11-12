@@ -6,6 +6,7 @@ import { useGameStore } from "@/state/gameStore";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { applyMediaResponse } from "@/engines/media/mediaEngine";
+import { applyContractDecision } from "@/engines/contracts/contractEngine";
 import type { InboxAction, InboxItem } from "@/domain/types";
 
 const PRIORITY_TONE: Record<InboxItem["priority"], "neutral" | "amber" | "rival" | "success"> = {
@@ -43,6 +44,10 @@ export default function InboxPage() {
         if (t) t.archived = true;
       }
       if (action.kind === "acknowledge" && t) t.archived = true;
+      if (action.kind === "decision" && action.payload?.contractAction) {
+        const r = applyContractDecision(w, action.payload);
+        if (t && r?.ok) t.archived = true;
+      }
     });
     if (action.kind === "navigate" && action.target) router.push(action.target);
   }

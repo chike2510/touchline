@@ -31,7 +31,7 @@ describe("stability", () => {
   });
   it("season rollover archives and isolates standings", () => {
     const w = mk(); const lg = Object.values(w.leagues)[0]!;
-    for (const f of Object.values(w.fixtures)) if (f.leagueId === lg.id) { f.status = "completed"; f.result = { homeGoals: 1, awayGoals: 0 } as never; }
+    for (const f of Object.values(w.fixtures)) if (f.status === "scheduled") { f.status = "completed"; f.result = { homeGoals: 1, awayGoals: 0 } as never; }
     progressSeasonEnd(w);
     expect(w.seasonNumber).toBe(2); expect(w.seasonArchive!.length).toBeGreaterThan(0);
     expect(computeStandings(w, lg.id).every((r) => r.played === 0)).toBe(true);

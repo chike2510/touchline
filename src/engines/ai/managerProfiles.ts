@@ -37,3 +37,28 @@ export function ensureManagerProfiles(world: SaveGameWorld): number {
   }
   return n;
 }
+
+// Squad rotation driven by the AI profile. Deterministic: no randomness, same world gives same answer.
+// Tired players (fatigue is 0-100, 100 = exhausted) are left out of selection when the manager's
+// rotationPolicy says so, but never so many that the club cannot field a full XI plus bench,
+// and never the last available goalkeeper. Returns the squad ids to pick from (original order kept).
+export function rotationThreshold(rotationPolicy: number): number { return Math.round(80 - rotationPolicy * 0.4); }
+
+export function rotationSquad(world: SaveGameWorld, clubId: string, availableIds: string[]): string[] {
+  const club = world.clubs[clubId];
+  if (!club || clubId === world.userClubId) return availableIds;
+  const profile = club.managerId ? world.managers[club.managerId]?.aiProfile : undefined;
+  if (!profile) return availableIds;
+  const limit = rotationThreshold(profile.rotationPolicy);
+  const tired = availableIds
+    .filter((id) => (world.players[id]?.fatigue ?? 0) > limit)
+    .sort((a, b) => (world.players[b]!.fatigue - world.players[a]!.fatigue) || (a < b ? -1 : 1));
+  const keep = new Set(availableIds);
+  const isGk = (id: string) => world.players[id]?.positions[0] === "GK";
+  for (const id of tired) {
+    if (keep.size <= 16) break; // XI + a usable bench
+    if (isGk(id) && [...keep].filter(isGk).length <= 1) continue;
+    keep.delete(id);
+  }
+  return availableIds.filter((id) => keep.has(id));
+}
