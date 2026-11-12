@@ -110,15 +110,28 @@ export function runAiManagerChanges(world: SaveGameWorld, season: number): strin
     if (!shouldSackManager(world, club.id)) continue;
     const old = world.managers[club.managerId!]!;
     old.clubId = null;
-    old.history = [...(old.history ?? []), { clubId: club.id, season, reason: "sacked" } as never];
+    old.history = [...(old.history ?? []), { clubId: club.id, clubName: club.name, from: world.currentDate, to: world.currentDate, trophies: [] }];
     const id = `mgr-${club.id}-s${season + 1}`;
     if (!world.managers[id]) {
       const t = { ...old.tacticalTendencies };
       const jit = (k: string) => Math.round(unit(world.seed + id, k) * 30 - 15);
-      t.pressingIntensity = clamp(t.pressingIntensity + jit("p")); t.buildUpSpeed = clamp(t.buildUpSpeed + jit("b"));
-      t.width = clamp(t.width + jit("w")); t.defensiveLine = clamp(t.defensiveLine + jit("d"));
-      world.managers[id] = { ...old, id, firstName: "Interim", lastName: club.shortName, clubId: club.id, history: [], tacticalTendencies: t, aiProfile: undefined };
-      world.managers[id]!.aiProfile = buildAiProfile(world.seed, world.managers[id]!);
+      t.pressingIntensity = clamp(t.pressingIntensity + jit("p"));
+      t.buildUpSpeed = clamp(t.buildUpSpeed + jit("b"));
+      t.width = clamp(t.width + jit("w"));
+      t.defensiveLine = clamp(t.defensiveLine + jit("d"));
+      const firstNames = ["Adrian", "Marco", "Daniel", "Rafael", "Thomas", "Victor", "Julian", "Samuel"];
+      const lastNames = ["Moretti", "Silva", "Bennett", "Kovacs", "Mensah", "Petrov", "Costa", "Okafor"];
+      const pick = (items: string[], salt: string) => items[Math.floor(unit(world.seed + id, salt) * items.length)]!;
+      const reputation = Math.max(35, Math.min(160, Math.round(club.reputation * 0.72 + unit(world.seed + id, "rep") * 35)));
+      const replacement: Manager = {
+        id, firstName: pick(firstNames, "first"), lastName: pick(lastNames, "last"),
+        nationality: old.nationality, clubId: club.id, isUserControlled: false, reputation,
+        tacticalTendencies: t,
+        contract: { wageWeekly: Math.max(1500, Math.round(reputation * 90)), expiryDate: new Date(Date.parse(world.currentDate) + 2 * 365 * 86400000).toISOString().slice(0, 10) },
+        history: [],
+      };
+      replacement.aiProfile = buildAiProfile(world.seed, replacement);
+      world.managers[id] = replacement;
     }
     club.managerId = id;
     club.boardConfidence = 50;
