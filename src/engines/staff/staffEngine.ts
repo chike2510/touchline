@@ -52,10 +52,12 @@ export function applyTrainingDay(world: SaveGameWorld): void {
           fatiguePenalty *
           professionalismFactor;
         player.currentAbility = clamp(player.currentAbility + dailyGrowth, 1, player.potentialAbility);
+        trainAttributes(player, dailyGrowth);
       } else if (ageFactor < 0.3) {
         // Past-peak decline for veterans, softened by professionalism.
         const decline = 0.01 * (1 - professionalismFactor) * (0.3 - ageFactor);
         player.currentAbility = clamp(player.currentAbility - decline, 1, 200);
+        declineAttributes(player, decline);
       }
 
       // Training itself is mildly taxing; recovery is handled by
@@ -95,5 +97,43 @@ export function applyMedicalRecovery(world: SaveGameWorld): void {
       player.injuryStatus.daysRemaining = Math.max(0, player.injuryStatus.daysRemaining - recoveryRate);
       if (player.injuryStatus.daysRemaining <= 0) player.injuryStatus = null;
     }
+  }
+}
+
+// Attribute-level development: daily CA growth is converted into fractional
+// progress on the player's lowest eligible attributes (cap 20), so CA and
+// actual attributes move together. Progress persists in player.attrProgress.
+type Group = "technical" | "mental" | "physical";
+function trainable(player: import("@/domain/types").Player): { group: Group; key: string; value: number }[] {
+  const out: { group: Group; key: string; value: number }[] = [];
+  for (const group of ["technical", "mental", "physical"] as Group[]) {
+    const g = player.attributes[group] as unknown as Record<string, number>;
+    for (const key of Object.keys(g)) {
+      if (key === "injuryProneness" || key === "naturalFitness") continue;
+      out.push({ group, key, value: g[key]! });
+    }
+  }
+  return out;
+}
+export function trainAttributes(player: import("@/domain/types").Player, growth: number): void {
+  const pool = trainable(player).filter((a) => a.value < 20).sort((a, b) => a.value - b.value).slice(0, 4);
+  if (!pool.length) return;
+  const prog = (player.attrProgress ??= {});
+  for (const a of pool) {
+    const k = `${a.group}.${a.key}`;
+    prog[k] = (prog[k] ?? 0) + growth * 0.25;
+    if (prog[k]! >= 1) {
+      prog[k]! -= 1;
+      (player.attributes[a.group] as unknown as Record<string, number>)[a.key] = Math.min(20, a.value + 1);
+    }
+  }
+}
+export function declineAttributes(player: import("@/domain/types").Player, decline: number): void {
+  const phys = player.attributes.physical as unknown as Record<string, number>;
+  const prog = (player.attrProgress ??= {});
+  for (const key of ["pace", "acceleration", "stamina"]) {
+    const k = `physical.${key}`;
+    prog[k] = (prog[k] ?? 0) - decline * 8;
+    if (prog[k]! <= -1) { prog[k]! += 1; phys[key] = Math.max(1, phys[key]! - 1); }
   }
 }

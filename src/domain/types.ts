@@ -102,6 +102,7 @@ export interface Player {
   sharpness: number; // 0-100 match fitness (distinct from fatigue)
   injuryStatus: InjuryStatus | null;
   suspension: SuspensionStatus | null;
+  attrProgress?: Record<string, number>; // fractional training progress per attribute (optional, older saves lack it)
   clubId: ID | null;
   nationalTeamId: ID | null;
   contract: Contract | null;
@@ -492,6 +493,8 @@ export interface SaveGameWorld {
   savedTactics: TacticSetup[];
   seasonNumber?: number; // 1-based; absent on older saves = 1
   seasonArchive?: SeasonArchiveEntry[];
+  lastBriefingDate?: string; // guards briefing duplication on reload
+  lastTrainingDate?: string;
   lastDailyProcessed?: string; // ISO date; guards exactly-once daily processing
   shortlistedPlayerIds?: ID[]; // optional: absent on older saves, always read with `?? []`
 }

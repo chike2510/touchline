@@ -1,3 +1,4 @@
+import { isAvailable } from "@/engines/stability/stabilityEngine";
 // ============================================================================
 // AI tactics & lineup selection — AI clubs don't store a persisted TacticSetup
 // the way the user's club does (only `SaveGameWorld.activeTactic` is tracked
@@ -77,7 +78,7 @@ export function pickAutoLineup(squadIds: string[], players: Record<string, Playe
   const slots = FORMATION_SLOTS[formation] ?? FORMATION_SLOTS["4-3-3"]!;
   const pool = squadIds
     .map((id) => players[id])
-    .filter((p): p is Player => !!p && !p.injuryStatus && !p.suspension)
+    .filter((p): p is Player => !!p && isAvailable(p))
     .sort((a, b) => b.currentAbility - a.currentAbility);
 
   const used = new Set<string>();

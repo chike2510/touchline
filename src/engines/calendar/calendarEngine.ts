@@ -82,10 +82,16 @@ export function advancePhase(world: SaveGameWorld): SaveGameWorld {
 
   switch (today.phase) {
     case "weekly-briefing":
-      runWeeklyBriefing(world);
+      if (world.lastBriefingDate !== world.currentDate) {
+        world.lastBriefingDate = world.currentDate;
+        runWeeklyBriefing(world);
+      }
       break;
     case "tactics-training":
-      applyTrainingDay(world);
+      if (world.lastTrainingDate !== world.currentDate) {
+        world.lastTrainingDate = world.currentDate;
+        applyTrainingDay(world);
+      }
       break;
     case "off-pitch":
       tickFinanceDay(world);

@@ -37,3 +37,25 @@ describe("stability", () => {
     expect(computeStandings(w, lg.id).every((r) => r.played === 0)).toBe(true);
   });
 });
+import { applyTrainingDay } from "@/engines/staff/staffEngine";
+import { pickAutoLineup } from "@/engines/tactics/aiTactics";
+describe("part 2", () => {
+  it("lineup excludes injured and suspended", () => {
+    const w = mk(); const club = w.clubs["club-birmingham"]!;
+    const a = w.players[club.squadIds[0]!]!, b = w.players[club.squadIds[1]!]!;
+    a.injuryStatus = createInjury(a, "2026-08-08", "x");
+    b.suspension = { reason: "red-card", matchesRemaining: 1 };
+    const { startingXI } = pickAutoLineup(club.squadIds, w.players, "4-3-3");
+    expect(startingXI).not.toContain(a.id); expect(startingXI).not.toContain(b.id);
+  });
+  it("training changes real attributes and training day runs once", () => {
+    const w = mk(); const club = w.clubs["club-birmingham"]!;
+    const p = w.players[club.squadIds[0]!]!; p.potentialAbility = 190; p.currentAbility = 60; p.fatigue = 0;
+    p.dateOfBirth = "2008-01-01"; p.injuryStatus = null;
+    const sum = () => Object.values(p.attributes.technical).reduce((x, y) => x + y, 0) + Object.values(p.attributes.mental).reduce((x, y) => x + y, 0);
+    const before = sum();
+    for (let i = 0; i < 400; i++) { applyTrainingDay(w); p.fatigue = 0; }
+    expect(sum()).toBeGreaterThan(before);
+    expect(p.currentAbility).toBeGreaterThan(60);
+  });
+});
