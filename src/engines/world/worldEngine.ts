@@ -7,6 +7,7 @@
 // ============================================================================
 import type { InboxItem, SaveGameWorld, RivalryRecord, Fixture } from "@/domain/types";
 import { nanoid } from "nanoid";
+import { runYouthIntake } from "@/engines/youth/youthEngine";
 import { computeStandings } from "@/engines/world/standings";
 import { generateRoundRobinFixtures, nextSaturday, WEATHER_POOL } from "@/engines/world/newSave";
 
@@ -75,6 +76,31 @@ export function runWeeklyBriefing(world: SaveGameWorld): void {
 // Promotion/relegation between divisions and contract-expiry handling are
 // still open — see the README's "documented stub" list — but the core loop
 // (finish season -> see final table -> play a new season) now works.
+// Once per finished season (guarded by lastRolloverSeason): youth intake for every club and contract
+// expiry handling. AI clubs auto-renew expired deals for 2 years (squads stay playable, no broad
+// transfer-market dependency); the user's expired players are kept and listed in the inbox for a decision.
+// Promotion/relegation is RECORDED in seasonArchive but league membership is not changed here.
+export function runSeasonRolloverEssentials(world: SaveGameWorld, finishedSeason: number): void {
+  if ((world.lastRolloverSeason ?? 0) >= finishedSeason) return;
+  world.lastRolloverSeason = finishedSeason;
+  const expiredUser: string[] = [];
+  for (const club of Object.values(world.clubs)) {
+    runYouthIntake(world, club.id);
+    for (const id of club.squadIds) {
+      const p = world.players[id];
+      if (!p?.contract || p.contract.expiryDate > world.currentDate) continue;
+      if (club.id === world.userClubId) { expiredUser.push(`${p.firstName} ${p.lastName}`); continue; }
+      p.contract = { ...p.contract, startDate: world.currentDate, expiryDate: new Date(Date.parse(world.currentDate) + 2 * 365 * 86400000).toISOString().slice(0, 10) };
+    }
+  }
+  if (expiredUser.length > 0) {
+    const item: InboxItem = { id: nanoid(10), category: "contract", subject: `${expiredUser.length} contract(s) expired`,
+      body: `Expired contracts need a decision: ${expiredUser.join(", ")}.`, date: world.currentDate, read: false, archived: false, priority: "high",
+      actions: [{ id: "ack", label: "Acknowledge", kind: "acknowledge" }] };
+    world.inboxItems[item.id] = item;
+  }
+}
+
 export function progressSeasonEnd(world: SaveGameWorld): void {
   let advanced = false;
   for (const league of Object.values(world.leagues)) {
@@ -85,14 +111,25 @@ export function progressSeasonEnd(world: SaveGameWorld): void {
     if (stillToPlay) continue; // season still in progress
 
     const standings = computeStandings(world, league.id);
-    (world.seasonArchive ??= []).push({ season, leagueId: league.id, championClubId: standings[0]?.clubId ?? null,
+    // Idempotent: never archive the same league+season twice.
+    if ((world.seasonArchive ??= []).some((a) => a.season === season && a.leagueId === league.id)) continue;
+    const nPromo = Math.max(0, Math.min(league.promotionSlots ?? 0, standings.length));
+    const nRel = Math.max(0, Math.min(league.relegationSlots ?? 0, standings.length));
+    world.seasonArchive.push({ season, leagueId: league.id, championClubId: standings[0]?.clubId ?? null,
+      promotionSlots: league.promotionSlots, relegationSlots: league.relegationSlots,
+      promotedClubIds: standings.slice(0, nPromo).map((r) => r.clubId),
+      relegatedClubIds: nRel > 0 ? standings.slice(-nRel).map((r) => r.clubId) : [],
       table: standings.map((r) => ({ clubId: r.clubId, played: r.played, won: r.won, drawn: r.drawn, lost: r.lost, goalsFor: r.goalsFor, goalsAgainst: r.goalsAgainst, points: r.points })) });
     reportSeasonEnd(world, league.id, standings);
     resetSeasonStats(world, league.clubIds);
     generateNextSeasonFixtures(world, league.id, league.clubIds, leagueFixtures, season + 1);
     advanced = true;
   }
-  if (advanced) world.seasonNumber = (world.seasonNumber ?? 1) + 1;
+  if (advanced) {
+    const finished = world.seasonNumber ?? 1;
+    world.seasonNumber = finished + 1;
+    runSeasonRolloverEssentials(world, finished);
+  }
 
   for (const club of Object.values(world.clubs)) {
     // Contract expiries -> free agency; loan returns; renew-or-release

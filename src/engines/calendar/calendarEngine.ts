@@ -94,8 +94,11 @@ export function advancePhase(world: SaveGameWorld): SaveGameWorld {
       }
       break;
     case "off-pitch":
-      tickFinanceDay(world);
-      tickFacilitiesDay(world);
+      if (world.lastFinanceDate !== world.currentDate) {
+        world.lastFinanceDate = world.currentDate;
+        tickFinanceDay(world);
+        tickFacilitiesDay(world);
+      }
       break;
     case "matchday-build-up":
       // Build-up UI (team news, opposition report) reads world state directly;
@@ -108,7 +111,10 @@ export function advancePhase(world: SaveGameWorld): SaveGameWorld {
       // back into `world.fixtures`/`world.players` before this phase ends.
       break;
     case "post-match":
-      tickFanSentimentDay(world);
+      if (world.lastFanSentimentDate !== world.currentDate) {
+        world.lastFanSentimentDate = world.currentDate;
+        tickFanSentimentDay(world);
+      }
       break;
     case "calendar-advance":
       world.currentDate = addDays(world.currentDate, 1);

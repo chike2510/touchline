@@ -14,6 +14,7 @@ import { buildCommentaryFeed } from "@/engines/match/commentary";
 import { DragSubBoard } from "@/components/matchday/DragSubBoard";
 import { useLiveMatch } from "@/hooks/useGameLoop";
 import { buildClubTacticForMatch, pickAutoLineup, autoAssignSetPieceTakers, reshapeTactic } from "@/engines/tactics/aiTactics";
+import { sanitizeLineup } from "@/engines/stability/lineupGuard";
 import { applyMatchDiscipline } from "@/engines/stability/stabilityEngine";
 import { buildMatchResultFromState, applyMatchStateToPlayers } from "@/engines/match/matchResult";
 import { applyMatchResultToFanSentiment } from "@/engines/fanSentiment/fanSentimentEngine";
@@ -87,19 +88,22 @@ export default function MatchdayPage() {
     const homeTactic = homeClub.id === userClubId ? safeUserTactic : buildClubTacticForMatch(world, homeClub);
     const awayTactic = awayClub.id === userClubId ? safeUserTactic : buildClubTacticForMatch(world, awayClub);
 
+    // Availability guard: swaps injured/suspended starters for the best available player.
+    const homeSan = sanitizeLineup(world, homeClub.id, homeTactic, fixture.competitionId);
+    const awaySan = sanitizeLineup(world, awayClub.id, awayTactic, fixture.competitionId);
     const home: TeamMatchSetup = {
       clubId: homeClub.id,
-      tactic: homeTactic,
-      startingXI: Object.keys(homeTactic.playerRoles),
-      bench: homeClub.squadIds.filter((id) => !homeTactic.playerRoles[id]).slice(0, 9),
+      tactic: homeSan.tactic,
+      startingXI: homeSan.startingXI,
+      bench: homeSan.bench,
       substitutesUsed: 0,
       maxSubstitutions: 5,
     };
     const away: TeamMatchSetup = {
       clubId: awayClub.id,
-      tactic: awayTactic,
-      startingXI: Object.keys(awayTactic.playerRoles),
-      bench: awayClub.squadIds.filter((id) => !awayTactic.playerRoles[id]).slice(0, 9),
+      tactic: awaySan.tactic,
+      startingXI: awaySan.startingXI,
+      bench: awaySan.bench,
       substitutesUsed: 0,
       maxSubstitutions: 5,
     };

@@ -16,15 +16,15 @@ import { buildClubTacticForMatch } from "@/engines/tactics/aiTactics";
 import { computeSquadChemistry } from "@/engines/personality/personalityEngine";
 import { initMatchState, simulateToMinute } from "@/engines/match/matchEngine";
 import { buildMatchResultFromState, applyMatchStateToPlayers } from "@/engines/match/matchResult";
+import { sanitizeLineup } from "@/engines/stability/lineupGuard";
 import { applyMatchDiscipline } from "@/engines/stability/stabilityEngine";
 import type { TeamMatchSetup } from "@/engines/match/matchTypes";
 
-function buildTeamSetup(world: SaveGameWorld, club: Club): TeamMatchSetup {
-  const tactic = buildClubTacticForMatch(world, club);
-  const startingXI = Object.keys(tactic.playerRoles);
+function buildTeamSetup(world: SaveGameWorld, club: Club, competitionId: string | null = null): TeamMatchSetup {
+  const san = sanitizeLineup(world, club.id, buildClubTacticForMatch(world, club), competitionId);
   return {
-    clubId: club.id, tactic, startingXI,
-    bench: club.squadIds.filter((id) => !tactic.playerRoles[id]).slice(0, 9),
+    clubId: club.id, tactic: san.tactic, startingXI: san.startingXI,
+    bench: san.bench,
     substitutesUsed: 0, maxSubstitutions: 5,
   };
 }
@@ -34,8 +34,8 @@ export function simulateFixtureInstantly(world: SaveGameWorld, fixture: Fixture)
   const awayClub = world.clubs[fixture.awayClubId];
   if (!homeClub || !awayClub) return null;
 
-  const home = buildTeamSetup(world, homeClub);
-  const away = buildTeamSetup(world, awayClub);
+  const home = buildTeamSetup(world, homeClub, fixture.competitionId);
+  const away = buildTeamSetup(world, awayClub, fixture.competitionId);
   const referee = world.referees[fixture.refereeId] ?? Object.values(world.referees)[0];
   if (!referee) return null;
 

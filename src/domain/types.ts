@@ -168,6 +168,12 @@ export interface Manager {
   tacticalTendencies: ManagerTacticalProfile;
   contract: { wageWeekly: number; expiryDate: string } | null;
   history: { clubId: ID; clubName: string; from: string; to: string | null; trophies: string[] }[];
+  // Milestone 2: deterministic AI behaviour profile. Optional: older saves get one on load.
+  aiProfile?: {
+    version: number;
+    ambition: number; patience: number; riskTolerance: number; rotationPolicy: number; youthTrust: number; // 0-100
+    squadSizeTarget: number;
+  };
 }
 
 // Editable, per-manager AI behaviour profile — drives both how the AI manager
@@ -465,6 +471,9 @@ export interface SeasonArchiveEntry {
   leagueId: ID;
   table: { clubId: ID; played: number; won: number; drawn: number; lost: number; goalsFor: number; goalsAgainst: number; points: number }[];
   championClubId: ID | null;
+  // Recorded at rollover for the season just finished (optional, absent on older archives).
+  promotionSlots?: number; relegationSlots?: number;
+  promotedClubIds?: ID[]; relegatedClubIds?: ID[];
 }
 
 export interface SaveGameWorld {
@@ -496,6 +505,9 @@ export interface SaveGameWorld {
   lastBriefingDate?: string; // guards briefing duplication on reload
   lastTrainingDate?: string;
   lastDailyProcessed?: string; // ISO date; guards exactly-once daily processing
+  lastFinanceDate?: string; // ISO date; exactly-once finance tick
+  lastFanSentimentDate?: string; // ISO date; exactly-once fan sentiment tick
+  lastRolloverSeason?: number; // season number whose rollover side effects (youth, contracts) already ran
   shortlistedPlayerIds?: ID[]; // optional: absent on older saves, always read with `?? []`
 }
 

@@ -15,6 +15,7 @@
 // instead of crashing, which is the trade worth making.
 // ============================================================================
 import type { SaveGameWorld, TacticSetup } from "@/domain/types";
+import { ensureManagerProfiles } from "@/engines/ai/managerProfiles";
 import { buildTacticFromStyle } from "@/engines/tactics/aiTactics";
 
 function isValidTacticShape(t: unknown): t is TacticSetup {
@@ -53,10 +54,28 @@ function migrateTacticSetup(raw: unknown): TacticSetup {
 // here) — mutates nothing on disk, just normalizes the in-memory object the
 // rest of the app reads from. The next autosave/manual save will persist
 // the migrated shape, so the fix-up only ever needs to run once per save.
+// Fills every optional field added since the first public save format. Idempotent and non-destructive:
+// existing values are never overwritten, and the input object is not mutated (players are copied only when changed).
 export function migrateSaveWorld(world: SaveGameWorld): SaveGameWorld {
-  return {
+  const players: SaveGameWorld["players"] = {};
+  for (const [id, p] of Object.entries(world.players ?? {})) {
+    const needs = p.injuryStatus === undefined || p.suspension === undefined;
+    players[id] = needs ? { ...p, injuryStatus: p.injuryStatus ?? null, suspension: p.suspension ?? null } : p;
+  }
+  const managers: SaveGameWorld["managers"] = {};
+  for (const [id, m] of Object.entries(world.managers ?? {})) managers[id] = { ...m };
+  const migrated: SaveGameWorld = {
     ...world,
+    players,
+    managers,
     activeTactic: migrateTacticSetup(world.activeTactic),
     savedTactics: (world.savedTactics ?? []).map(migrateTacticSetup),
+    seasonNumber: world.seasonNumber ?? 1,
+    seasonArchive: world.seasonArchive ?? [],
+    shortlistedPlayerIds: world.shortlistedPlayerIds ?? [],
+    inboxItems: world.inboxItems ?? {},
+    calendar: world.calendar ?? {},
   };
+  ensureManagerProfiles(migrated);
+  return migrated;
 }
