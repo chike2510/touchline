@@ -222,7 +222,7 @@ export default function TacticsPage() {
   const intensity = intensityScore(tactic);
 
   return (
-    <div className="flex flex-col gap-3 py-3">
+    <div className="tactics-page-layout flex flex-col gap-3 py-3">
       <div className="flex gap-1 overflow-x-auto border-b border-navy-700">
         {TOP_TABS.map((t) => (
           <button
