@@ -16,7 +16,7 @@ function StatRow({ label, home, away, format }: { label: string; home: number; a
 function SplitBar({ label, homePct }: { label: string; homePct: number }) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="flex items-center justify-between text-xs text-ink-500">
+      <div className="grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 text-xs text-ink-500">
         <span>{Math.round(homePct)}%</span>
         <span>{label}</span>
         <span>{Math.round(100 - homePct)}%</span>
