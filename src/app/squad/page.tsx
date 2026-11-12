@@ -77,7 +77,7 @@ export default function SquadPage() {
   }
 
   return (
-    <div className="flex flex-col gap-3 py-3 lg:flex-row lg:items-start lg:gap-4">
+    <div className="squad-page-layout flex flex-col gap-3 py-3 lg:flex-row lg:items-start lg:gap-4">
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex items-center justify-between">
           <h1 className="font-display text-2xl text-ink-100">Squad</h1>
