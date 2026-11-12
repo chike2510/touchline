@@ -6,7 +6,7 @@
 // ============================================================================
 import type { SaveGameWorld, Player, TransferOffer, TransferListing } from "@/domain/types";
 import { nanoid } from "nanoid";
-import { sellerPriceFactor } from "@/engines/ai/managerProfiles";
+import { buyerSpendCap, sellerPriceFactor, squadNeed } from "@/engines/ai/managerProfiles";
 import { canAffordTransferFee, canAffordWage } from "@/engines/finance/financeEngine";
 
 // Baseline market value from current ability, age curve, contract length
@@ -117,9 +117,11 @@ export function evaluateOfferAsSellingClub(world: SaveGameWorld, offer: Transfer
   if (!player) return "rejected";
   const value = estimateMarketValue(player, world.currentDate);
   const listing = world.transferListings[offer.playerId];
-  const sellerMgr = world.clubs[offer.fromClubId]?.managerId;
+  const seller = world.clubs[offer.fromClubId];
+  const sellerMgr = seller?.managerId;
   const factor = sellerPriceFactor(sellerMgr ? world.managers[sellerMgr]?.aiProfile : undefined);
-  const acceptThreshold = (listing ? value * 0.85 : value * 1.15) * factor;
+  const surplusDiscount = seller && squadNeed(world, seller.id) === "sell" ? 0.9 : 1;
+  const acceptThreshold = (listing ? value * 0.85 : value * 1.15) * factor * surplusDiscount;
   return offer.fee >= acceptThreshold ? "accepted" : "rejected";
 }
 
@@ -147,13 +149,16 @@ export function completeTransfer(world: SaveGameWorld, offer: TransferOffer): vo
   if (!player) return;
   const buyer = world.clubs[offer.toClubId];
   const seller = world.clubs[offer.fromClubId];
-  if (!buyer || !seller) return;
+  if (!buyer || !seller || !seller.squadIds.includes(player.id) || buyer.squadIds.includes(player.id)) return;
   if (!canAffordTransferFee(world, buyer.id, offer.fee)) return;
   if (!canAffordWage(world, buyer.id, offer.wageOffer)) return;
 
+  const previousWage = player.contract?.wageWeekly ?? 0;
   buyer.finance.balance -= offer.fee;
   buyer.finance.transferBudget = Math.max(0, buyer.finance.transferBudget - offer.fee);
+  buyer.finance.wageBudgetUsedWeekly = Math.max(0, buyer.finance.wageBudgetUsedWeekly - previousWage + offer.wageOffer);
   seller.finance.balance += offer.fee;
+  seller.finance.wageBudgetUsedWeekly = Math.max(0, seller.finance.wageBudgetUsedWeekly - previousWage);
 
   seller.squadIds = seller.squadIds.filter((id) => id !== player.id);
   buyer.squadIds.push(player.id);
@@ -171,6 +176,79 @@ export function completeTransfer(world: SaveGameWorld, offer: TransferOffer): vo
   };
   delete world.transferListings[player.id];
   offer.status = "completed";
+}
+
+/**
+ * Run a small, deterministic AI-to-AI transfer-market batch. The user's club is
+ * deliberately excluded as both buyer and seller; user transfers remain under
+ * direct player control. One batch is intended to run once per in-window date.
+ */
+export function runAiTransferMarket(world: SaveGameWorld, maxDeals = 2): string[] {
+  if (!transferWindowInfo(world.currentDate).open || maxDeals <= 0) return [];
+  const completed: string[] = [];
+  const buyers = Object.values(world.clubs)
+    .filter((club) => club.id !== world.userClubId && !club.isUserControlled && !!club.managerId && squadNeed(world, club.id) === "buy")
+    .sort((a, b) => a.id.localeCompare(b.id));
+
+  for (const buyer of buyers) {
+    if (completed.length >= maxDeals) break;
+    const budgetCap = Math.min(buyerSpendCap(world, buyer.id), buyer.finance.transferBudget);
+    if (budgetCap <= 0) continue;
+
+    const candidates = Object.values(world.players)
+      .filter((player) => {
+        const seller = player.clubId ? world.clubs[player.clubId] : undefined;
+        if (!seller || seller.id === buyer.id || seller.id === world.userClubId || seller.isUserControlled) return false;
+        if (!seller.managerId || seller.squadIds.length <= 16 || !seller.squadIds.includes(player.id)) return false;
+        if (player.injuryStatus || (player.suspension && player.suspension.matchesRemaining > 0)) return false;
+        return !!world.transferListings[player.id] || squadNeed(world, seller.id) === "sell" || seller.squadIds.length >= 18;
+      })
+      .map((player) => ({ player, value: estimateMarketValue(player, world.currentDate) }))
+      .sort((a, b) => b.player.currentAbility - a.player.currentAbility || a.value - b.value || a.player.id.localeCompare(b.player.id));
+
+    for (const candidate of candidates) {
+      if (completed.length >= maxDeals) break;
+      const player = candidate.player;
+      const seller = world.clubs[player.clubId!];
+      if (!seller || seller.squadIds.length <= 16) continue;
+      const listing = world.transferListings[player.id];
+      const fee = listing?.askingPrice != null
+        ? Math.max(candidate.value, listing.askingPrice)
+        : Math.round(candidate.value * (squadNeed(world, seller.id) === "sell" ? 1.0 : 1.18));
+      if (fee <= 0 || fee > budgetCap) continue;
+
+      const currentWage = player.contract?.wageWeekly ?? 0;
+      const wageOffer = Math.max(Math.round(currentWage * 1.2), Math.round(buyer.finance.wageBudgetWeekly * 0.002));
+      if (!canAffordWage(world, buyer.id, wageOffer)) continue;
+
+      const offer: TransferOffer = {
+        id: `ai-${world.currentDate}-${buyer.id}-${player.id}`,
+        playerId: player.id, fromClubId: seller.id, toClubId: buyer.id,
+        type: "permanent", fee, addOns: [], wageOffer,
+        contractLengthYears: playerAge(player.dateOfBirth, world.currentDate) >= 30 ? 2 : 4,
+        status: "pending", submittedDate: world.currentDate,
+      };
+      if (world.transferOffers[offer.id]) continue;
+      if (evaluateOfferAsSellingClub(world, offer) !== "accepted") continue;
+
+      let playerDecision = evaluateOfferAsPlayer(world, offer);
+      if (playerDecision === "wants-more") {
+        offer.wageOffer = Math.round(wageOffer * 1.2);
+        if (!canAffordWage(world, buyer.id, offer.wageOffer)) continue;
+        playerDecision = evaluateOfferAsPlayer(world, offer);
+      }
+      if (playerDecision !== "accepts") continue;
+
+      world.transferOffers[offer.id] = offer;
+      completeTransfer(world, offer);
+      if (offer.status === "completed") completed.push(player.id);
+    }
+  }
+  return completed;
+}
+
+function playerAge(dob: string, asOf: string): number {
+  return ageFromDob(dob, asOf);
 }
 
 function addYears(iso: string, years: number): string {
