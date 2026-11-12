@@ -337,6 +337,27 @@ export default function MatchdayPage() {
         weather={fixture.weather}
       />
 
+      <section className="glass-panel rounded-card px-3 py-2.5" aria-label="Live match statistics">
+        <div className="mb-2 flex items-center justify-between gap-2 text-[11px] font-semibold uppercase tracking-wide text-ink-400">
+          <span className="truncate">{homeClub?.shortName ?? "Home"}</span>
+          <span className="shrink-0 text-accent-300">Possession</span>
+          <span className="truncate text-right">{awayClub?.shortName ?? "Away"}</span>
+        </div>
+        <div className="mb-2 flex items-center justify-between font-data text-lg font-bold tabular-nums text-white">
+          <span>{possessionHome}%</span>
+          <span>{100 - possessionHome}%</span>
+        </div>
+        <div className="mb-3 flex h-2 overflow-hidden rounded-full bg-navy-700">
+          <div className="h-full bg-accent-400 transition-[width] duration-500" style={{ width: `${possessionHome}%` }} />
+          <div className="h-full bg-pulse-500 transition-[width] duration-500" style={{ width: `${100 - possessionHome}%` }} />
+        </div>
+        <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-2 text-center">
+          <div><p className="font-data text-sm font-semibold text-ink-100">{state.shotsHome} – {state.shotsAway}</p><p className="text-[10px] uppercase tracking-wide text-ink-500">Shots</p></div>
+          <div><p className="font-data text-sm font-semibold text-ink-100">{state.shotsOnTargetHome} – {state.shotsOnTargetAway}</p><p className="text-[10px] uppercase tracking-wide text-ink-500">On target</p></div>
+          <div><p className="font-data text-sm font-semibold text-ink-100">{state.homeXg.toFixed(2)} – {state.awayXg.toFixed(2)}</p><p className="text-[10px] uppercase tracking-wide text-ink-500">Expected goals</p></div>
+        </div>
+      </section>
+
       <PitchViz
         minute={state.minute}
         possessionHome={possessionHome}
@@ -428,7 +449,7 @@ export default function MatchdayPage() {
           onClick={() => setActivePanel(null)}
         >
           <div
-            className="glass-panel max-h-[70vh] w-full max-w-2xl overflow-y-auto rounded-t-card rounded-b-none p-4"
+            className="glass-panel max-h-[calc(100dvh-5rem)] w-full min-w-0 max-w-2xl overflow-x-hidden overflow-y-auto rounded-t-card rounded-b-none p-3 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:p-4"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-2 flex items-center justify-between">
