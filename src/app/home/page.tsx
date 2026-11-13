@@ -60,6 +60,14 @@ export default function HomePage() {
       .sort((a, b) => (a.kickoff < b.kickoff ? -1 : 1))[0];
   }, [world, club]);
 
+  const upcomingFixtures = useMemo(() => {
+    if (!world || !club) return [];
+    return Object.values(world.fixtures)
+      .filter((f) => (f.homeClubId === club.id || f.awayClubId === club.id) && f.status === "scheduled")
+      .sort((a, b) => (a.kickoff < b.kickoff ? -1 : 1))
+      .slice(1, 5);
+  }, [world, club]);
+
   const squad = useMemo(() => {
     if (!world || !club) return [];
     return club.squadIds.map((id) => world.players[id]).filter((p): p is Player => !!p);
@@ -78,6 +86,11 @@ export default function HomePage() {
       suspensions: squad.filter((p) => p.suspension).length,
     };
   }, [world, club, squad]);
+
+  const squadCondition = useMemo(() => {
+    const ranked = [...squad].sort((a, b) => b.fatigue - a.fatigue).slice(0, 5);
+    return ranked.map((p) => ({ p, condition: Math.round(100 - p.fatigue) }));
+  }, [squad]);
 
   const playerOfTheWeek = useMemo(() => {
     const played = squad.filter((p) => p.seasonStats.appearances > 0);
@@ -118,7 +131,7 @@ export default function HomePage() {
 
   return (
     <div className="home-dashboard-layout flex flex-col gap-4 py-3 pb-16">
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* Column 1 */}
         <div className="flex flex-col gap-4">
           <SectionCard title="Next Match" right={<ChevronRight size={15} className="text-ink-500" />}>
@@ -162,6 +175,23 @@ export default function HomePage() {
             <FooterLink href="/inbox" label="View All News" />
           </SectionCard>
 
+          <SectionCard title="Upcoming Fixtures">
+            <div className="flex flex-col gap-1.5 text-xs">
+              {upcomingFixtures.map((f) => {
+                const oppId = f.homeClubId === club.id ? f.awayClubId : f.homeClubId;
+                const venue = f.homeClubId === club.id ? "H" : "A";
+                return (
+                  <div key={f.id} className="flex items-center justify-between border-b border-navy-700 pb-1.5 last:border-0 last:pb-0">
+                    <span className="text-ink-300">{f.kickoff.slice(0, 10)}</span>
+                    <span className="flex-1 truncate px-2 text-ink-100">{world.clubs[oppId]?.shortName ?? "TBC"}</span>
+                    <span className="font-data text-ink-500">{venue}</span>
+                  </div>
+                );
+              })}
+              {upcomingFixtures.length === 0 && <p className="text-sm text-ink-500">No further fixtures.</p>}
+            </div>
+          </SectionCard>
+
           <SectionCard title="Training Overview">
             <p className="text-xs text-ink-500">
               Full training scheduling isn&apos;t simulated yet — this is a placeholder until the Training engine lands.
@@ -181,6 +211,7 @@ export default function HomePage() {
                   <th className="pb-1 text-right font-normal">P</th>
                   <th className="pb-1 text-right font-normal">GD</th>
                   <th className="pb-1 text-right font-normal">Pts</th>
+                  <th className="pb-1 pl-2 text-right font-normal">Form</th>
                 </tr>
               </thead>
               <tbody>
@@ -199,6 +230,7 @@ export default function HomePage() {
                       <td className="py-1 text-right font-data">{row.played}</td>
                       <td className="py-1 text-right font-data">{row.goalDifference > 0 ? `+${row.goalDifference}` : row.goalDifference}</td>
                       <td className="py-1 text-right font-data">{row.points}</td>
+                      <td className="py-1 pl-2"><span className="flex justify-end gap-0.5">{row.form.slice(0, 5).map((r, k) => (<span key={k} className={`h-2 w-2 rounded-full ${r === "W" ? "bg-positive-500" : r === "D" ? "bg-ink-500" : "bg-accent-500"}`} />))}</span></td>
                     </tr>
                   );
                 })}
@@ -207,6 +239,21 @@ export default function HomePage() {
             <button onClick={() => setShowFullTable(true)} className="mt-1 w-full rounded-card border border-navy-600 py-1.5 text-xs text-ink-300 hover:bg-navy-800">
               View Full Table
             </button>
+          </SectionCard>
+
+          <SectionCard title="Squad Condition" right={<FooterLink href="/squad" label="" />}>
+            <div className="flex flex-col gap-2">
+              {squadCondition.map(({ p, condition }) => (
+                <div key={p.id} className="flex items-center gap-2 text-xs">
+                  <span className="w-28 truncate text-ink-300">{p.firstName[0]}. {p.lastName}</span>
+                  <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-navy-700">
+                    <div className={`h-full rounded-full ${condition >= 70 ? "bg-positive-500" : condition >= 45 ? "bg-warning-500" : "bg-accent-500"}`} style={{ width: `${condition}%` }} />
+                  </div>
+                  <span className="w-8 text-right font-data text-ink-100">{condition}%</span>
+                </div>
+              ))}
+              {squadCondition.length === 0 && <p className="text-sm text-ink-500">No squad data.</p>}
+            </div>
           </SectionCard>
 
           <SectionCard title="Player of the Week">
