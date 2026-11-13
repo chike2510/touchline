@@ -102,6 +102,7 @@ export default function TacticsPage() {
   const [creatingTactic, setCreatingTactic] = useState(false);
   const [changingFormation, setChangingFormation] = useState(false);
   const [pitchPhase, setPitchPhase] = useState<"in" | "out">("in");
+  const [showLineupList, setShowLineupList] = useState(false);
 
   const club = world?.clubs[world.userClubId];
   const tactic = world?.activeTactic;
@@ -290,13 +291,28 @@ export default function TacticsPage() {
                 >
                   <LayoutGrid size={14} />
                 </button>
-                <button title="Squad list view" className="rounded-card bg-navy-800 p-1.5 text-ink-400">
+                <button onClick={() => setShowLineupList((v) => !v)} title={showLineupList ? "Show tactical pitch" : "Show squad list"} aria-label={showLineupList ? "Show tactical pitch" : "Show squad list"} aria-pressed={showLineupList} className={`rounded-card p-1.5 ${showLineupList ? "bg-accent-500 text-white" : "bg-navy-800 text-ink-400"}`}>
                   <ListTree size={14} />
                 </button>
               </div>
 
-              <div className="mx-auto max-w-sm">
-                {pitchPhase === "in" ? (
+              <div className={`mx-auto w-full ${showLineupList && pitchPhase === "in" ? "max-w-none" : "max-w-sm"}`}>
+                {showLineupList && pitchPhase === "in" ? (
+                  <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+                    {inSlots.map((slot, i) => {
+                      const playerId = inAssignments[i];
+                      const player = playerId ? world.players[playerId] : undefined;
+                      const role = playerId ? tactic.playerRoles[playerId] : undefined;
+                      return (
+                        <button key={`${slot}-${i}`} onClick={() => setSelectedSlot(i)} className={`flex min-w-0 items-center gap-2 rounded-card border px-2 py-2 text-left transition-colors ${selectedSlot === i ? "border-accent-400 bg-accent-500/15" : "border-navy-600 bg-navy-800/80 hover:bg-navy-700"}`}>
+                          <span className="w-8 shrink-0 font-data text-[10px] font-bold text-accent-300">{slot}</span>
+                          <span className="min-w-0 flex-1 truncate text-xs font-medium text-ink-100">{player ? `${player.firstName} ${player.lastName}` : "Select player"}</span>
+                          <span className="shrink-0 text-[10px] text-ink-500">{role ? `${ROLE_CATALOG[role.roleCode].shortLabel} · ${DUTY_ABBR[role.duty]}` : "＋"}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : pitchPhase === "in" ? (
                   <FormationPitch
                     coords={inCoords} slotPositions={inSlots} assignments={inAssignments}
                     players={world.players} onSlotClick={(i) => setSelectedSlot(i)} selectedSlot={selectedSlot}
