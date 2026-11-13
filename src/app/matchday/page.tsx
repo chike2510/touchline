@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useGameStore } from "@/state/gameStore";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
@@ -67,7 +68,7 @@ function hashSeed(s: string): number {
   return h >>> 0;
 }
 
-export default function MatchdayPage() {
+function MatchdayScreen() {
   const world = useGameStore((s) => s.world);
   const mutateWorld = useGameStore((s) => s.mutateWorld);
   const advanceOnePhase = useGameStore((s) => s.advanceOnePhase);
@@ -544,4 +545,23 @@ function TacticQuickChange({ tactic, onChange }: { tactic: TacticSetup; onChange
       <p className="mt-1.5 text-[11px] text-ink-500">Changing mid-match costs some tactic familiarity.</p>
     </div>
   );
+}
+
+// The matchday screen is hidden until the manager's match has kicked off:
+// anything other than the live phase with a fixture linked to today bounces
+// back to Home. Typing /matchday directly is covered too.
+export default function MatchdayPage() {
+  const router = useRouter();
+  const world = useGameStore((s) => s.world);
+  const hydrated = !!world;
+  const today = world ? world.calendar[world.currentDate] : undefined;
+  const kickedOff = today?.phase === "matchday-live" && !!today.fixtureId;
+
+  useEffect(() => {
+    if (hydrated && !kickedOff) router.replace("/home");
+  }, [hydrated, kickedOff, router]);
+
+  if (!hydrated) return <p className="px-4 py-6 text-sm text-ink-500">No save loaded.</p>;
+  if (!kickedOff) return null;
+  return <MatchdayScreen />;
 }

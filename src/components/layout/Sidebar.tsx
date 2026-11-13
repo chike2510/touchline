@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  LayoutDashboard, Inbox, Users, ClipboardList, Dumbbell, CalendarDays, Search, Radio,
+  LayoutDashboard, Inbox, Users, ClipboardList, Dumbbell, CalendarDays, Search,
   ArrowLeftRight, Briefcase, Shield, Landmark, Sprout, Stethoscope, Trophy, Database, Settings, Star,
 } from "lucide-react";
 import { useGameStore } from "@/state/gameStore";
@@ -13,7 +13,7 @@ const NAV_ITEMS = [
   { href: "/home", label: "Home", Icon: LayoutDashboard },
   { href: "/tactics", label: "Tactics", Icon: ClipboardList },
   { href: "/squad", label: "Squad", Icon: Users },
-  { href: "/matchday", label: "Matchday", Icon: Radio },
+  { href: "/settings", label: "Settings", Icon: Settings },
   { href: "/inbox", label: "Inbox", Icon: Inbox },
   { href: "/training", label: "Training", Icon: Dumbbell },
   { href: "/schedule", label: "Schedule", Icon: CalendarDays },
@@ -26,7 +26,6 @@ const NAV_ITEMS = [
   { href: "/medical", label: "Medical Centre", Icon: Stethoscope },
   { href: "/competitions", label: "Competitions", Icon: Trophy },
   { href: "/data-hub", label: "Data Hub", Icon: Database },
-  { href: "/settings", label: "Settings", Icon: Settings },
 ] as const;
 
 export function Sidebar() {
