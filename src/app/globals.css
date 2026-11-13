@@ -178,3 +178,148 @@ html, body { width: 100%; overflow-x: hidden; }
   .matchday-live-layout .matchday-side-stats > * { min-width: 0; }
   .matchday-live-layout .matchday-side-stats .glass-panel { padding: 6px; }
 }
+
+
+/* Landscape-first refinement: constrain the nested app column as well as the
+   outer shell. The old min-h-dvh on the inner column could add another full
+   viewport beneath the top bar, making every page appear vertically clipped. */
+@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 700px) {
+  .app-shell {
+    width: 100%;
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .app-shell > div:not(.app-sidebar) {
+    height: 100%;
+    min-height: 0;
+    min-width: 0;
+    flex: 1 1 0%;
+    overflow: hidden;
+  }
+  .app-topbar {
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+  .app-topbar > div:first-child {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+  .app-main {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    flex: 1 1 0%;
+    overscroll-behavior: contain;
+  }
+  .app-main > div {
+    min-width: 0;
+    min-height: 0;
+    height: 100%;
+  }
+
+  /* Home: three independently scrollable dashboard columns. */
+  .home-dashboard-layout {
+    box-sizing: border-box;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .home-dashboard-layout > .grid > div {
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  .home-dashboard-layout .glass-panel {
+    min-width: 0;
+  }
+
+  /* Tactics: keep the pitch in the middle and make each control rail scroll
+     independently, so role pickers and instruction sliders remain reachable. */
+  .tactics-page-layout {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .tactics-page-layout > .grid {
+    min-width: 0;
+    min-height: 0;
+    grid-template-columns: minmax(155px, .75fr) minmax(245px, 1.3fr) minmax(185px, .9fr);
+  }
+  .tactics-page-layout > .grid > div {
+    min-width: 0;
+    min-height: 0;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+  }
+  .tactics-page-layout > .grid > div:nth-child(2) {
+    overflow-y: auto;
+  }
+  .tactics-page-layout .relative.rounded-card {
+    min-width: 0;
+  }
+
+  /* Squad: retain a usable table width and scroll it inside its own viewport;
+     the selected-player panel must not force the whole page wider. */
+  .squad-page-layout {
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+  }
+  .squad-page-layout > .min-w-0.flex-1 {
+    min-width: 0;
+    min-height: 0;
+    overscroll-behavior: contain;
+  }
+  .squad-page-layout .overflow-x-auto {
+    max-width: 100%;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  .squad-page-layout table {
+    min-width: 760px;
+  }
+  .squad-page-layout > .lg\\:w-96 {
+    max-width: 34%;
+    min-width: 210px;
+  }
+
+  /* Matchday: score, possession, pitch, analytics and controls all stay
+     inside the visible landscape canvas. */
+  .matchday-live-layout {
+    min-width: 0;
+    min-height: 0;
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+  }
+  .matchday-live-layout > section[aria-label="Live match statistics"] {
+    padding: 5px 10px;
+  }
+  .matchday-live-layout > section[aria-label="Live match statistics"] > div.mb-2 {
+    margin-bottom: 3px;
+  }
+  .matchday-live-layout > section[aria-label="Live match statistics"] > div.mb-3 {
+    margin-bottom: 4px;
+  }
+  .matchday-live-layout .matchday-side-stats {
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+  }
+  .matchday-live-layout > .glass-panel.flex.items-center,
+  .matchday-live-layout > .flex.items-center.gap-2 {
+    min-height: 0;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 500px) {
+  .app-topbar { flex-basis: 40px; height: 40px; min-height: 40px; }
+  .app-main { padding-left: 8px; padding-right: 8px; }
+  .home-dashboard-layout .glass-panel { padding: 7px; }
+  .tactics-page-layout > .grid {
+    grid-template-columns: minmax(145px, .72fr) minmax(225px, 1.25fr) minmax(175px, .9fr);
+    gap: 6px;
+  }
+  .squad-page-layout table { min-width: 700px; }
+}
