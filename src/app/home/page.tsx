@@ -134,7 +134,7 @@ export default function HomePage() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* Column 1 */}
         <div className="flex flex-col gap-4">
-          <SectionCard title="Next Match" right={<ChevronRight size={15} className="text-ink-500" />}>
+          <SectionCard title="Upcoming Fixture" right={<ChevronRight size={15} className="text-ink-500" />}>
             {nextFixture ? (
               <>
                 <p className="text-xs text-ink-500">{league?.name ?? "Fixture"}</p>

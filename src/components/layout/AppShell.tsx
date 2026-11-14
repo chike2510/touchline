@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { TopBar } from "./TopBar";
 import { OrientationController } from "./OrientationController";
@@ -8,6 +8,7 @@ import { useGameStore } from "@/state/gameStore";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const flushPendingSave = useGameStore((s) => s.flushPendingSave);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Mobile OSes background/kill tabs aggressively and without warning — the
   // debounced autosave in mutateWorld could still be mid-wait when that
@@ -30,9 +31,9 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     <div className="app-shell flex min-h-dvh w-full min-w-0 overflow-x-hidden">
       <OrientationController />
       <PlayerProfileModal />
-      <Sidebar />
+      <Sidebar menuOpen={menuOpen} onCloseMenu={() => setMenuOpen(false)} />
       <div className="flex min-h-dvh min-w-0 flex-1 flex-col overflow-x-hidden">
-        <TopBar />
+        <TopBar onOpenMenu={() => setMenuOpen(true)} />
         <main className="app-main min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto px-3 pb-24 pt-2 sm:px-4 md:px-6 md:pb-4">
           <div className="mx-auto w-full min-w-0 max-w-[1600px]">{children}</div>
         </main>

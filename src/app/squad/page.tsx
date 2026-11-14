@@ -8,16 +8,9 @@ import type { Player, PositionCode } from "@/domain/types";
 
 const POSITION_TABS: { label: string; codes: PositionCode[] }[] = [
   { label: "GK", codes: ["GK"] },
-  { label: "DR", codes: ["RB"] },
-  { label: "DCR", codes: ["CB"] },
-  { label: "DCL", codes: ["CB"] },
-  { label: "DL", codes: ["LB"] },
-  { label: "DM", codes: ["CDM"] },
-  { label: "MCR", codes: ["CM"] },
-  { label: "MCL", codes: ["CM"] },
-  { label: "AMR", codes: ["RW", "RM"] },
-  { label: "AML", codes: ["LW", "LM"] },
-  { label: "STC", codes: ["ST", "CF"] },
+  { label: "DEF", codes: ["RB", "CB", "LB"] },
+  { label: "MID", codes: ["CDM", "CM", "CAM", "RM", "LM", "RW", "LW"] },
+  { label: "FWD", codes: ["ST", "CF"] },
 ];
 
 const SUB_TABS = ["Overview", "Squad Depth", "Statistics", "Happiness"] as const;
@@ -80,7 +73,7 @@ export default function SquadPage() {
     <div className="squad-page-layout flex flex-col gap-3 py-3 lg:flex-row lg:items-start lg:gap-4">
       <div className="min-w-0 flex-1">
         <div className="mb-2 flex items-center justify-between">
-          <h1 className="font-display text-2xl text-ink-100">Squad</h1>
+          <div><h1 className="font-display text-2xl text-ink-100">Squad Management</h1><p className="text-xs text-ink-500">First team, depth and player profiles</p></div>
         </div>
 
         <div className="mb-2 flex flex-wrap gap-1">

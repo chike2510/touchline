@@ -1,11 +1,11 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { CalendarDays, Clock, HelpCircle, Bell, Settings as SettingsIcon, ChevronRight } from "lucide-react";
+import { CalendarDays, Clock, HelpCircle, Bell, Settings as SettingsIcon, ChevronRight, Menu } from "lucide-react";
 import { useGameStore } from "@/state/gameStore";
 import { ClubCrest } from "@/components/ui/ClubCrest";
 import { formatMoney, formatMoneyPerWeek } from "@/lib/format";
 
-export function TopBar() {
+export function TopBar({ onOpenMenu }: { onOpenMenu: () => void }) {
   const router = useRouter();
   const meta = useGameStore((s) => s.meta);
   const world = useGameStore((s) => s.world);
@@ -34,7 +34,10 @@ export function TopBar() {
 
   return (
     <header className="app-topbar glass-panel sticky top-0 z-20 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 rounded-none border-x-0 border-t-0 px-4 py-2.5">
-      <div className="flex items-center gap-2.5">
+      <div className="flex min-w-0 items-center gap-2.5">
+        <button type="button" onClick={onOpenMenu} aria-label="Open navigation menu" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-card text-ink-300 transition-colors hover:bg-navy-700 hover:text-ink-100">
+          <Menu size={21} aria-hidden />
+        </button>
         <ClubCrest clubId={club?.id} abbreviation={club?.abbreviation ?? "TL"} color={club?.colors.primary} size={36} />
         <div className="min-w-0">
           <p className="truncate font-display text-base leading-tight text-ink-100">{club?.name ?? meta?.clubName ?? "Touchline"}</p>
