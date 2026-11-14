@@ -143,7 +143,7 @@ html, body { width: 100%; overflow-x: hidden; }
   .tactics-page-layout .mx-auto.max-w-sm { max-width: 100%; }
   .squad-page-layout { height: 100%; min-height: 0; flex-direction: row; align-items: stretch; gap: 10px; padding: 0 0 4px; }
   .squad-page-layout > .min-w-0.flex-1 { min-width: 0; min-height: 0; overflow: auto; }
-  .squad-page-layout > .lg\\:w-96 { width: 250px; flex: 0 0 250px; min-height: 0; overflow: auto; }
+  .squad-page-layout > div:nth-child(2) { width: 250px; flex: 0 0 250px; min-height: 0; overflow: auto; }
   .squad-page-layout h1 { font-size: 19px; }
   .squad-page-layout .overflow-x-auto { max-height: calc(100% - 72px); overflow: auto; }
   .matchday-live-layout { height: 100%; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(210px, .34fr); grid-template-rows: auto auto minmax(0,1fr) auto; gap: 7px; overflow: hidden; padding: 0 0 4px; }
@@ -279,7 +279,7 @@ html, body { width: 100%; overflow-x: hidden; }
   .squad-page-layout table {
     min-width: 760px;
   }
-  .squad-page-layout > .lg\\:w-96 {
+  .squad-page-layout > div:nth-child(2) {
     max-width: 34%;
     min-width: 210px;
   }
@@ -521,7 +521,7 @@ html, body { width: 100%; overflow-x: hidden; }
     overflow-y: auto;
     scrollbar-width: thin;
   }
-  .squad-page-layout > .lg\\:w-96 {
+  .squad-page-layout > div:nth-child(2) {
     width: 32%;
     max-width: 360px;
     min-width: 240px;
