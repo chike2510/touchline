@@ -113,441 +113,283 @@ html, body { width: 100%; overflow-x: hidden; }
 }
 
 
-/* Landscape phone/tablet app shell: use the short viewport as the constraint,
-   not the desktop width breakpoint. The navigation remains reachable without
-   consuming a desktop-width rail. */
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 700px) {
-  html, body { height: 100%; min-height: 100%; overflow: hidden; }
-  .app-shell { height: 100dvh; min-height: 0; display: flex; flex-direction: column; }
-  .app-topbar { position: relative; z-index: 45; flex: 0 0 48px; min-height: 48px; height: 48px; padding: 5px 12px; gap: 8px; }
-  .app-topbar > div:first-child { gap: 7px; }
-  .app-topbar > div:first-child > div p:first-child { font-size: 13px; }
-  .app-topbar button { padding-top: 5px; padding-bottom: 5px; }
-  .app-sidebar { position: fixed; inset: auto 0 0 0; z-index: 60; height: 48px; width: 100%; border-radius: 0; border-left: 0; border-right: 0; border-bottom: 0; }
-  .app-sidebar nav { display: flex; flex-direction: row; align-items: center; justify-content: flex-start; gap: 4px; overflow-x: auto; overflow-y: hidden; padding: 3px 8px; scrollbar-width: none; }
-  .app-sidebar nav::-webkit-scrollbar { display: none; }
-  .app-sidebar nav a { min-width: 62px; height: 40px; flex: 0 0 auto; flex-direction: column; justify-content: center; gap: 1px; padding: 3px 7px; border-left: 0; border-top: 2px solid transparent; font-size: 9px; line-height: 1.1; }
-  .app-sidebar nav a span { display: inline !important; max-width: 70px; font-size: 9px; }
-  .app-sidebar nav a svg { width: 15px; height: 15px; }
-  .app-main { height: calc(100dvh - 96px); min-height: 0; flex: 1 1 auto; overflow-y: auto; padding: 8px 12px 10px; }
-  .app-main > div { max-width: none; height: 100%; }
-  .home-dashboard-layout { height: 100%; min-height: 0; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); grid-template-rows: minmax(0,1fr); gap: 10px; padding: 0 0 4px; }
-  .home-dashboard-layout > .grid { display: contents; }
-  .home-dashboard-layout > .grid > div { min-width: 0; min-height: 0; overflow: auto; gap: 8px; }
-  .home-dashboard-layout .glass-panel { padding: 10px; gap: 7px; }
-  .tactics-page-layout { height: 100%; min-height: 0; overflow: auto; gap: 8px; padding: 0 0 4px; }
-  .tactics-page-layout > .flex.gap-1 { flex: 0 0 auto; overflow-x: auto; }
-  .tactics-page-layout > .grid { flex: 1 1 auto; min-height: 0; grid-template-columns: minmax(185px, .78fr) minmax(280px, 1.35fr) minmax(205px, .88fr); gap: 9px; }
-  .tactics-page-layout > .grid > div { min-width: 0; min-height: 0; overflow-y: auto; gap: 8px; }
-  .tactics-page-layout .relative.rounded-card { min-height: 0; padding: 8px; }
-  .tactics-page-layout .mx-auto.max-w-sm { max-width: 100%; }
-  .squad-page-layout { height: 100%; min-height: 0; flex-direction: row; align-items: stretch; gap: 10px; padding: 0 0 4px; }
-  .squad-page-layout > .min-w-0.flex-1 { min-width: 0; min-height: 0; overflow: auto; }
-  .squad-page-layout > div:nth-child(2) { width: 250px; flex: 0 0 250px; min-height: 0; overflow: auto; }
-  .squad-page-layout h1 { font-size: 19px; }
-  .squad-page-layout .overflow-x-auto { max-height: calc(100% - 72px); overflow: auto; }
-  .matchday-live-layout { height: 100%; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) minmax(210px, .34fr); grid-template-rows: auto auto minmax(0,1fr) auto; gap: 7px; overflow: hidden; padding: 0 0 4px; }
-  .matchday-live-layout > :nth-child(1) { grid-column: 1 / -1; }
-  .matchday-live-layout > :nth-child(2) { grid-column: 1 / -1; padding: 6px 10px; }
-  .matchday-live-layout > :nth-child(3) { grid-column: 1; grid-row: 3; min-height: 0; overflow: hidden; }
-  .matchday-live-layout > :nth-child(4) { grid-column: 2; grid-row: 3; min-width: 0; overflow: hidden; }
-  .matchday-live-layout > :nth-child(5) { grid-column: 1; grid-row: 4; }
-  .matchday-live-layout > :nth-child(6) { grid-column: 2; grid-row: 4; }
-  .matchday-live-layout > :nth-child(7) { position: fixed; right: 12px; bottom: 58px; z-index: 35; }
-  .matchday-live-layout .pitch-3d-stage { height: 100%; min-height: 0; padding: 0 !important; }
-  .matchday-live-layout .pitch-3d-tilt { height: 100%; transform: none; }
-  .matchday-live-layout .fixed.inset-0.z-40 { z-index: 70; }
-  .matchday-live-layout .fixed.inset-0.z-40 > div { max-height: calc(100dvh - 60px); }
-  .home-dashboard-layout .fixed.bottom-0 { left: 0 !important; right: 0 !important; bottom: 48px !important; }
+
+/* Touchline viewport system: one predictable scroll container for manager pages. */
+html,body{width:100%;height:100%;min-height:0;overflow:hidden;overscroll-behavior:none}
+.app-shell{display:flex;flex-direction:row;width:100%;height:100dvh;min-height:0;overflow:hidden}
+.app-shell-content{display:flex;flex:1 1 0%;flex-direction:column;width:0;height:100%;min-width:0;min-height:0;overflow:hidden}
+.app-topbar{position:relative;z-index:45;flex:0 0 auto;min-width:0}
+.app-main{box-sizing:border-box;flex:1 1 0%;width:100%;height:0;min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;scrollbar-gutter:stable;padding-bottom:max(20px,env(safe-area-inset-bottom))}
+.app-main-content{width:100%;min-width:0;min-height:100%;height:auto;margin-inline:auto}
+.app-sidebar{flex:0 0 auto;min-width:0;min-height:0}
+.app-menu-backdrop{position:fixed!important;inset:0!important;z-index:120!important;width:100vw;height:100dvh;min-height:100dvh;overflow:hidden}
+.app-menu-drawer{box-sizing:border-box;height:100dvh;max-height:100dvh;min-height:0;overflow:hidden;padding-bottom:env(safe-area-inset-bottom);animation:touchline-menu-in .18s ease-out}
+.app-menu-drawer nav{min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+@keyframes touchline-menu-in{from{opacity:.6;transform:translateX(14px)}to{opacity:1;transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.app-menu-drawer{animation:none}}
+.home-dashboard-layout{width:100%;min-width:0;min-height:0;height:auto;overflow:visible;padding-bottom:8px}
+.home-dashboard-layout>.grid{width:100%;min-width:0}
+.home-dashboard-layout>.grid>div{min-width:0;min-height:0;overflow:visible;overscroll-behavior:auto;scrollbar-width:auto}
+.home-dashboard-layout .glass-panel{min-width:0}
+.tactics-page-layout{width:100%;min-width:0;min-height:0;height:auto;overflow:visible}
+.tactics-page-layout>.grid{width:100%;min-width:0;min-height:0;grid-template-columns:minmax(0,.78fr) minmax(0,1.35fr) minmax(0,.9fr);align-items:start}
+.tactics-page-layout>.grid>div{min-width:0;min-height:0;overflow:visible;overscroll-behavior:auto}
+.tactics-page-layout .relative.rounded-card{min-width:0}
+.squad-page-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(240px,.42fr);align-items:start;width:100%;min-width:0;min-height:0;height:auto;overflow:visible}
+.squad-page-layout>*{min-width:0;min-height:0;width:100%}
+.squad-page-layout .overflow-x-auto{width:100%;max-width:100%;max-height:none;overflow-x:auto;overflow-y:visible;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+.squad-page-layout table{min-width:700px}
+
+/* Full-screen launcher and career creator have independent navigation and scroll. */
+.standalone-shell{display:flex;flex-direction:column;width:100vw;height:100dvh;min-width:0;min-height:0;overflow:hidden}
+.launcher-shell{overflow-x:hidden;overflow-y:auto;overscroll-behavior-y:contain;background:radial-gradient(ellipse at 77% 24%,rgba(116,40,108,.18),transparent 38%),radial-gradient(ellipse at 18% 78%,rgba(12,108,83,.12),transparent 36%),linear-gradient(145deg,#080b14,#0a0e19 52%,#080a12)}
+.launcher-page{display:flex;flex-direction:column;width:min(100%,1500px);min-height:100%;margin:0 auto;padding:clamp(18px,3vw,44px) clamp(18px,4vw,58px) 18px;color:#f5f6fb}
+.launcher-topline{display:flex;align-items:center;justify-content:space-between;min-height:44px;border-bottom:1px solid rgba(157,170,204,.13);padding-bottom:16px}
+.launcher-brand{display:inline-flex;align-items:center;gap:10px;color:#f8f9fc;font-size:13px;font-weight:800;letter-spacing:.22em;text-decoration:none}
+.launcher-mark{display:grid;width:32px;height:32px;place-items:center;border-radius:9px;background:linear-gradient(145deg,#f23848,#a30f28);box-shadow:0 7px 24px rgba(226,33,54,.25);font-size:15px;letter-spacing:0}
+.launcher-edition,.launcher-kicker{color:#9ca8bf;font-size:10px;font-weight:750;letter-spacing:.19em}
+.launcher-main{display:flex;flex:1 0 auto;flex-direction:column;gap:clamp(28px,4vh,52px)}
+.launcher-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(300px,.9fr);align-items:center;gap:clamp(20px,4vw,70px);min-height:clamp(280px,42vh,440px);padding:clamp(24px,4vh,46px) 0}
+.launcher-hero-copy{max-width:670px}
+.launcher-kicker{display:flex;align-items:center;gap:8px;margin:0 0 15px;color:#f06c78}
+.launcher-hero h1{margin:0;color:#f7f8fc;font-size:clamp(38px,5.3vw,76px);font-weight:800;letter-spacing:-.055em;line-height:.98}
+.launcher-hero h1 span{color:#aeb8cb;font-weight:500}
+.launcher-description{max-width:480px;margin:22px 0 0;color:#96a1b7;font-size:clamp(13px,1.3vw,16px);line-height:1.7}
+.launcher-hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:11px;margin-top:28px}
+.launcher-primary-action,.launcher-secondary-action{display:inline-flex;align-items:center;justify-content:center;gap:11px;min-height:48px;border-radius:10px;padding:0 18px;font-size:13px;font-weight:750;text-decoration:none;transition:transform .16s ease,filter .16s ease}
+.launcher-primary-action{background:linear-gradient(110deg,#f12e42,#c81332);color:white;box-shadow:0 10px 32px rgba(226,31,54,.22)}
+.launcher-secondary-action{border:1px solid rgba(152,166,197,.22);background:rgba(22,29,46,.7);color:#dce2ef}
+.launcher-primary-action:hover,.launcher-secondary-action:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.launcher-secondary-action:disabled{opacity:.55}
+.launcher-hero-art{position:relative;display:grid;min-height:260px;place-items:center;overflow:hidden;border:1px solid rgba(134,151,190,.14);border-radius:22px;background:radial-gradient(ellipse at center,rgba(68,91,120,.18),transparent 57%),linear-gradient(145deg,rgba(18,25,42,.83),rgba(9,13,24,.58));box-shadow:0 28px 80px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.04)}
+.launcher-orbit{position:absolute;width:310px;height:310px;border:1px solid rgba(175,189,218,.1);border-radius:50%}
+.launcher-orbit-one{transform:scaleX(1.35) rotate(-25deg)}
+.launcher-orbit-two{transform:scaleX(.82) rotate(25deg)}
+.launcher-pitch{position:relative;width:min(64%,280px);aspect-ratio:1.25/1;border:1px solid rgba(94,224,174,.45);border-radius:6px;background:linear-gradient(90deg,transparent 49.7%,rgba(147,244,207,.25) 50%,transparent 50.3%),linear-gradient(0deg,transparent 49.7%,rgba(147,244,207,.25) 50%,transparent 50.3%),repeating-linear-gradient(90deg,rgba(14,87,65,.2) 0 28px,rgba(23,124,88,.13) 28px 56px),#0b3229;box-shadow:0 0 52px rgba(41,202,139,.1);transform:perspective(600px) rotateX(15deg) rotateZ(-8deg)}
+.launcher-pitch-half{position:absolute;inset:0 0 50%;border-bottom:1px solid rgba(147,244,207,.25)}
+.launcher-pitch-circle{position:absolute;top:50%;left:50%;width:24%;aspect-ratio:1;border:1px solid rgba(147,244,207,.32);border-radius:50%;transform:translate(-50%,-50%)}
+.launcher-pitch-box{position:absolute;left:28%;width:44%;height:16%;border:1px solid rgba(147,244,207,.27)}
+.launcher-box-top{top:0;border-top:0}.launcher-box-bottom{bottom:0;border-bottom:0}
+.launcher-pitch-ball{position:absolute;top:35%;left:54%;color:#f2f5fa;font-size:18px;text-shadow:0 0 12px rgba(255,255,255,.4)}
+.launcher-stamp{position:absolute;right:9%;bottom:10%;display:flex;flex-direction:column;padding:10px 14px;border:1px solid rgba(231,61,78,.42);border-radius:8px;background:rgba(16,16,28,.87);box-shadow:0 8px 30px rgba(0,0,0,.28);transform:rotate(-5deg)}
+.launcher-stamp span{color:#f07580;font-size:9px;letter-spacing:.2em}.launcher-stamp strong{color:#fff;font-size:16px;letter-spacing:.12em}.launcher-stamp small{color:#8793aa;font-size:8px;letter-spacing:.16em}
+.launcher-library{padding-top:24px;border-top:1px solid rgba(157,170,204,.13)}
+.launcher-section-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:16px}
+.launcher-section-heading .launcher-kicker{margin-bottom:7px}
+.launcher-section-heading h2{margin:0;color:#eef1f7;font-size:clamp(20px,2vw,26px);letter-spacing:-.03em}
+.launcher-text-action{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:#f07b86;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer}
+.launcher-empty,.launcher-empty-card{display:flex;align-items:center;gap:15px;min-height:88px;border:1px solid rgba(136,151,186,.16);border-radius:12px;background:rgba(15,21,35,.72);padding:18px;color:#9ca8bf;font-size:13px}
+.launcher-empty-card{flex-wrap:wrap}.launcher-empty-card h3{margin:0 0 4px;color:#eff2f8;font-size:14px}.launcher-empty-card p{margin:0;color:#8793aa;font-size:12px}
+.launcher-empty-icon{display:grid;width:44px;height:44px;place-items:center;border-radius:11px;background:rgba(231,55,75,.12);color:#ef727e}
+.launcher-empty-card .launcher-text-action{margin-left:auto}
+.launcher-loader{width:16px;height:16px;border:2px solid rgba(220,230,248,.18);border-top-color:#ed5262;border-radius:50%;animation:launcher-spin .8s linear infinite}
+@keyframes launcher-spin{to{transform:rotate(360deg)}}
+.launcher-save-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.launcher-save-card{display:flex;flex-direction:column;align-items:stretch;min-width:0;min-height:148px;border:1px solid rgba(136,151,186,.16);border-radius:12px;background:linear-gradient(145deg,rgba(18,25,42,.95),rgba(11,16,28,.9));padding:15px;color:#f4f6fb;text-align:left;cursor:pointer;transition:border-color .16s ease,transform .16s ease}
+.launcher-save-card:hover{border-color:rgba(237,76,95,.65);transform:translateY(-2px)}.launcher-save-card:disabled{opacity:.6;cursor:wait}
+.launcher-save-card-featured{border-color:rgba(231,57,77,.36);background:linear-gradient(145deg,rgba(53,25,42,.78),rgba(14,20,34,.96))}
+.launcher-save-topline{display:flex;align-items:center;justify-content:space-between}.launcher-save-type{color:#ee7884;font-size:9px;font-weight:800;letter-spacing:.17em}
+.launcher-save-arrow{display:grid;width:27px;height:27px;place-items:center;border-radius:50%;background:rgba(255,255,255,.06);color:#c4ccdc}
+.launcher-save-club{margin-top:13px;overflow:hidden;color:#f5f6fa;font-size:16px;font-weight:750;text-overflow:ellipsis;white-space:nowrap}
+.launcher-save-manager{margin-top:2px;color:#a3aec2;font-size:12px}
+.launcher-save-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;color:#8693aa;font-size:10px}
+.launcher-save-meta span{display:inline-flex;align-items:center;gap:5px}
+.launcher-save-open{margin-top:auto;padding-top:13px;color:#f17c87;font-size:11px;font-weight:750}
+.launcher-error{border:1px solid rgba(245,105,112,.28);border-radius:10px;background:rgba(116,28,39,.24);padding:11px 14px;color:#ffb4ba;font-size:12px}
+.launcher-footer{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:26px;border-top:1px solid rgba(157,170,204,.12);padding-top:15px;color:#6f7c94;font-size:10px}
+.launcher-footer-brand{display:inline-flex;align-items:center;gap:6px;color:#95a2b9;font-weight:800;letter-spacing:.12em}
+.launcher-footer a{display:inline-flex;align-items:center;color:#aeb9cd;text-decoration:none}
+
+/* Four-stage manager and club setup. */
+.career-creator{display:flex;flex-direction:column;width:min(100%,1440px);height:100%;min-width:0;min-height:0;margin:0 auto;color:#f2f4f9}
+.career-creator-header{display:flex;flex:0 0 58px;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(157,170,204,.13);padding:0 clamp(16px,3vw,40px)}
+.career-creator-mode{color:#8e9bb2;font-size:10px;font-weight:800;letter-spacing:.17em}.career-creator-mode span{color:#e64b5c;padding:0 4px}
+.career-creator-exit{color:#a6b1c5;font-size:11px;text-decoration:none}
+.career-creator-progress{flex:0 0 auto;padding:14px clamp(16px,3vw,40px) 12px;border-bottom:1px solid rgba(157,170,204,.09)}
+.career-creator-progress-copy{display:flex;justify-content:space-between;margin-bottom:9px;color:#ee7783;font-size:9px;font-weight:800;letter-spacing:.16em}
+.career-creator-progress-copy strong{color:#c6cede;font-size:10px}.career-creator-progress-copy i{color:#6c7890;font-style:normal}
+.career-creator-progress-track{height:3px;overflow:hidden;border-radius:4px;background:rgba(137,153,186,.16)}
+.career-creator-progress-track span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,#e5283e,#f16b78);transition:width .2s ease}
+.career-creator-step-labels{display:flex;justify-content:space-between;gap:10px;margin-top:11px}
+.career-creator-step-labels button{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:#66738a;font-size:10px;cursor:pointer}
+.career-creator-step-labels button span{color:#71809a}.career-creator-step-labels button.career-step-active{color:#f0f2f7}
+.career-creator-step-labels button.career-step-active span{color:#f06d7a}.career-creator-step-labels button.career-step-complete{color:#71cfac}
+.career-creator-main{flex:1 1 0%;width:100%;min-width:0;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:clamp(15px,2.7vh,30px) clamp(16px,3vw,40px) 24px}
+.career-creator-heading{margin:0 auto 18px;width:min(100%,1100px)}.career-creator-heading .launcher-kicker{margin-bottom:7px}
+.career-creator-heading h1{margin:0;color:#f6f7fb;font-size:clamp(24px,3vw,36px);font-weight:780;letter-spacing:-.045em}
+.career-creator-heading>p:last-child{margin:5px 0 0;color:#909db4;font-size:12px}
+.career-panel,.career-review{width:min(100%,1100px);margin:0 auto;border:1px solid rgba(136,151,186,.17);border-radius:14px;background:linear-gradient(145deg,rgba(16,22,37,.94),rgba(10,15,27,.95));padding:clamp(14px,2vw,22px);box-shadow:0 20px 60px rgba(0,0,0,.14)}
+.career-panel-heading{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:13px}
+.career-panel-index{display:block;color:#e86b79;font-size:9px;font-weight:800;letter-spacing:.16em}
+.career-panel-heading h2{margin:4px 0 0;color:#f1f3f8;font-size:17px;font-weight:700}.career-panel-note{color:#7f8ca4;font-size:10px}
+.career-league-picker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.career-league-picker button{display:flex;align-items:center;gap:9px;border:1px solid rgba(140,156,190,.17);border-radius:8px;background:rgba(255,255,255,.025);padding:9px 12px;color:#c4cede;font-size:11px;cursor:pointer}
+.career-league-picker button small{color:#74829a;font-size:9px}.career-league-picker button.career-league-active{border-color:rgba(235,66,83,.65);background:rgba(225,35,57,.13);color:#fff}
+.career-club-heading{margin-top:8px}
+.career-club-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.career-club-card{position:relative;display:flex;min-width:0;min-height:89px;flex-direction:column;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(136,151,186,.13);border-radius:9px;background:rgba(255,255,255,.025);padding:10px 6px;color:#cbd3e1;font-size:10px;text-align:center;cursor:pointer;transition:border-color .14s ease,background .14s ease}
+.career-club-card span{overflow:hidden;max-width:100%;text-overflow:ellipsis}.career-club-card:hover{border-color:rgba(229,74,90,.44)}
+.career-club-card.career-club-selected{border-color:#ed5362;background:rgba(221,37,57,.13);color:#fff}
+.career-club-card i{position:absolute;top:6px;right:7px;display:grid;width:18px;height:18px;place-items:center;border-radius:50%;background:#db3046;color:#fff;font-style:normal}
+.career-selected-club{display:flex;align-items:center;gap:13px;margin-top:13px;border:1px solid rgba(65,191,145,.2);border-radius:10px;background:rgba(28,112,85,.09);padding:10px 13px}
+.career-selected-club>div{display:flex;flex:1;min-width:0;flex-direction:column;gap:2px}.career-selected-club small{color:#68c8a4;font-size:8px;font-weight:800;letter-spacing:.15em}
+.career-selected-club strong{color:#f2f6f6;font-size:14px}.career-selected-club span{color:#8ea99f;font-size:10px}.career-selected-club>svg{color:#69c9a4}
+.career-help-copy{margin:0 0 14px;color:#909cb2;font-size:11px;line-height:1.6}
+.career-world-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-bottom:17px}
+.career-world-card{display:flex;align-items:center;gap:12px;border:1px solid rgba(136,151,186,.14);border-radius:9px;background:rgba(255,255,255,.025);padding:12px}
+.career-world-number{color:#e76c78;font-size:10px;font-weight:800;letter-spacing:.08em}
+.career-world-card>div{display:flex;flex:1;min-width:0;flex-direction:column;gap:3px}.career-world-card strong{color:#e7ebf3;font-size:12px}.career-world-card small{color:#7f8ca3;font-size:10px}.career-world-card>svg{color:#6acaa5}
+.career-setting-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.career-field{position:relative;display:flex;min-width:0;flex-direction:column;gap:7px;color:#aeb8ca;font-size:11px}
+.career-field>span{display:inline-flex;align-items:center;gap:7px;color:#c4ccda;font-size:10px;font-weight:700}
+.career-field input,.career-field select{box-sizing:border-box;width:100%;min-width:0;min-height:41px;border:1px solid rgba(142,157,191,.2);border-radius:8px;background:#0b1120;padding:0 11px;color:#f0f3f8;color-scheme:dark;outline:none}
+.career-field input:focus,.career-field select:focus{border-color:rgba(234,79,96,.8);box-shadow:0 0 0 2px rgba(234,79,96,.12)}
+.career-field small{color:#78859b;font-size:9px;line-height:1.4}.career-nationality-field select{appearance:none;padding-right:34px}
+.career-nationality-field>svg{position:absolute;right:12px;bottom:14px;color:#8592a8;pointer-events:none}
+.career-manager-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:18px}
+.career-nationality-field{grid-column:1/-1;max-width:360px}
+.career-subsection-heading{display:flex;align-items:baseline;gap:13px;margin:14px 0 9px}.career-subsection-heading h3{margin:0;color:#e7ebf3;font-size:12px;font-weight:700}
+.career-reputation-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.career-reputation-option{display:flex;min-width:0;flex-direction:column;align-items:start;gap:6px;border:1px solid rgba(136,151,186,.16);border-radius:9px;background:rgba(255,255,255,.025);padding:12px;text-align:left;cursor:pointer}
+.career-reputation-option strong{color:#e9edf4;font-size:12px}.career-reputation-option span{color:#8996ac;font-size:10px;line-height:1.45}.career-reputation-option small{color:#68758d;font-size:9px}
+.career-reputation-option.career-reputation-active{border-color:#e74e60;background:rgba(220,39,58,.12)}.career-reputation-option.career-reputation-active small{color:#f08a94}
+.career-formation-picker{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:10px}
+.career-formation-picker button{min-width:66px;border:1px solid rgba(136,151,186,.16);border-radius:7px;background:rgba(255,255,255,.025);padding:8px 11px;color:#aeb8ca;font-size:11px;cursor:pointer}
+.career-formation-picker button.career-formation-active{border-color:#e74e60;background:rgba(220,39,58,.15);color:#fff}
+.career-review{padding:clamp(16px,3vw,28px)}
+.career-review-club{display:flex;align-items:center;gap:16px;border-bottom:1px solid rgba(142,157,191,.13);padding-bottom:18px}
+.career-review-club h2{margin:4px 0 2px;color:#f4f6fa;font-size:clamp(18px,2.3vw,26px)}.career-review-club p{margin:0;color:#8996ac;font-size:11px}
+.career-review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:13px;border:1px solid rgba(136,151,186,.12);border-radius:10px;background:rgba(136,151,186,.1);overflow:hidden}
+.career-review-grid>div{display:flex;min-width:0;flex-direction:column;gap:4px;background:#0d1422;padding:13px}
+.career-review-grid span{color:#7d8aa2;font-size:8px;font-weight:800;letter-spacing:.14em}.career-review-grid strong{overflow:hidden;color:#edf0f6;font-size:13px;text-overflow:ellipsis;white-space:nowrap}.career-review-grid small{color:#8290a7;font-size:9px}
+.career-review-save{display:flex;align-items:center;gap:10px;margin-top:13px;border:1px solid rgba(224,71,88,.18);border-radius:9px;background:rgba(215,39,58,.08);padding:11px 13px;color:#ed7883}
+.career-review-save>div{display:flex;flex-direction:column;gap:3px}.career-review-save small{color:#e57783;font-size:8px;font-weight:800;letter-spacing:.14em}.career-review-save strong{color:#f1e8eb;font-size:11px}
+.career-creator-footer{display:flex;flex:0 0 auto;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid rgba(157,170,204,.13);background:rgba(8,12,21,.96);padding:10px clamp(16px,3vw,40px) max(10px,env(safe-area-inset-bottom))}
+.career-back-button,.career-next-button{display:inline-flex;min-width:112px;min-height:42px;align-items:center;justify-content:center;gap:9px;border-radius:8px;padding:0 15px;font-size:11px;font-weight:800;cursor:pointer}
+.career-back-button{border:1px solid rgba(136,151,186,.2);background:rgba(255,255,255,.03);color:#bdc7d8}.career-back-button:disabled{opacity:.35;cursor:default}
+.career-next-button{border:0;background:linear-gradient(105deg,#f02d41,#bc1530);color:white;box-shadow:0 8px 24px rgba(221,38,58,.19)}.career-next-button:disabled{opacity:.4;cursor:not-allowed}
+.career-footer-context{display:flex;flex-direction:column;align-items:center;gap:3px;color:#a6b2c8;font-size:9px;font-weight:800;letter-spacing:.16em}
+.career-footer-context small{color:#6d7a92;font-size:9px;font-weight:500;letter-spacing:0}
+
+/* Full-screen match shell. The manager sidebar and top bar are not mounted on this route. */
+.matchday-shell{background:#070b14;overflow:hidden}
+.matchday-shell>*{width:100%;min-width:0}
+.matchday-shell>div{width:100%;height:100%;min-width:0;min-height:0;overflow:hidden}
+.matchday-build-up{display:flex;flex-direction:column;gap:13px;width:min(100%,1120px);height:100%;min-width:0;min-height:0;margin:0 auto;overflow-y:auto;overscroll-behavior:contain;padding:clamp(12px,2.2vh,24px) clamp(14px,3vw,36px)}
+.matchday-build-up-header{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.matchday-build-up-header h1{margin:4px 0 0;color:#f4f6fb;font-size:clamp(22px,3vw,34px);font-weight:800;letter-spacing:-.04em}
+.matchday-eyebrow{margin:0;color:#ef7380;font-size:9px;font-weight:800;letter-spacing:.18em}
+.matchday-exit{border:1px solid rgba(142,157,191,.18);border-radius:8px;background:rgba(255,255,255,.03);padding:9px 12px;color:#aeb9cd;font-size:10px}
+.matchday-kickoff-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:auto;border:1px solid rgba(226,66,84,.22);border-radius:12px;background:linear-gradient(105deg,rgba(67,23,39,.52),rgba(17,23,37,.88));padding:13px 15px}
+.matchday-kickoff-bar p{margin:4px 0 0;color:#aeb9cd;font-size:11px}
+.matchday-kickoff-button{display:inline-flex;min-width:136px;min-height:42px;align-items:center;justify-content:center;gap:9px;border:0;border-radius:8px;background:linear-gradient(105deg,#f12d43,#bf1732);color:white;font-size:11px;font-weight:800;box-shadow:0 8px 24px rgba(222,37,59,.2)}
+.matchday-empty-state{display:flex;width:min(100%,720px);flex:1;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin:auto;padding:24px;text-align:center}
+.matchday-empty-state h1{margin:0;color:#f1f4fa;font-size:24px}.matchday-empty-state p:not(.matchday-eyebrow){color:#8e9bb2;font-size:12px}
+.matchday-empty-state button{margin-top:10px;border:1px solid rgba(142,157,191,.2);border-radius:8px;background:rgba(255,255,255,.04);padding:11px 15px;color:#e1e6ef;font-size:11px}
+.matchday-live-layout{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(220px,.34fr);grid-template-rows:auto auto minmax(0,1fr) auto;gap:7px;width:100%;height:100%;min-width:0;min-height:0;overflow:hidden;padding:8px}
+.matchday-live-layout>:nth-child(1){grid-column:1/-1;min-width:0}
+.matchday-live-layout>:nth-child(2){grid-column:1/-1;min-width:0;padding:6px 10px}
+.matchday-live-layout>:nth-child(3){grid-column:1;grid-row:3;min-width:0;min-height:0;overflow:hidden}
+.matchday-live-layout>:nth-child(4){grid-column:2;grid-row:3;min-width:0;min-height:0;overflow:hidden}
+.matchday-live-layout>:nth-child(5){grid-column:1;grid-row:4;min-width:0}
+.matchday-live-layout>:nth-child(6){grid-column:2;grid-row:4;min-width:0}
+.matchday-live-layout>:nth-child(7){position:fixed;right:12px;bottom:12px;z-index:35}
+.matchday-live-layout .pitch-3d-stage{height:100%;min-height:0;padding:0!important}
+.matchday-live-layout .pitch-3d-tilt{height:100%;transform:none}
+.matchday-live-layout .matchday-side-stats{min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.matchday-live-layout .fixed.inset-0.z-40{z-index:70}
+
+/* Short landscape: bottom manager navigation and one main content scroller. */
+@media screen and (orientation:landscape) and (min-width:600px) and (max-width:1100px) and (max-height:850px){
+ .app-shell{flex-direction:column}.app-shell-content{width:100%}
+ .app-topbar{flex:0 0 52px;min-height:52px;height:52px;flex-wrap:nowrap;gap:8px;padding:4px 10px}
+ .app-topbar>div:first-child{flex:0 1 auto;min-width:0;gap:7px}
+ .app-topbar>div:first-child>div p:first-child{max-width:145px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+ .app-topbar>div:nth-child(2){min-width:0;gap:6px}.app-topbar>div:nth-child(2)>*{white-space:nowrap}
+ .app-topbar>div:last-child{gap:4px}.app-topbar button{min-height:34px}
+ .app-main{padding:8px 12px calc(70px + env(safe-area-inset-bottom));scrollbar-gutter:auto}
+ .app-main-content{max-width:none;min-height:0;height:auto}
+ .app-sidebar{position:fixed!important;inset:auto 0 0 0!important;z-index:60!important;display:flex!important;flex-direction:row!important;width:100%!important;height:58px!important;min-height:58px!important;max-height:58px!important;overflow:hidden!important;border-radius:0!important;border-right:0!important;border-bottom:0!important;border-left:0!important}
+ .app-sidebar>div:first-child,.app-sidebar>div:last-child{display:none!important}
+ .app-sidebar nav{display:flex!important;flex:1 1 0%;flex-direction:row!important;align-items:stretch!important;justify-content:space-around!important;width:100%;min-width:0;overflow:hidden!important;padding:4px 8px calc(4px + env(safe-area-inset-bottom))!important;gap:4px!important}
+ .app-sidebar nav a{display:flex!important;flex:1 1 0%!important;min-width:0!important;max-width:240px;height:48px!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:3px!important;padding:3px 4px!important;border-left:0!important;border-top:2px solid transparent;font-size:9px!important;line-height:1.1}
+ .app-sidebar nav a[aria-current=page]{border-top-color:#e5394e;background:linear-gradient(180deg,rgba(229,30,43,.17),rgba(229,30,43,0))}
+ .app-sidebar nav a span{display:inline!important;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:9px!important;line-height:1.1;text-align:center}
+ .app-sidebar nav a svg{width:17px;height:17px}
+ .home-dashboard-layout{padding:0 0 8px!important}
+ .home-dashboard-layout>.grid{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:start;gap:9px!important}
+ .home-dashboard-layout>.grid>div{overflow:visible!important;gap:9px!important}
+ .home-dashboard-layout .glass-panel{padding:10px!important;gap:7px!important}
+ .tactics-page-layout{padding:0 0 8px!important}
+ .tactics-page-layout>.grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.35fr) minmax(0,.9fr)!important;align-items:start;gap:8px!important}
+ .tactics-page-layout>.grid>div{overflow:visible!important;gap:8px!important}
+ .tactics-page-layout .relative.rounded-card{padding:7px!important}
+ .squad-page-layout{grid-template-columns:minmax(0,1fr) minmax(220px,.42fr)!important;gap:8px!important}
+ .squad-page-layout .overflow-x-auto{max-height:none!important;overflow-x:auto!important;overflow-y:visible!important}
+ .squad-page-layout table{min-width:650px}
+ .matchday-live-layout{grid-template-columns:minmax(0,1fr) minmax(190px,.34fr);gap:6px;padding:6px}
+ .matchday-live-layout>:nth-child(7){right:8px;bottom:8px}
 }
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 500px) {
-  .app-topbar { flex-basis: 42px; height: 42px; min-height: 42px; }
-  .app-main { height: calc(100dvh - 88px); padding-top: 5px; }
-  .app-sidebar { height: 46px; }
-  .app-sidebar nav a { height: 38px; }
-  .matchday-live-layout { grid-template-rows: auto auto minmax(0,1fr) auto; gap: 4px; }
+/* Very short landscape phone. */
+@media screen and (orientation:landscape) and (max-width:760px) and (max-height:600px){
+ .app-topbar{flex-basis:46px;height:46px;min-height:46px;padding-inline:7px}
+ .app-topbar>div:first-child>div p:first-child{max-width:100px;font-size:10px}
+ .app-topbar>div:nth-child(2){font-size:10px}.app-topbar>div:last-child button:nth-child(2){display:none}
+ .app-main{padding-inline:7px;padding-top:6px}
+ .home-dashboard-layout>.grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .home-dashboard-layout>.grid>div:last-child{grid-column:1/-1}
+ .tactics-page-layout>.grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.3fr)!important}
+ .tactics-page-layout>.grid>div:nth-child(3){grid-column:1/-1}
+ .squad-page-layout{grid-template-columns:minmax(0,1fr) minmax(185px,.42fr)!important}
+ .squad-page-layout table{min-width:560px}
+ .career-creator-header{flex-basis:44px}.career-creator-progress{padding-top:8px;padding-bottom:8px}
+ .career-creator-step-labels{margin-top:7px}.career-creator-main{padding-top:8px;padding-bottom:10px}
+ .career-creator-heading{margin-bottom:9px}.career-creator-heading h1{font-size:22px}.career-creator-heading>p:last-child{font-size:10px}
+ .career-creator-footer{padding-top:7px;padding-bottom:max(7px,env(safe-area-inset-bottom))}
+ .career-panel{padding:10px}.career-club-card{min-height:70px;gap:5px;padding:6px}
+ .career-reputation-option{padding:8px}.career-reputation-option span{font-size:9px}
+ .career-creator-footer button{min-height:36px}.matchday-build-up{padding-top:8px;padding-bottom:8px;gap:8px}
 }
-
-
-/* Live match: reserve the pitch as the primary canvas and keep analytics
-   persistently visible in the adjacent panel (not hidden behind the toolbar). */
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 700px) {
-  .matchday-live-layout > .matchday-side-stats { grid-column: 2; grid-row: 3; min-height: 0; }
-  .matchday-live-layout > .glass-panel.flex.items-center { grid-column: 1; grid-row: 4; min-width: 0; }
-  .matchday-live-layout > .flex.items-center.gap-2 { grid-column: 2; grid-row: 4; min-width: 0; }
-  .matchday-live-layout .matchday-side-stats > * { min-width: 0; }
-  .matchday-live-layout .matchday-side-stats .glass-panel { padding: 6px; }
+/* Small portrait view. */
+@media screen and (max-width:767px) and (orientation:portrait){
+ .app-shell{flex-direction:column}.app-shell-content{width:100%}
+ .app-topbar{min-height:54px;flex-wrap:nowrap;padding-inline:9px}
+ .app-sidebar{position:fixed!important;inset:auto 0 0 0!important;z-index:60!important;display:flex!important;flex-direction:row!important;width:100%!important;height:58px!important;min-height:58px!important;max-height:58px!important}
+ .app-sidebar>div:first-child,.app-sidebar>div:last-child{display:none!important}
+ .app-sidebar nav{display:flex!important;flex:1;flex-direction:row!important;justify-content:space-around!important;gap:2px!important;padding:3px 5px!important}
+ .app-sidebar nav a{display:flex!important;flex:1 1 0%!important;min-width:0!important;flex-direction:column!important;align-items:center;justify-content:center;gap:3px;border-left:0!important;border-top:2px solid transparent}
+ .app-sidebar nav a span{display:inline!important;max-width:100%;font-size:8px!important}
+ .app-main{padding:10px 10px calc(70px + env(safe-area-inset-bottom))}
+ .home-dashboard-layout>.grid{grid-template-columns:minmax(0,1fr)!important}
+ .squad-page-layout{grid-template-columns:minmax(0,1fr)!important}
+ .career-creator-header{flex-basis:52px}.career-club-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .career-reputation-grid{grid-template-columns:minmax(0,1fr)}
+ .launcher-hero{grid-template-columns:minmax(0,1fr)}.launcher-hero-art{min-height:190px}
+ .launcher-save-grid{grid-template-columns:minmax(0,1fr)}.launcher-footer{flex-wrap:wrap}
 }
-
-
-/* Landscape-first refinement: constrain the nested app column as well as the
-   outer shell. The old min-h-dvh on the inner column could add another full
-   viewport beneath the top bar, making every page appear vertically clipped. */
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 700px) {
-  .app-shell {
-    width: 100%;
-    height: 100dvh;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .app-shell > div:not(.app-sidebar) {
-    height: 100%;
-    min-height: 0;
-    min-width: 0;
-    flex: 1 1 0%;
-    overflow: hidden;
-  }
-  .app-topbar {
-    flex-wrap: nowrap;
-    min-width: 0;
-  }
-  .app-topbar > div:first-child {
-    min-width: 0;
-    flex: 0 1 auto;
-  }
-  .app-main {
-    box-sizing: border-box;
-    min-width: 0;
-    min-height: 0;
-    height: auto;
-    flex: 1 1 0%;
-    overscroll-behavior: contain;
-  }
-  .app-main > div {
-    min-width: 0;
-    min-height: 0;
-    height: 100%;
-  }
-
-  /* Home: three independently scrollable dashboard columns. */
-  .home-dashboard-layout {
-    box-sizing: border-box;
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .home-dashboard-layout > .grid > div {
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-  }
-  .home-dashboard-layout .glass-panel {
-    min-width: 0;
-  }
-
-  /* Tactics: keep the pitch in the middle and make each control rail scroll
-     independently, so role pickers and instruction sliders remain reachable. */
-  .tactics-page-layout {
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .tactics-page-layout > .grid {
-    min-width: 0;
-    min-height: 0;
-    grid-template-columns: minmax(155px, .75fr) minmax(245px, 1.3fr) minmax(185px, .9fr);
-  }
-  .tactics-page-layout > .grid > div {
-    min-width: 0;
-    min-height: 0;
-    overscroll-behavior: contain;
-    scrollbar-width: thin;
-  }
-  .tactics-page-layout > .grid > div:nth-child(2) {
-    overflow-y: auto;
-  }
-  .tactics-page-layout .relative.rounded-card {
-    min-width: 0;
-  }
-
-  /* Squad: retain a usable table width and scroll it inside its own viewport;
-     the selected-player panel must not force the whole page wider. */
-  .squad-page-layout {
-    min-width: 0;
-    min-height: 0;
-    overflow: hidden;
-  }
-  .squad-page-layout > .min-w-0.flex-1 {
-    min-width: 0;
-    min-height: 0;
-    overscroll-behavior: contain;
-  }
-  .squad-page-layout .overflow-x-auto {
-    max-width: 100%;
-    overflow: auto;
-    overscroll-behavior: contain;
-  }
-  .squad-page-layout table {
-    min-width: 760px;
-  }
-  .squad-page-layout > div:nth-child(2) {
-    max-width: 34%;
-    min-width: 210px;
-  }
-
-  /* Matchday: score, possession, pitch, analytics and controls all stay
-     inside the visible landscape canvas. */
-  .matchday-live-layout {
-    min-width: 0;
-    min-height: 0;
-    box-sizing: border-box;
-    overscroll-behavior: contain;
-  }
-  .matchday-live-layout > section[aria-label="Live match statistics"] {
-    padding: 5px 10px;
-  }
-  .matchday-live-layout > section[aria-label="Live match statistics"] > div.mb-2 {
-    margin-bottom: 3px;
-  }
-  .matchday-live-layout > section[aria-label="Live match statistics"] > div.mb-3 {
-    margin-bottom: 4px;
-  }
-  .matchday-live-layout .matchday-side-stats {
-    scrollbar-width: thin;
-    overscroll-behavior: contain;
-  }
-  .matchday-live-layout > .glass-panel.flex.items-center,
-  .matchday-live-layout > .flex.items-center.gap-2 {
-    min-height: 0;
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
+@media screen and (max-width:560px){
+ .career-manager-fields,.career-setting-grid{grid-template-columns:minmax(0,1fr)}
+ .career-nationality-field{grid-column:auto;max-width:none}
+ .career-world-grid,.career-review-grid{grid-template-columns:minmax(0,1fr)}
+ .launcher-edition{display:none}.launcher-section-heading{align-items:start;flex-direction:column}
 }
+@media(max-width:767px){.pitch-3d-stage{perspective:none;padding:2%!important}.pitch-3d-tilt{transform:none;transform-origin:center}}
 
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 500px) {
-  .app-topbar { flex-basis: 40px; height: 40px; min-height: 40px; }
-  .app-main { padding-left: 8px; padding-right: 8px; }
-  .home-dashboard-layout .glass-panel { padding: 7px; }
-  .tactics-page-layout > .grid {
-    grid-template-columns: minmax(145px, .72fr) minmax(225px, 1.25fr) minmax(175px, .9fr);
-    gap: 6px;
-  }
-  .squad-page-layout table { min-width: 700px; }
-}
-
-
-/* Landscape viewport guard: keep the app canvas and bottom navigation
-   deterministic on landscape phones/tablets instead of allowing the desktop
-   rail to consume the page width. */
-@media screen and (orientation: landscape) and (max-height: 900px) and (max-width: 1100px) {
-  .app-shell {
-    display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
-    height: 100dvh !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-  }
-  .app-shell > div:not(.app-sidebar) {
-    display: flex;
-    flex: 1 1 0% !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    height: calc(100dvh - 48px) !important;
-    overflow: hidden !important;
-  }
-  .app-topbar {
-    flex: 0 0 48px !important;
-    width: 100%;
-    min-height: 48px !important;
-    height: 48px !important;
-    flex-wrap: nowrap;
-  }
-  .app-sidebar {
-    position: fixed !important;
-    inset: auto 0 0 0 !important;
-    z-index: 60 !important;
-    display: flex !important;
-    flex-direction: row !important;
-    width: 100% !important;
-    height: 48px !important;
-    min-height: 48px !important;
-    max-height: 48px !important;
-    overflow: hidden !important;
-    border-radius: 0 !important;
-  }
-  .app-sidebar > div:first-child,
-  .app-sidebar > div:last-child {
-    display: none !important;
-  }
-  .app-sidebar nav {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    width: 100%;
-    min-width: 0;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    padding: 3px 8px !important;
-  }
-  .app-sidebar nav a {
-    display: flex !important;
-    flex: 0 0 auto !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    min-width: 62px !important;
-    height: 40px !important;
-    padding: 3px 7px !important;
-    border-left: 0 !important;
-    border-top: 2px solid transparent;
-    gap: 1px !important;
-  }
-  .app-sidebar nav a span {
-    display: inline !important;
-    max-width: 70px;
-    font-size: 9px !important;
-    line-height: 1.1;
-  }
-  .app-main {
-    flex: 1 1 0% !important;
-    width: 100%;
-    min-width: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
-    overflow-x: hidden;
-    overflow-y: auto !important;
-    padding: 8px 12px 10px !important;
-  }
-  .app-main > div {
-    width: 100%;
-    max-width: none !important;
-    min-width: 0;
-    min-height: 100%;
-    height: auto !important;
-  }
-}
-
-
-/* Reference-screen polish: keep the primary navigation compact and evenly
-   distributed, while the hamburger drawer holds specialist destinations. */
-@media screen and (orientation: landscape) and (min-width: 600px) and (max-height: 900px) {
-  .app-sidebar nav {
-    width: 100%;
-    justify-content: space-around !important;
-    gap: 4px !important;
-    padding: 3px 10px !important;
-  }
-  .app-sidebar nav a {
-    flex: 1 1 0% !important;
-    min-width: 0 !important;
-    max-width: 220px;
-    height: 44px !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    gap: 3px !important;
-    padding: 3px 4px !important;
-    border-left: 0 !important;
-    border-top: 2px solid transparent;
-  }
-  .app-sidebar nav a[aria-current="page"] {
-    border-top-color: theme("colors.accent.500");
-    background: linear-gradient(180deg, rgba(229,30,43,.16), rgba(229,30,43,0));
-  }
-  .app-sidebar nav a span {
-    display: inline !important;
-    max-width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 10px !important;
-    line-height: 1.1;
-    text-align: center;
-  }
-  .app-sidebar nav a svg { width: 17px; height: 17px; }
-
-  .home-dashboard-layout {
-    height: 100%;
-    min-height: 0;
-    gap: 8px !important;
-    padding: 0 0 4px !important;
-  }
-  .home-dashboard-layout > .grid {
-    display: grid !important;
-    flex: 1 1 0%;
-    min-height: 0;
-    grid-template-columns: minmax(0, .96fr) minmax(0, 1.08fr) minmax(0, .96fr);
-    grid-template-rows: minmax(0, 1fr);
-    gap: 10px !important;
-  }
-  .home-dashboard-layout > .grid > div {
-    min-width: 0;
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    gap: 9px !important;
-    scrollbar-width: thin;
-    overscroll-behavior: contain;
-  }
-  .home-dashboard-layout .glass-panel {
-    min-width: 0;
-    padding: 11px !important;
-    gap: 8px !important;
-    border-radius: 12px;
-  }
-
-  .tactics-page-layout {
-    height: 100%;
-    min-height: 0;
-    gap: 8px !important;
-    padding: 0 0 4px !important;
-  }
-  .tactics-page-layout > .grid {
-    flex: 1 1 0%;
-    min-height: 0;
-    grid-template-columns: minmax(170px, .78fr) minmax(240px, 1.35fr) minmax(190px, .88fr) !important;
-    gap: 9px !important;
-  }
-  .tactics-page-layout > .grid > div {
-    min-width: 0;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    overscroll-behavior: contain;
-  }
-  .tactics-page-layout .rounded-card.border {
-    border-radius: 12px;
-  }
-
-  .squad-page-layout {
-    height: 100%;
-    min-height: 0;
-    gap: 10px !important;
-    padding: 0 0 4px !important;
-  }
-  .squad-page-layout > .min-w-0.flex-1 {
-    min-width: 0;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-  .squad-page-layout > div:nth-child(2) {
-    width: 32%;
-    max-width: 360px;
-    min-width: 240px;
-    flex: 0 0 32%;
-    min-height: 0;
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-  .squad-page-layout table tbody tr { height: 38px; }
-
-  .matchday-live-layout {
-    height: 100%;
-    min-height: 0;
-    padding: 0 0 4px !important;
-  }
-  .matchday-live-layout .glass-panel { border-radius: 12px; }
-}
-
-.app-menu-drawer {
-  padding-bottom: env(safe-area-inset-bottom);
-  animation: touchline-menu-in 180ms ease-out;
-}
-@keyframes touchline-menu-in {
-  from { opacity: .6; transform: translateX(14px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .app-menu-drawer { animation: none; }
+/* Immersive short-landscape match: pitch and analytics own the main canvas. */
+@media screen and (orientation:landscape) and (min-width:600px) and (max-width:1100px) and (max-height:430px){
+ .matchday-live-layout{grid-template-columns:minmax(0,1.35fr) minmax(260px,.9fr)!important;grid-template-rows:auto minmax(0,1fr) auto!important;align-content:stretch;gap:5px!important;padding:5px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]{grid-column:1/-1!important;grid-row:1!important;padding:4px 9px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]>div.mb-3{margin-bottom:3px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]>div.grid{gap:7px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]>div.grid>div:nth-child(2){min-width:76px!important;padding:4px 9px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]>div.grid>div:nth-child(2)>span:first-child{font-size:20px!important}
+ .matchday-live-layout>section[aria-label="Live match scoreboard"]>div.mt-3{display:none!important}
+ .matchday-live-layout>section[aria-label="Live match statistics"]{display:none!important}
+ .matchday-live-layout>.pitch-3d-stage{grid-column:1!important;grid-row:2!important;width:100%;min-width:0;min-height:0;height:100%!important}
+ .matchday-live-layout>.matchday-side-stats{grid-column:2!important;grid-row:2!important;width:100%;min-width:0;min-height:0;height:100%!important;overflow-x:hidden!important;overflow-y:auto!important}
+ .matchday-live-layout>.glass-panel.flex.items-center{display:none!important}
+ .matchday-live-layout>.flex.items-center.gap-2{grid-column:1/-1!important;grid-row:3!important;width:100%;min-width:0;justify-content:center;padding:3px 8px!important}
+ .matchday-live-layout>:nth-child(7){left:10px!important;right:auto!important;bottom:51px!important;flex-direction:row!important;gap:6px!important}
+ .matchday-live-layout>:nth-child(7) button{width:38px!important;height:38px!important;background:rgba(10,15,26,.88)}
+ .matchday-live-layout .pitch-3d-stage,.matchday-live-layout .pitch-3d-stage>div{min-width:0;min-height:0;height:100%!important}
 }

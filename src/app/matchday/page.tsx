@@ -69,6 +69,7 @@ function hashSeed(s: string): number {
 }
 
 function MatchdayScreen() {
+  const router = useRouter();
   const world = useGameStore((s) => s.world);
   const mutateWorld = useGameStore((s) => s.mutateWorld);
   const advanceOnePhase = useGameStore((s) => s.advanceOnePhase);
@@ -221,8 +222,11 @@ function MatchdayScreen() {
 
   if (!fixture) {
     return (
-      <div className="py-6">
-        <p className="text-sm text-ink-500">No fixture scheduled right now. Advance the calendar from the top bar.</p>
+      <div className="matchday-empty-state">
+        <p className="matchday-eyebrow">MATCH CENTRE</p>
+        <h1>No fixture is scheduled</h1>
+        <p>There is no match linked to the current calendar day.</p>
+        <button type="button" onClick={() => router.replace("/home")}>Return to the manager's office</button>
       </div>
     );
   }
@@ -237,8 +241,11 @@ function MatchdayScreen() {
   // ---- Build-up screen (before kickoff) --------------------------------------
   if (!isLive) {
     return (
-      <div className="flex flex-col gap-3 py-3">
-        <h1 className="font-display text-2xl text-ink-100">Matchday build-up</h1>
+      <div className="matchday-build-up">
+        <header className="matchday-build-up-header">
+          <div><p className="matchday-eyebrow">MATCH CENTRE</p><h1>Matchday</h1></div>
+          <button type="button" onClick={() => router.replace("/home")} className="matchday-exit">Back to management</button>
+        </header>
         <Card>
           <CardHeader
             title={
@@ -252,8 +259,7 @@ function MatchdayScreen() {
             right={<Badge tone="amber">{userIsHome ? "Home" : "Away"}</Badge>}
           />
           <p className="text-sm text-ink-500">
-            Set your tactic from the active tactic below, then tap Continue in the top bar to kick off.
-            The lineup is auto-selected from your best-fit available players.
+            Your best-fit starting XI is selected from the available squad. Review your shape, then enter the tunnel when you're ready.
           </p>
         </Card>
 
@@ -276,6 +282,10 @@ function MatchdayScreen() {
             <p>Familiarity: <span className="text-ink-100">{Math.round(world.activeTactic.familiarity)}/100</span></p>
           </div>
         </Card>
+        <div className="matchday-kickoff-bar">
+          <div><span className="matchday-eyebrow">READY WHEN YOU ARE</span><p>Take your team out and get the match underway.</p></div>
+          <button type="button" onClick={() => void advanceOnePhase()} className="matchday-kickoff-button">Kick off <Play size={17}/></button>
+        </div>
       </div>
     );
   }
@@ -298,7 +308,7 @@ function MatchdayScreen() {
         players={world.players}
         homeClub={homeClub}
         awayClub={awayClub}
-        onFinish={() => advanceOnePhase()}
+        onFinish={async () => { await advanceOnePhase(); router.replace("/home"); }}
       />
     );
   }
@@ -555,13 +565,14 @@ export default function MatchdayPage() {
   const world = useGameStore((s) => s.world);
   const hydrated = !!world;
   const today = world ? world.calendar[world.currentDate] : undefined;
-  const kickedOff = today?.phase === "matchday-live" && !!today.fixtureId;
+  const isMatchdayPhase = today?.phase === "matchday-build-up" || today?.phase === "matchday-live";
+  const matchdayAvailable = isMatchdayPhase && !!today?.fixtureId;
 
   useEffect(() => {
-    if (hydrated && !kickedOff) router.replace("/home");
-  }, [hydrated, kickedOff, router]);
+    if (hydrated && !matchdayAvailable) router.replace("/home");
+  }, [hydrated, matchdayAvailable, router]);
 
   if (!hydrated) return <p className="px-4 py-6 text-sm text-ink-500">No save loaded.</p>;
-  if (!kickedOff) return null;
+  if (!matchdayAvailable) return null;
   return <MatchdayScreen />;
 }

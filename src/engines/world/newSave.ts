@@ -149,6 +149,8 @@ export interface NewSaveParams {
   managerFirstName: string;
   managerLastName: string;
   managerNationality: string;
+  managerReputation?: number;
+  managerFormation?: string;
   userClubId: string; // must match a club id in the league JSON
   startDate: string; // ISO date, e.g. "2026-08-08"
 }
@@ -274,12 +276,13 @@ export function createStarterWorld(params: NewSaveParams): SaveGameWorld {
   }
 
   const userManagerId = nanoid(10);
+  const preferredFormation = params.managerFormation ?? "4-3-3";
   managers[userManagerId] = {
     id: userManagerId, firstName: params.managerFirstName, lastName: params.managerLastName,
     nationality: params.managerNationality, clubId: params.userClubId, isUserControlled: true,
-    reputation: 40,
+    reputation: params.managerReputation ?? 40,
     tacticalTendencies: {
-      preferredFormation: "4-3-3", mentality: "balanced", pressingIntensity: 50, buildUpSpeed: 50,
+      preferredFormation, mentality: "balanced", pressingIntensity: 50, buildUpSpeed: 50,
       defensiveLine: 50, width: 50, favoursYouth: 50, transferAggression: 50, adaptability: 50,
     },
     contract: { wageWeekly: 6000, expiryDate: addYears(params.startDate, 2) },
@@ -293,9 +296,9 @@ export function createStarterWorld(params: NewSaveParams): SaveGameWorld {
   // (every club here does, for depth) — pickAutoLineup builds a real
   // balanced XI (1 GK, correct outfield shape) the same way AI clubs get
   // their lineup, so the user's own default tactic doesn't start broken.
-  const { startingXI } = pickAutoLineup(userSquad, players, "4-3-3");
+  const { startingXI } = pickAutoLineup(userSquad, players, preferredFormation);
   const defaultUserTactic = autoAssignSetPieceTakers(
-    buildTacticFromStyle("control-possession", "4-3-3", startingXI, "Starting XI"),
+    buildTacticFromStyle("control-possession", preferredFormation, startingXI, "Starting XI"),
     startingXI, players
   );
 
